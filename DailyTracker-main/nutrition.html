@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <img
+      src="/images/back.png"
+      style="width: 2rem; height: 2rem;"
+      onclick="document.getElementById('fBack').submit();"
+    /><br /><br />
+        <form
+      id="fBack"
+      action="/home"
+      method="POST"
+      onsubmit="return false;"
+    ></form>
+        <header>Rate your nutrition today on a scale of 1 to 10!</header>
+        <form id="form" action="/nutritionPosted" method="POST" onsubmit="return false;">
+            <input type="hidden" id="num" name="num">
+            <div style="text-align:center;">
+                <label for="day">Enter the date</label>
+                <input type="date" id="day" name="day">
+            </div><br><br><br><br>
+        </form>
+        <div class="container py-5 text-center" style="display:flex; justify-content: center;">
+            <a href="#" id="1" style="background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%);" class="link pop-on-hover">1</a>
+            <a href="#" id="2" style="background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%);" class="link pop-on-hover">2</a>
+            <a href="#" id="3" style="background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%);" class="link pop-on-hover">3</a>
+            <a href="#" id="4" style="background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%);" class="link pop-on-hover">4</a>
+            <a href="#" id="5" style="background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%);" class="link pop-on-hover">5</a>
+            <a href="#" id="6" style="background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%);" class="link pop-on-hover">6</a>
+            <a href="#" id="7" style="background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%);" class="link pop-on-hover">7</a>
+            <a href="#" id="8" style="background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%);" class="link pop-on-hover">8</a>
+            <a href="#" id="9" style="background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%);" class="link pop-on-hover">9</a>
+            <a href="#" id="10" style="background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%);" class="link pop-on-hover">10</a>
+        </div>
+        <br><br>
+        <div style="display:flex; justify-content:center;">
+            <img src="/sandwiches/Full sandwich.svg" id="sandwich">
+        </div>
+
+        <script>
+            document.getElementById("1").onclick = function() {
+                document.getElementById("num").value = 1;
+                document.getElementById("1").style.background = "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)";
+                document.getElementById("2").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("3").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("4").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("5").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("6").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("7").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("8").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("9").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("10").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                if (document.getElementById("day").value != "") {
+                    document.getElementById("form").submit();
+                }
+                change();
+            }
+            document.getElementById("2").onclick = function() {
+                document.getElementById("num").value = 2;
+                document.getElementById("2").style.background = "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)";
+                document.getElementById("1").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("3").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("4").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("5").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("6").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("7").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("8").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("9").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("10").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                if (document.getElementById("day").value != "") {
+                    document.getElementById("form").submit();
+                }
+                change();
+            }
+            document.getElementById("3").onclick = function() {
+                document.getElementById("num").value = 3;
+                document.getElementById("3").style.background = "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)";
+                document.getElementById("1").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("2").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("4").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("5").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("6").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("7").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("8").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("9").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("10").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                if (document.getElementById("day").value != "") {
+                    document.getElementById("form").submit();
+                }
+                change();
+            }
+            document.getElementById("4").onclick = function() {
+                document.getElementById("num").value = 4;
+                document.getElementById("4").style.background = "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)";
+                document.getElementById("1").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("3").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("2").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("5").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("6").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("7").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("8").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("9").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("10").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                if (document.getElementById("day").value != "") {
+                    document.getElementById("form").submit();
+                }
+                change();
+            }
+            document.getElementById("5").onclick = function() {
+                document.getElementById("num").value = 5;
+                document.getElementById("5").style.background = "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)";
+                document.getElementById("1").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("3").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("4").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("2").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("6").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("7").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("8").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("9").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("10").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                if (document.getElementById("day").value != "") {
+                    document.getElementById("form").submit();
+                }
+                change();
+            }
+            document.getElementById("6").onclick = function() {
+                document.getElementById("num").value = 6;
+                document.getElementById("6").style.background = "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)";
+                document.getElementById("1").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("3").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("4").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("2").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("5").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("7").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("8").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("9").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("10").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                if (document.getElementById("day").value != "") {
+                    document.getElementById("form").submit();
+                }
+                change();
+            }
+            document.getElementById("7").onclick = function() {
+                document.getElementById("num").value = 7;
+                document.getElementById("7").style.background = "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)";
+                document.getElementById("1").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("3").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("4").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("2").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("6").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("5").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("8").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("9").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("10").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                if (document.getElementById("day").value != "") {
+                    document.getElementById("form").submit();
+                }
+                change();
+            }
+            document.getElementById("8").onclick = function() {
+                document.getElementById("num").value = 8;
+                document.getElementById("8").style.background = "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)";
+                document.getElementById("1").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("3").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("4").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("2").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("6").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("7").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("5").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("9").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("10").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                if (document.getElementById("day").value != "") {
+                    document.getElementById("form").submit();
+                }
+                change();
+            }
+            document.getElementById("9").onclick = function() {
+                document.getElementById("num").value = 9;
+                document.getElementById("9").style.background = "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)";
+                document.getElementById("1").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("3").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("4").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("2").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("6").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("7").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("8").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("5").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("10").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                if (document.getElementById("day").value != "") {
+                    document.getElementById("form").submit();
+                }
+                change();
+            }
+            document.getElementById("10").onclick = function() {
+                document.getElementById("num").value = 10;
+                document.getElementById("10").style.background = "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)";
+                document.getElementById("1").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("3").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("4").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("2").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("6").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("7").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("8").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("9").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                document.getElementById("5").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
+                if (document.getElementById("day").value != "") {
+                    document.getElementById("form").submit();
+                }
+                change();
+            }
+        </script>
+
+		<style>
+            img {
+                width: 50%
+
+            }
+            .link{
+                padding: 15px 30px;
+                color: #000;
+                text-decoration: none;
+            }
+
+            .link:hover{
+                text-decoration: none;
+                color: #000;
+            }
+
+            @-webkit-keyframes pop-on-hover {
+            50% {
+                -webkit-transform: scale(2);
+                transform: scale(2);
+            }
+            }
+            @keyframes pop-on-hover {
+            50% {
+                -webkit-transform: scale(2);
+                transform: scale(2);
+            }
+            }
+            .pop-on-hover {
+                display: inline-block;
+                vertical-align: middle;
+                -webkit-transform: perspective(1px) translateZ(0);
+                transform: perspective(1px) translateZ(0);
+                box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+            }
+            .pop-on-hover:hover, .pop-on-hover:focus, .pop-on-hover:active {
+                -webkit-animation-name: pop-on-hover;
+                animation-name: pop-on-hover;
+                -webkit-animation-duration: 0.3s;
+                animation-duration: 0.3s;
+                -webkit-animation-timing-function: linear;
+                animation-timing-function: linear;
+                -webkit-animation-iteration-count: 1;
+                animation-iteration-count: 1;
+            }
+            body {
+                background: rgb(225, 225, 225);
+            }
+			header{
+				text-align: center;
+				font-size: 250%;
+				margin-bottom: 20px;
+			}
+			input{
+                font-size: 17px;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: auto;
+				width: auto;
+			}
+		</style>
+		<script>
+            function change() {
+                var num = parseInt(document.getElementById("num").value);
+                let image = document.getElementById("sandwich")
+                if(num == 10) {
+                    image.src = "/sandwiches/Crumbs.svg";
+                }
+                else if(num > 7) {
+                    image.src = "/sandwiches/last bite.svg";
+                }
+                else if (num > 5) {
+                    image.src = "/sandwiches/3rd bite.svg";
+                }
+                else if (num > 3) {
+                    image.src = "/sandwiches/2nd bite.svg";
+                }
+                else if (num > 1) {
+                    image.src = "/sandwiches/1st bite.svg";
+                }
+                else{
+                    image.src = "/sandwiches/Full sandwich.svg";
+                }
+            }
+		</script>
+    </body>
+</html>

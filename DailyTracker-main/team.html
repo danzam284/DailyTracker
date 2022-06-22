@@ -1,0 +1,1274 @@
+<html>
+  <body>
+    <img
+      src="/images/back.png"
+      style="width: 2rem; height: 2rem;"
+      onclick="document.getElementById('lol').submit();"
+    />
+    <form id="lol" action="/home" method="POST" onsubmit="return false;"></form>
+    <div
+      style="
+        margin-left: 25%;
+        margin-right: 25%;
+        border-radius: 25px;
+        background-color: #f1f3f5;
+      "
+    >
+      <h1 style="text-align: center;">Leaderboard</h1>
+      <div
+        class="checked-group"
+        style="display: flex; justify-content: center;"
+      >
+        <label style="margin-right: 5%; margin-left: 5%;"
+          ><input
+            type="checkbox"
+            checked="true"
+            id="showWater"
+            name="showWater"
+          />Water</label
+        >
+        <label style="margin-right: 5%; margin-left: 5%;"
+          ><input
+            type="checkbox"
+            checked="true"
+            id="showFrog"
+            name="showFrog"
+          />Frog</label
+        >
+        <label style="margin-right: 5%; margin-left: 5%;"
+          ><input
+            type="checkbox"
+            checked="true"
+            id="showSleep"
+            name="showSleep"
+          />Sleep</label
+        >
+        <label style="margin-right: 5%; margin-left: 5%;"
+          ><input
+            type="checkbox"
+            checked="true"
+            id="showWorry"
+            name="showWorry"
+          />Worry</label
+        >
+        <label style="margin-right: 5%; margin-left: 5%;"
+          ><input
+            type="checkbox"
+            checked="true"
+            id="showFood"
+            name="showFood"
+          />Nutrition</label
+        >
+      </div>
+      <br />
+      <div class="btn-group">
+        <button id="Day">Day</button>
+        <button id="Week">Week</button>
+        <button id="Month">Month</button>
+      </div>
+      <div id="slid">
+        <label class="switch">
+          <input id="c" type="checkbox" checked />
+          <span id="slider" class="slider"></span> </label
+        ><br /><br />
+        <label for="c">Team Data</label>
+      </div>
+    </div>
+
+    <style>
+      canvas {
+        background-color: white;
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-top: 3%;
+        margin-bottom: 3%;
+      }
+      body {
+        background: linear-gradient(
+          0deg,
+          rgba(2, 0, 36, 1) 0%,
+          rgba(17, 17, 236, 1) 0%,
+          rgba(0, 212, 255, 1) 35%
+        );
+      }
+      #slid {
+        margin-left: calc(50% - 40px);
+        color: rgb(0, 0, 0);
+      }
+      .switch input {
+        display: none;
+      }
+      .switch {
+        display: inline-block;
+        width: 60px;
+        height: 30px;
+        margin: 4px;
+        transform: translateY(50%);
+        position: relative;
+      }
+
+      .slider {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 30px;
+        box-shadow: 0 0 0 2px rgb(55, 55, 55), 0 0 4px rgb(55, 55, 55);
+        cursor: pointer;
+        border: 4px solid transparent;
+        overflow: hidden;
+        transition: 0.2s;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color: rgb(46, 46, 46);
+        border-radius: 30px;
+        transform: translateX(-30px);
+        transition: 0.2s;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(30px); /*translateX(w-h)*/
+        background-color: rgb(30, 96, 210);
+      }
+
+      input:checked + .slider {
+        box-shadow: 0 0 0 2px rgb(30, 96, 210), 0 0 8px rgb(30, 96, 210);
+      }
+
+      .btn-group {
+        display: flex;
+        justify-content: center;
+      }
+      .btn-group button {
+        background-color: #a6a6a6;
+        border: 1px solid rgb(75, 75, 75);
+        color: rgb(0, 0, 0);
+        padding: 10px 24px;
+        cursor: pointer;
+        float: left;
+      }
+      .btn-group:after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+      .btn-group button:not(:last-child) {
+        border-right: none;
+      }
+      .btn-group button:hover {
+        background-color: #8ccff3;
+      }
+    </style>
+    <br />
+    <div style="display: flex; justify-content: center;" id="row1">
+      <canvas id="canvas" style="width: 40%;"></canvas>
+      <canvas id="canvas2" style="width: 40%;"></canvas>
+    </div>
+    <div style="display: flex; justify-content: center;" id="row2">
+      <canvas id="canvas3" style="width: 40%;"></canvas>
+      <canvas id="canvas4" style="width: 40%;"></canvas>
+    </div>
+    <div style="display: flex; justify-content: center;" id="row3">
+      <canvas id="canvas5" style="width: 40%;"></canvas>
+    </div>
+  </body>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript">
+      var dates;
+      var daysofWeek;
+      var mode = "week";
+      const slider = document.getElementById("c");
+
+      slider.onclick = function () {
+        chartWater.destroy();
+        nc--;
+        remove(waterA);
+        waterA = null;
+        chartFood.destroy();
+        nc--;
+        remove(foodA);
+        foodA = null;
+        chartHard.destroy();
+        nc--;
+        remove(hardA);
+        hardA = null;
+        chartWorry.destroy();
+        nc--;
+        remove(worryA);
+        worryA = null;
+        chartSleep.destroy();
+        nc--;
+        remove(sleepA);
+        sleepA = null;
+        run();
+      };
+      async function changeMode(mode) {
+        if (mode == "day") {
+          buttonDay.style.backgroundColor = "#10cfe8";
+          buttonWeek.style.backgroundColor = "#a6a6a6";
+          buttonMonth.style.backgroundColor = "#a6a6a6";
+          configureDates();
+          chartWater.destroy();
+          nc--;
+          remove(waterA);
+          waterA = null;
+          chartFood.destroy();
+          nc--;
+          remove(foodA);
+          foodA = null;
+          chartHard.destroy();
+          nc--;
+          remove(hardA);
+          hardA = null;
+          chartWorry.destroy();
+          nc--;
+          remove(worryA);
+          worryA = null;
+          chartSleep.destroy();
+          nc--;
+          remove(sleepA);
+          sleepA = null;
+          run();
+        }
+        if (mode == "week") {
+          buttonWeek.style.backgroundColor = "#10cfe8";
+          buttonDay.style.backgroundColor = "#a6a6a6";
+          buttonMonth.style.backgroundColor = "#a6a6a6";
+          configureDates();
+          chartWater.destroy();
+          nc--;
+          remove(waterA);
+          waterA = null;
+          chartFood.destroy();
+          nc--;
+          remove(foodA);
+          foodA = null;
+          chartHard.destroy();
+          nc--;
+          remove(hardA);
+          hardA = null;
+          chartWorry.destroy();
+          nc--;
+          remove(worryA);
+          worryA = null;
+          chartSleep.destroy();
+          nc--;
+          remove(sleepA);
+          sleepA = null;
+          run();
+        }
+        if (mode == "month") {
+          buttonMonth.style.backgroundColor = "#10cfe8";
+          buttonWeek.style.backgroundColor = "#a6a6a6";
+          buttonDay.style.backgroundColor = "#a6a6a6";
+          configureDates();
+          chartWater.destroy();
+          nc--;
+          remove(waterA);
+          waterA = null;
+          chartFood.destroy();
+          nc--;
+          remove(foodA);
+          foodA = null;
+          chartHard.destroy();
+          nc--;
+          remove(hardA);
+          hardA = null;
+          chartWorry.destroy();
+          nc--;
+          remove(worryA);
+          worryA = null;
+          chartSleep.destroy();
+          nc--;
+          remove(sleepA);
+          sleepA = null;
+          run();
+        }
+      }
+      const buttonDay = document.getElementById("Day");
+      const buttonWeek = document.getElementById("Week");
+      const buttonMonth = document.getElementById("Month");
+      buttonWeek.style.backgroundColor = "#10cfe8";
+
+      buttonDay.onclick = function () {
+        if (mode != "day") {
+          mode = "day";
+          changeMode(mode);
+        }
+      };
+      buttonWeek.onclick = function () {
+        if (mode != "week") {
+          mode = "week";
+          changeMode(mode);
+        }
+      };
+      buttonMonth.onclick = function () {
+        if (mode != "month") {
+          mode = "month";
+          changeMode(mode);
+        }
+      };
+
+      function toDate(date) {
+        var re = new RegExp("/", "g");
+        date = date.toLocaleDateString().replace(re, "-");
+        let curr = 1;
+        let month = "";
+        let day = "";
+        let year = "";
+        for (let i = 0; i < date.length; i++) {
+          if (date[i] != "-") {
+            if (curr == 1) {
+              month += date[i];
+            } else if (curr == 2) {
+              day += date[i];
+            } else {
+              year += date[i];
+            }
+          } else {
+            curr += 1;
+          }
+        }
+        if (month.length < 2) {
+          month = "0" + month;
+        }
+        if (day.length < 2) {
+          day = "0" + day;
+        }
+        return year + "-" + month + "-" + day;
+      }
+
+      function configureDates() {
+        let n;
+        if (mode == "day") {
+          n = 0;
+        }
+        if (mode == "week") {
+          n = 6;
+        }
+        if (mode == "month") {
+          n = 29;
+        }
+        let today = new Date(Date.now());
+        dates = [toDate(today)];
+        daysofWeek = [today.getDay()];
+        for (let i = 0; i < n; i++) {
+          let yesterday = new Date(today);
+          yesterday.setDate(yesterday.getDate() - 1);
+          dates.unshift(toDate(yesterday));
+          daysofWeek.unshift(yesterday.getDay());
+          today = yesterday;
+        }
+      }
+
+      configureDates();
+
+      const weekday = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ];
+      var day;
+      var name;
+      var width;
+      var height;
+      var nc = 5;
+      var c1 = false;
+      var c2 = false;
+      var c3 = false;
+      var c4 = false;
+      var c5 = false;
+      var waterA;
+      var hardA;
+      var sleepA;
+      var worryA;
+      var foodA;
+      var ctx = document.getElementById("canvas").getContext("2d");
+      var ctx2 = document.getElementById("canvas2").getContext("2d");
+      var ctx3 = document.getElementById("canvas3").getContext("2d");
+      var ctx4 = document.getElementById("canvas4").getContext("2d");
+      var ctx5 = document.getElementById("canvas5").getContext("2d");
+      var dataWater;
+      var dataFood;
+      var dataWorry;
+      var dataHard;
+      var dataSleep;
+      var avgWater;
+      var avgFood;
+      var avgWorry;
+      var avgHard;
+      var avgSleep;
+      var increased = false;
+      var mem;
+      var allData;
+
+      async function buildWater() {
+        let dsets = [];
+        if (slider.checked) {
+          dsets = [avgWater, dataWater];
+        } else {
+          dsets = [dataWater];
+        }
+        let c = find(1);
+        chartWater = new Chart(c, {
+          type: "bar",
+          data: {
+            labels: day,
+            datasets: dsets
+          },
+          options: {
+            spanGaps: true,
+            plugins: {
+              title: {
+                display: true,
+                text: name + "'s Water"
+              }
+            },
+            scales: {
+              xAxes: {
+                title: {
+                  display: true,
+                  text: "Day"
+                }
+              },
+              yAxes: {
+                title: {
+                  display: true,
+                  text: "Cups of Water"
+                }
+              }
+            },
+            responsive: false,
+            maintainAspectRatio: true,
+            showScale: false
+          }
+        });
+        if (height == undefined) {
+          height = chartWater.height;
+        }
+        if (width == undefined) {
+          width = chartWater.width;
+        }
+      }
+      function buildHard() {
+        let dsets = [];
+        if (slider.checked) {
+          dsets = [avgHard, dataHard];
+        } else {
+          dsets = [dataHard];
+        }
+        let c = find(2);
+        chartHard = new Chart(c, {
+          type: "bar",
+          data: {
+            labels: day,
+            datasets: dsets
+          },
+          options: {
+            spanGaps: true,
+            plugins: {
+              title: {
+                display: true,
+                text: name + "'s Frog"
+              }
+            },
+            scales: {
+              xAxes: {
+                title: {
+                  display: true,
+                  text: "Day"
+                }
+              },
+              yAxes: {
+                title: {
+                  display: true,
+                  text: "Hours on Frog"
+                }
+              }
+            },
+            responsive: false,
+            maintainAspectRatio: true,
+            showScale: false
+          }
+        });
+      }
+
+      function buildSleep() {
+        let dsets = [];
+        if (slider.checked) {
+          dsets = [avgSleep, dataSleep];
+        } else {
+          dsets = [dataSleep];
+        }
+        let c = find(3);
+        chartSleep = new Chart(c, {
+          type: "bar",
+          data: {
+            labels: day,
+            datasets: dsets
+          },
+          options: {
+            spanGaps: true,
+            plugins: {
+              title: {
+                display: true,
+                text: name + "'s Sleep"
+              }
+            },
+            scales: {
+              xAxes: {
+                title: {
+                  display: true,
+                  text: "Day"
+                }
+              },
+              yAxes: {
+                title: {
+                  display: true,
+                  text: "Hours of Sleep"
+                }
+              }
+            },
+            responsive: false,
+            maintainAspectRatio: true,
+            showScale: false
+          }
+        });
+      }
+
+      function buildWorry() {
+        let dsets = [];
+        if (slider.checked) {
+          dsets = [avgWorry, dataWorry];
+        } else {
+          dsets = [dataWorry];
+        }
+        let c = find(4);
+        chartWorry = new Chart(c, {
+          type: "bar",
+          data: {
+            labels: day,
+            datasets: dsets
+          },
+          options: {
+            spanGaps: true,
+            plugins: {
+              title: {
+                display: true,
+                text: name + "'s Worrying"
+              }
+            },
+            scales: {
+              xAxes: {
+                title: {
+                  display: true,
+                  text: "Day"
+                }
+              },
+              yAxes: {
+                title: {
+                  display: true,
+                  text: "Minutes of Worrying"
+                }
+              }
+            },
+            responsive: false,
+            maintainAspectRatio: true,
+            showScale: false
+          }
+        });
+      }
+
+      function buildFood() {
+        let dsets = [];
+        if (slider.checked) {
+          dsets = [avgFood, dataFood];
+        } else {
+          dsets = [dataFood];
+        }
+        let c = find(5);
+        chartFood = new Chart(c, {
+          type: "bar",
+          data: {
+            labels: day,
+            datasets: dsets
+          },
+          options: {
+            spanGaps: true,
+            plugins: {
+              title: {
+                display: true,
+                text: name + "'s Nutrition"
+              }
+            },
+            scales: {
+              xAxes: {
+                title: {
+                  display: true,
+                  text: "Day"
+                }
+              },
+              yAxes: {
+                title: {
+                  display: true,
+                  text: "Minutes of Worrying"
+                }
+              }
+            },
+            responsive: false,
+            maintainAspectRatio: true,
+            showScale: false
+          }
+        });
+      }
+
+      function ret() {
+        if (
+          foodA == 1 ||
+          sleepA == 1 ||
+          hardA == 1 ||
+          waterA == 1 ||
+          worryA == 1
+        ) {
+          document.getElementById("canvas").style.backgroundColor = "white";
+        } else {
+          document.getElementById("canvas").style.backgroundColor =
+            "rgba(0, 0, 0, 0)";
+        }
+        if (
+          foodA == 2 ||
+          sleepA == 2 ||
+          hardA == 2 ||
+          waterA == 2 ||
+          worryA == 2
+        ) {
+          document.getElementById("canvas2").style.backgroundColor = "white";
+        } else {
+          document.getElementById("canvas2").style.backgroundColor =
+            "rgba(0, 0, 0, 0)";
+        }
+        if (
+          foodA == 3 ||
+          sleepA == 3 ||
+          hardA == 3 ||
+          waterA == 3 ||
+          worryA == 3
+        ) {
+          document.getElementById("canvas3").style.backgroundColor = "white";
+        } else {
+          document.getElementById("canvas3").style.backgroundColor =
+            "rgba(0, 0, 0, 0)";
+        }
+        if (
+          foodA == 4 ||
+          sleepA == 4 ||
+          hardA == 4 ||
+          waterA == 4 ||
+          worryA == 4
+        ) {
+          document.getElementById("canvas4").style.backgroundColor = "white";
+        } else {
+          document.getElementById("canvas4").style.backgroundColor =
+            "rgba(0, 0, 0, 0)";
+        }
+        if (
+          foodA == 5 ||
+          sleepA == 5 ||
+          hardA == 5 ||
+          waterA == 5 ||
+          worryA == 5
+        ) {
+          document.getElementById("canvas5").style.backgroundColor = "white";
+        } else {
+          document.getElementById("canvas5").style.backgroundColor =
+            "rgba(0, 0, 0, 0)";
+        }
+      }
+
+      function find(idx) {
+        if (!c1) {
+          c1 = true;
+          repl(idx, 1);
+          return ctx;
+        }
+        if (!c2) {
+          c2 = true;
+          repl(idx, 2);
+          return ctx2;
+        }
+        if (!c3) {
+          c3 = true;
+          repl(idx, 3);
+          return ctx3;
+        }
+        if (!c4) {
+          c4 = true;
+          repl(idx, 4);
+          return ctx4;
+        }
+        if (!c5) {
+          c5 = true;
+          repl(idx, 5);
+          return ctx5;
+        }
+      }
+
+      function repl(idx, val) {
+        if (idx == 1) {
+          waterA = val;
+        } else if (idx == 2) {
+          hardA = val;
+        } else if (idx == 3) {
+          sleepA = val;
+        } else if (idx == 4) {
+          worryA = val;
+        } else {
+          foodA = val;
+        }
+      }
+
+      function remove(idx) {
+        if (idx == 1) {
+          c1 = false;
+        } else if (idx == 2) {
+          c2 = false;
+        } else if (idx == 3) {
+          c3 = false;
+        } else if (idx == 4) {
+          c4 = false;
+        } else if (idx == 5) {
+          c5 = false;
+        }
+      }
+
+      function findAndFix(n) {
+        if (waterA == n) {
+          chartWater.destroy();
+          remove(n);
+          buildWater();
+          chartWater.resize(width, height);
+        } else if (hardA == n) {
+          chartHard.destroy();
+          remove(n);
+          buildHard();
+          chartHard.resize(width, height);
+        } else if (sleepA == n) {
+          chartSleep.destroy();
+          remove(n);
+          buildSleep();
+          chartSleep.resize(width, height);
+        } else if (worryA == n) {
+          chartWorry.destroy();
+          remove(n);
+          buildWorry();
+          chartWorry.resize(width, height);
+        } else if (foodA == n) {
+          chartFood.destroy();
+          remove(n);
+          buildFood();
+          chartFood.resize(width, height);
+        }
+      }
+
+      function fix() {
+        if ((!c1 || !c2) && c5) {
+          findAndFix(5);
+        }
+        if ((!c1 || !c2) && c4) {
+          findAndFix(4);
+        }
+        if ((!c1 || !c2) && c3) {
+          findAndFix(3);
+        }
+        if ((!c3 || !c4) && c5) {
+          findAndFix(5);
+        }
+
+        if (nc == 1) {
+          increased = true;
+          height *= 2;
+          width *= 2;
+          findAndFix(1);
+          findAndFix(2);
+          height /= 2;
+          width /= 2;
+          mem = document.getElementById("canvas2");
+          document.getElementById("canvas2").remove();
+        } else if (increased) {
+          increased = false;
+          document.getElementById("row1").appendChild(mem);
+          findAndFix(1);
+          findAndFix(2);
+        }
+      }
+
+      async function run() {
+        nc = 5;
+        document.getElementById("showWater").checked = true;
+        document.getElementById("showFrog").checked = true;
+        document.getElementById("showSleep").checked = true;
+        document.getElementById("showWorry").checked = true;
+        document.getElementById("showFood").checked = true;
+        $.ajax({
+          type: "POST",
+          url: "/getdata",
+          dataType: "text",
+          success: function (content) {
+            allData = content.split("\n");
+          }
+        });
+        await $.ajax({
+          type: "POST",
+          url: "/getName",
+          dataType: "text",
+          success: function (content) {
+            name = content;
+          }
+        });
+        $.ajax({
+          type: "POST",
+          url: "/getCsv",
+          dataType: "text",
+          success: function (content) {
+            const CSVToArray = (data) =>
+              data
+                .slice(data.indexOf("\n") + 1)
+                .split("\n")
+                .map((v) => v.split(","));
+
+            content = CSVToArray(content);
+            content.pop();
+
+            day = [];
+            let water = [];
+            let hard = [];
+            let sleep = [];
+            let worry = [];
+            let food = [];
+            let avgwater = [];
+            let avghard = [];
+            let avgsleep = [];
+            let avgworry = [];
+            let avgfood = [];
+            let amtWater = [];
+            let amtHard = [];
+            let amtSleep = [];
+            let amtWorry = [];
+            let amtFood = [];
+            for (let i = 0; i < dates.length; i++) {
+              let filledWater = false;
+              let filledHard = false;
+              let filledSleep = false;
+              let filledWorry = false;
+              let filledFood = false;
+              amtWater.push(0);
+              amtHard.push(0);
+              amtSleep.push(0);
+              amtWorry.push(0);
+              amtFood.push(0);
+              for (let j = 0; j < allData.length; j++) {
+                if (allData[j][0] != "*") {
+                  let d = CSVToArray(allData[j]);
+                  if (d[0][0] == dates[i]) {
+                    if (amtWater[i] != 0) {
+                      if (d[0][1] != " ") {
+                        avgwater[i] += parseInt(d[0][1]);
+                        amtWater[i]++;
+                      }
+                    } else {
+                      if (d[0][1] != " ") {
+                        avgwater.push(parseInt(d[0][1]));
+                        amtWater[i]++;
+                      }
+                    }
+                    if (amtHard[i] != 0) {
+                      if (d[0][2] != " ") {
+                        avghard[i] += parseInt(d[0][2]);
+                        amtHard[i]++;
+                      }
+                    } else {
+                      if (d[0][2] != " ") {
+                        avghard.push(parseInt(d[0][2]));
+                        amtHard[i]++;
+                      }
+                    }
+                    if (amtSleep[i] != 0) {
+                      if (d[0][3] != " ") {
+                        avgsleep[i] += parseInt(d[0][3]);
+                        amtSleep[i]++;
+                      }
+                    } else {
+                      if (d[0][3] != " ") {
+                        avgsleep.push(parseInt(d[0][3]));
+                        amtSleep[i]++;
+                      }
+                    }
+                    if (amtWorry[i] != 0) {
+                      if (d[0][4] != " ") {
+                        avgworry[i] += parseInt(d[0][4]);
+                        amtWorry[i]++;
+                      }
+                    } else {
+                      if (d[0][4] != " ") {
+                        avgworry.push(parseInt(d[0][4]));
+                        amtWorry[i]++;
+                      }
+                    }
+                    if (amtFood[i] != 0) {
+                      if (d[0][5] != " ") {
+                        avgfood[i] += parseInt(d[0][5]);
+                        amtFood[i]++;
+                      }
+                    } else {
+                      if (d[0][5] != " ") {
+                        avgfood.push(parseInt(d[0][5]));
+                        amtFood[i]++;
+                      }
+                    }
+
+                    let finalCheck = true;
+                    if (!filledWater || !filledFood || !filledWorry || !filledSleep || !filledHard && name != null) {
+                      let ind = j - 1;
+                      while (ind > 0 && finalCheck) {
+                        if (allData[ind][0] != "*") {
+                          ind--;
+                        }
+                        finalCheck = false;
+                      }
+                      if (allData[ind].slice(1, name.length + 1) == name) {
+                        if (!filledFood && !filledHard && !filledSleep && !filledWater && !filledWorry) {
+                          day.push(weekday[daysofWeek[i]]);
+                        }
+                        if (d[0][1] != " ") {
+                          water.push(parseInt(d[0][1]));
+                          filledWater = true;
+                        }
+                        if (d[0][2] != " ") {
+                          hard.push(parseInt(d[0][2]));
+                          filledHard = true;
+                        }
+                        if (d[0][3] != " ") {
+                          sleep.push(parseInt(d[0][3]));
+                          filledSleep = true;
+                        }
+                        if (d[0][4] != " ") {
+                          worry.push(parseInt(d[0][4]));
+                          filledWorry = true;
+                        }
+                        if (d[0][5] != " ") {
+                          food.push(parseInt(d[0][5]));
+                          filledFood = true;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              if (amtWater[i] == 0) {
+                avgwater[i] = null;
+              } else {
+                avgwater[i] /= amtWater[i];
+              }
+              if (amtHard[i] == 0) {
+                avghard[i] = null;
+              } else {
+                avghard[i] /= amtHard[i];
+              }
+              if (amtSleep[i] == 0) {
+                avgsleep[i] = null;
+              } else {
+                avgsleep[i] /= amtSleep[i];
+              }
+              if (amtWorry[i] == 0) {
+                avgworry[i] = null;
+              } else {
+                avgworry[i] /= amtWorry[i];
+              }
+              if (amtFood[i] == 0) {
+                avgfood[i] = null;
+              } else {
+                avgfood[i] /= amtFood[i];
+              }
+
+              if (!filledWater && !filledFood && !filledHard && !filledWorry && !filledSleep) {
+                day.push(weekday[daysofWeek[i]]);
+              }
+              if (!filledWater) {
+                water.push(null);
+              }
+              if (!filledHard) {
+                hard.push(null);
+              }
+              if (!filledSleep) {
+                sleep.push(null);
+              }
+              if (!filledWorry) {
+                worry.push(null);
+              }
+              if (!filledFood) {
+                food.push(null);
+              }
+            }
+
+            if (mode == "month") {
+              day = [];
+              for (let i = 1; i < 31; i++) {
+                day.push(i);
+              }
+            }
+
+            dataFood = {
+              label: "Your Nutrition",
+              backgroundColor: "#3a9111",
+              borderColor: "#3a9111",
+              data: food
+            };
+
+            avgFood = {
+              label: "Average Nutrition",
+              backgroundColor: "#8a1723",
+              borderColor: "#8a1723",
+              data: avgfood
+            };
+
+            dataWater = {
+              label: "Your Water",
+              backgroundColor: "#1758ad",
+              borderColor: "#1758ad",
+              data: water
+            };
+
+            avgWater = {
+              label: "Average Water",
+              backgroundColor: "#db2ab8",
+              borderColor: "#db2ab8",
+              data: avgwater
+            };
+
+            dataWorry = {
+              label: "Your Worrying",
+              backgroundColor: "#700f7a",
+              borderColor: "#700f7a",
+              data: worry
+            };
+
+            avgWorry = {
+              label: "Average Worrying",
+              backgroundColor: "#b88948",
+              borderColor: "#b88948",
+              data: avgworry
+            };
+
+            dataSleep = {
+              label: "Your Sleep",
+              backgroundColor: "#f0b82b",
+              borderColor: "#f0b82b",
+              data: sleep
+            };
+
+            avgSleep = {
+              label: "Average Sleep",
+              backgroundColor: "#34ebcf",
+              borderColor: "#34ebcf",
+              data: avgsleep
+            };
+
+            dataHard = {
+              label: "Your Frog",
+              backgroundColor: "#918f11",
+              borderColor: "#918f11",
+              data: hard
+            };
+
+            avgHard = {
+              label: "Average Frog",
+              backgroundColor: "#509091",
+              borderColor: "#509091",
+              data: avghard
+            };
+
+            document.getElementById("showWater").onchange = async function () {
+              if (document.getElementById("showWater").checked) {
+                buildWater();
+                chartWater.resize(width, height);
+                nc++;
+                if (nc == 1) {
+                  increased = true;
+                  height *= 2;
+                  width *= 2;
+                  findAndFix(1);
+                  findAndFix(2);
+                  height /= 2;
+                  width /= 2;
+                  mem = document.getElementById("canvas2");
+                  document.getElementById("canvas2").remove();
+                } else if (increased) {
+                  increased = false;
+                  document.getElementById("row1").appendChild(mem);
+                  findAndFix(1);
+                  findAndFix(2);
+                }
+              } else {
+                nc--;
+                chartWater.destroy();
+                remove(waterA);
+                waterA = null;
+                fix();
+              }
+              ret();
+            };
+            document.getElementById("showFrog").onchange = function () {
+              if (document.getElementById("showFrog").checked) {
+                buildHard();
+                chartHard.resize(width, height);
+                nc++;
+                if (nc == 1) {
+                  increased = true;
+                  height *= 2;
+                  width *= 2;
+                  findAndFix(1);
+                  findAndFix(2);
+                  height /= 2;
+                  width /= 2;
+                  mem = document.getElementById("canvas2");
+                  document.getElementById("canvas2").remove();
+                } else if (increased) {
+                  increased = false;
+                  document.getElementById("row1").appendChild(mem);
+                  findAndFix(1);
+                  findAndFix(2);
+                }
+              } else {
+                chartHard.destroy();
+                nc--;
+                remove(hardA);
+                hardA = null;
+                fix();
+              }
+              ret();
+            };
+            document.getElementById("showSleep").onchange = function () {
+              if (document.getElementById("showSleep").checked) {
+                buildSleep();
+                chartSleep.resize(width, height);
+                nc++;
+                if (nc == 1) {
+                  increased = true;
+                  height *= 2;
+                  width *= 2;
+                  findAndFix(1);
+                  findAndFix(2);
+                  height /= 2;
+                  width /= 2;
+                  mem = document.getElementById("canvas2");
+                  document.getElementById("canvas2").remove();
+                } else if (increased) {
+                  increased = false;
+                  document.getElementById("row1").appendChild(mem);
+                  findAndFix(1);
+                  findAndFix(2);
+                }
+              } else {
+                chartSleep.destroy();
+                nc--;
+                remove(sleepA);
+                sleepA = null;
+                fix();
+              }
+              ret();
+            };
+            document.getElementById("showWorry").onchange = function () {
+              if (document.getElementById("showWorry").checked) {
+                buildWorry();
+                chartWorry.resize(width, height);
+                nc++;
+                if (nc == 1) {
+                  increased = true;
+                  height *= 2;
+                  width *= 2;
+                  findAndFix(1);
+                  findAndFix(2);
+                  height /= 2;
+                  width /= 2;
+                  mem = document.getElementById("canvas2");
+                  document.getElementById("canvas2").remove();
+                } else if (increased) {
+                  increased = false;
+                  document.getElementById("row1").appendChild(mem);
+                  findAndFix(1);
+                  findAndFix(2);
+                }
+              } else {
+                chartWorry.destroy();
+                nc--;
+                remove(worryA);
+                worryA = null;
+                fix();
+              }
+              ret();
+            };
+            document.getElementById("showFood").onchange = function () {
+              if (document.getElementById("showFood").checked) {
+                buildFood();
+                chartFood.resize(width, height);
+                nc++;
+                if (nc == 1) {
+                  increased = true;
+                  height *= 2;
+                  width *= 2;
+                  findAndFix(1);
+                  findAndFix(2);
+                  height /= 2;
+                  width /= 2;
+                  mem = document.getElementById("canvas2");
+                  document.getElementById("canvas2").remove();
+                } else if (increased) {
+                  increased = false;
+                  document.getElementById("row1").appendChild(mem);
+                  findAndFix(1);
+                  findAndFix(2);
+                }
+              } else {
+                chartFood.destroy();
+                nc--;
+                remove(foodA);
+                foodA = null;
+                fix();
+              }
+              ret();
+            };
+
+            buildWater();
+            findAndFix(1);
+            buildHard();
+            findAndFix(2);
+            buildSleep();
+            findAndFix(3);
+            buildWorry();
+            findAndFix(4);
+            buildFood();
+            findAndFix(5);
+
+            document.getElementById("showFood").checked = false;
+            document.getElementById("showFood").onchange();
+            document.getElementById("showFood").checked = true;
+            document.getElementById("showFood").onchange();
+          }
+        });
+      }
+      run();
+    </script>
+  </head>
+</html>

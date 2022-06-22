@@ -1,0 +1,25 @@
+{
+    "name": "demoapp",
+    "homepage": "https://danzam284.github.io/DailyTracker/",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "dev": "nodemon app.js"
+    },
+    "author": "Daniel Zamloot",
+    "license": "ISC",
+    "dependencies": {
+        "chart.js": "^3.8.0",
+        "cheerio": "^1.0.0-rc.11",
+        "ejs": "^3.1.8",
+        "express": "^4.17.1",
+        "heroku": "^7.60.2",
+        "jsdom": "^19.0.0",
+        "node-html-parser": "^5.3.3",
+        "node.js": "^0.0.1-security",
+        "nodemon": "^2.0.16",
+        "redis": "^4.1.0"
+    }
+}

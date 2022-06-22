@@ -1,0 +1,48 @@
+<html>
+    <h1 style="text-align:center; font-size:20;">Welcome</h1>
+    <img src="/images/putin.png">
+    <img src="/images/patrick.png">
+    <img src="/images/walter.png">
+    <img src="/images/racoon.png">
+    <img src="/images/apple.png">
+    <img src="/images/yellow.png">
+    <img src="/images/bill.png">
+    <img src="/images/sheep.png">
+    <img src="/images/steve.png">
+    <img src="/images/duo.png">
+    <img src="/images/pikachu.png">
+    <img src="/images/elephant.png">
+    <img src="/images/penguin.png">
+    <img src="/images/gya.png">
+    <img src="/images/hamster.png">
+    <img src="/images/cloud.png">
+    <img src="/images/ant.png">
+    <img src="/images/spider.png">
+    <img src="/images/google.png">
+    <img src="/images/horse.png">
+    <img src="/images/baby.png">
+    <br>
+
+    <div style="display:flex; justify-content:center;">
+        <button id="click">Dont Click This</button>
+    </div>
+    
+    <style>
+        html {
+            background-color: red;
+        }
+        img {
+            width: 200px;
+            height: width;
+        }
+    </style>
+
+    <script>
+        var sound = new Audio("/images/scream.mp3");
+        sound.play();
+        document.getElementById("click").onclick = function() {
+            sound.currentTime = 0;
+            sound.play();
+        }
+    </script>
+</html>

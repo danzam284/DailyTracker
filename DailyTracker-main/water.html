@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <img
+      src="/images/back.png"
+      style="width: 2rem; height: 2rem;"
+      onclick="document.getElementById('fBack').submit();"
+    /><br /><br />
+        <form
+      id="fBack"
+      action="/home"
+      method="POST"
+      onsubmit="return false;"
+    ></form>
+        <header style="color:#00bbff">How many cups of water did you drink today?</header>
+        <form id="form" action="/waterPosted" method="POST" onsubmit="return false;">
+            <div style="text-align:center;">
+                <label for="day">Enter the date</label>
+                <input type="date" id="day" name="day">
+            </div>
+            <div class="inp-border a1" style="margin-left: calc(50% - 200px);">
+                <input class="input" step=".01" id="water" type="number" name="water">
+            </div>
+        </form>
+
+        <img id="waterbottle" src="/bottles/empty.svg" alt="waterbottle">
+		<style>
+            .input {
+                text-align: center;
+                padding: 15px;
+                outline: none;
+                border: double 0;
+                background: white;
+                border-radius: 67px;
+                position: relative;
+                box-sizing: border-box;
+                display: block;
+                width: 100%;
+            }
+            .inp-border {
+                padding: 5px;
+                margin: 2vh 1vh;
+                border-radius: 67px;
+                max-width: 400px;
+            }
+            body {
+                background: rgb(225, 225, 225);
+            }
+			#waterbottle{
+                width:50%;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			header{
+				text-align: center;
+				font-size: 250%;
+				margin-bottom: 20px;
+			}
+			input{
+                font-size: 17px;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: auto;
+				width: auto;
+			}
+            .a1 {
+                background: linear-gradient(
+                    330.28deg,
+                    #0324ff 100%,
+                    #455dff 100%,
+                    #0c8ffa 100%
+                );
+            }
+            .a1 > input {
+                color: black;
+            }
+            .a1 > input::placeholder {
+                color: black;
+                opacity: 0.6;
+            }
+            .inp-border:focus-within {
+                background: linear-gradient(
+                330.28deg,
+                #0339fc 0%,
+                #335df5 30.73%,
+                #00bbff 55.73%,
+                #54d1ff 79.17%,
+                #00eeff 100%
+                );
+            }
+            .inp-border:hover {
+                background: linear-gradient(
+                330.28deg,
+                #0339fc 0%,
+                #335df5 30.73%,
+                #00bbff 55.73%,
+                #54d1ff 79.17%,
+                #00eeff 100%
+                );
+            }
+            .a1:hover > input::placeholder {
+                color: white;
+            }
+		</style>
+		<script>
+            document.addEventListener("keydown", function(event) {
+				if (event.keyCode == 13) {
+					var image = document.getElementById("waterbottle");
+					if(document.getElementById("water").value > 10) {
+						image.src = "/bottles/full.svg";
+					}
+					else if(document.getElementById("water").value > 8) {
+						image.src = "/bottles/128oz.svg";
+					}
+					else if(document.getElementById("water").value > 6) {
+						image.src = "/bottles/64oz.svg";
+					}
+					else if(document.getElementById("water").value > 4) {
+						image.src = "/bottles/32oz.svg";
+					}
+					else if(document.getElementById("water").value > 3) {
+						image.src = "/bottles/16oz.svg"; 
+					}
+					else if(document.getElementById("water").value > 0) {
+						image.src = "/bottles/8oz.svg";
+					}
+					else{
+						image.src = "/bottles/empty.svg";
+					}
+				}
+                let w = document.getElementById("water").value;
+                if (w == "" || isNaN(w) || document.getElementById("day").value == "") {
+                    //doNothing
+                } else {
+                    document.getElementById("form").submit();
+                }
+			});
+		</script>
+    </body>
+</html>

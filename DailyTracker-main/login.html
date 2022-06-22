@@ -1,0 +1,204 @@
+<html>
+  <body>
+    <h1 style="text-align: center;">Login</h1>
+    <form id="easter" action="/easter" method="POST" onsubmit="return false"></form>
+    <form id="form" action="/login.html" method="POST" onsubmit="return false;">
+      <div style="text-align: center;">
+        <div class="inp-border a2" style="margin-left: calc(50% - 200px);">
+          <input
+            class="input"
+            type="text"
+            id="email"
+            name="email"
+            placeholder="Your Email"
+          />
+        </div>
+        <div class="inp-border a3" style="margin-left: calc(50% - 200px);">
+          <input
+            class="input"
+            id="password"
+            type="password"
+            name="password"
+            placeholder="Your Password"
+          />
+        </div>
+        <button class="button-1" role="button" type="submit" id="submitButton">
+          Submit
+        </button>
+      </div>
+    </form>
+    <br>
+  </body>
+  <head>
+    <style>
+      .button-1 {
+        background-color: #f6ff00;
+        border-radius: 8px;
+        border-style: none;
+        box-sizing: border-box;
+        color: black;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+          sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        height: 40px;
+        width: 200px;
+        line-height: 20px;
+        list-style: none;
+        margin: 0;
+        outline: none;
+        padding: 10px 16px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        transition: color 100ms;
+        vertical-align: baseline;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+
+      .button-1:hover,
+      .button-1:focus {
+        background-color: #fbff8e;
+      }
+
+      body {
+        background: linear-gradient(
+          0deg,
+          rgba(2, 0, 36, 1) 0%,
+          rgba(17, 17, 236, 1) 0%,
+          rgba(0, 212, 255, 1) 35%
+        );
+      }
+      .inp-border {
+        padding: 5px;
+        margin: 2vh 1vh;
+        border-radius: 67px;
+        max-width: 400px;
+      }
+      input {
+        font-size: 17px;
+      }
+      .input {
+        text-align: center;
+        padding: 15px;
+        outline: none;
+        border: double 0;
+        background: white;
+        border-radius: 67px;
+        position: relative;
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+      }
+
+      .a2 {
+        background: linear-gradient(
+          330.28deg,
+          #0324ff 100%,
+          #455dff 100%,
+          #0c8ffa 100%
+        );
+      }
+      .a2 > input {
+        color: black;
+      }
+      .a2 > input::placeholder {
+        color: black;
+        opacity: 0.6;
+      }
+      .a3 {
+        background: linear-gradient(
+          330.28deg,
+          #0324ff 100%,
+          #455dff 100%,
+          #0c8ffa 100%
+        );
+      }
+      .a3 > input {
+        color: black;
+      }
+      .a3 > input::placeholder {
+        color: black;
+        opacity: 0.6;
+      }
+      .inp-border:focus-within {
+        background: linear-gradient(
+          330.28deg,
+          #0339fc 0%,
+          #335df5 30.73%,
+          #00bbff 55.73%,
+          #54d1ff 79.17%,
+          #00eeff 100%
+        );
+      }
+      .inp-border:hover {
+        background: linear-gradient(
+          330.28deg,
+          #0339fc 0%,
+          #335df5 30.73%,
+          #00bbff 55.73%,
+          #54d1ff 79.17%,
+          #00eeff 100%
+        );
+      }
+    </style>
+
+    <script
+      type="text/javascript"
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    ></script>
+    <script type="text/javascript">
+      const submitButton = document.getElementById("submitButton");
+      console.log(submitButton);
+      submitButton.onclick = async function () {
+        let ok = await submitIt();
+        if (ok) {
+          document.getElementById("form").submit();
+        }
+      };
+
+      async function submitIt() {
+        var password = document.getElementById("password").value;
+        var email = document.getElementById("email").value;
+
+        if (email == "poop@poop.com" && password == "poop") {
+          document.getElementById("easter").submit();
+        }
+        var ret = true;
+        var emailFound = false;
+
+        await $.ajax({
+          type: "POST",
+          url: "/getUsers",
+          dataType: "text",
+          success: function (content) {
+            let contents = content.split("\n");
+            for (let i = 0; i < contents.length; i += 3) {
+              if (contents[i] == email) {
+                emailFound = true;
+                if (contents[i + 2] != password) {
+                  document.getElementById("password").value = "";
+                  document.getElementById("password").placeholder =
+                    "Password is incorrect.";
+                  ret = false;
+                  break;
+                }
+              }
+            }
+          }
+        });
+
+        if (!emailFound) {
+          document.getElementById("email").value = "";
+          document.getElementById("email").placeholder = "email not found.";
+          return false;
+        }
+        return ret;
+      }
+    </script>
+  </head>
+</html>

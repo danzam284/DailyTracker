@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <img
+      src="/images/back.png"
+      style="width: 2rem; height: 2rem;"
+      onclick="document.getElementById('fBack').submit();"
+    /><br /><br />
+        <form
+      id="fBack"
+      action="/home"
+      method="POST"
+      onsubmit="return false;"
+    ></form>
+        <header style="color:green">How many hours did you spend on your hardest task today?</header>
+        <form id="form" action="/frogPosted" method="POST" onsubmit="return false;">
+            <div style="text-align:center;">
+                <label for="day">Enter the date</label>
+                <input type="date" id="day" name="day">
+            </div>
+            <div class="inp-border a1" style="margin-left: calc(50% - 200px);">
+                <input class="input" id="frogTime" step=".01" type="number" name="frogTime">
+            </div>
+        </form>
+
+        <img id="frog" src="/frogs/empty.svg" alt="frog">
+		<style>
+            .input {
+                text-align: center;
+                padding: 15px;
+                outline: none;
+                border: double 0;
+                background: white;
+                border-radius: 67px;
+                position: relative;
+                box-sizing: border-box;
+                display: block;
+                width: 100%;
+            }
+            .inp-border {
+                padding: 5px;
+                margin: 2vh 1vh;
+                border-radius: 67px;
+                max-width: 400px;
+            }
+            body {
+                background: rgb(225, 225, 225);
+            }
+			#frog{
+                width:50%;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			header{
+				text-align: center;
+				font-size: 250%;
+				margin-bottom: 20px;
+			}
+			input{
+                font-size: 17px;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: auto;
+				width: auto;
+			}
+            .a1 {
+                background: linear-gradient(
+                    330.28deg,
+                    #0324ff 100%,
+                    #455dff 100%,
+                    #0c8ffa 100%
+                );
+            }
+            .a1 > input {
+                color: black;
+            }
+            .a1 > input::placeholder {
+                color: black;
+                opacity: 0.6;
+            }
+            .inp-border:focus-within {
+                background: linear-gradient(
+                330.28deg,
+                #0339fc 0%,
+                #335df5 30.73%,
+                #00bbff 55.73%,
+                #54d1ff 79.17%,
+                #00eeff 100%
+                );
+            }
+            .inp-border:hover {
+                background: linear-gradient(
+                330.28deg,
+                #0339fc 0%,
+                #335df5 30.73%,
+                #00bbff 55.73%,
+                #54d1ff 79.17%,
+                #00eeff 100%
+                );
+            }
+            .a1:hover > input::placeholder {
+                color: white;
+            }
+		</style>
+		<script>
+            document.addEventListener("keydown", function(event) {
+				if (event.keyCode == 13) {
+					var image = document.getElementById("frog");
+					if(document.getElementById("frogTime").value > 2) {
+						image.src = "/frogs/Frog-full.svg";
+					}
+					else if(document.getElementById("frogTime").value > 1.5) {
+						image.src = "/frogs/48mins.svg";
+					}
+					else if(document.getElementById("frogTime").value > 1) {
+						image.src = "/frogs/36mins.svg";
+					}
+					else if(document.getElementById("frogTime").value > 0.5) {
+						image.src = "/frogs/24mins.svg"; 
+					}
+					else if(document.getElementById("frogTime").value > 0) {
+						image.src = "/frogs/12mins.svg";
+					}
+					else{
+						image.src = "/frogs/empty.svg";
+					}
+				}
+                let w = document.getElementById("frogTime").value;
+                if (w == "" || isNaN(w) || document.getElementById("day").value == "") {
+                    //doNothing
+                } else {
+                    document.getElementById("form").submit();
+                }
+			});
+		</script>
+    </body>
+</html>

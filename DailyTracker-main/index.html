@@ -1,0 +1,378 @@
+<html>
+  <body>
+    <img
+      src="/images/back.png"
+      style="width: 2rem; height: 2rem;"
+      onclick="document.getElementById('fBack').submit();"
+    /><br /><br />
+    <form
+      id="fBack"
+      action="/home"
+      method="POST"
+      onsubmit="return false;"
+    ></form>
+    <form action="/skip" method="POST">
+      <button class="button-1" role="button" type="submit" id="submit">
+        Skip the Survey
+      </button>
+    </form>
+    <span id="error" style="color: red; text-align: center;"></span>
+    <form action="/index.html" method="POST" onsubmit="return submitIt();">
+      <div style="text-align: center;">
+        <label for="day">Enter the date</label><br />
+        <input type="date" id="day" name="day" /><br /><br />
+
+        <div class="inp-border a1" style="margin-left: calc(50% - 200px);">
+          <input
+            class="input"
+            id="water"
+            type="text"
+            name="water"
+            placeholder="How many glasses of water?"
+          />
+        </div>
+        <div class="inp-border a2" style="margin-left: calc(50% - 200px);">
+          <input
+            class="input"
+            id="hard"
+            type="text"
+            name="hard"
+            placeholder="How many hours on frog?"
+          />
+        </div>
+        <div class="inp-border a3" style="margin-left: calc(50% - 200px);">
+          <input
+            class="input"
+            id="sleep"
+            type="text"
+            name="sleep"
+            placeholder="How many hours of sleep?"
+          />
+        </div>
+        <div class="inp-border a4" style="margin-left: calc(50% - 200px);">
+          <input
+            class="input"
+            id="worry"
+            type="text"
+            name="worry"
+            placeholder="How many minutes of worrying?"
+          />
+        </div>
+        <div class="inp-border a5" style="margin-left: calc(50% - 200px);">
+          <input
+            class="input"
+            id="food"
+            type="text"
+            name="food"
+            placeholder="Quality of nutrition (1-10)?"
+          />
+        </div>
+        <button class="button-2" role="button" type="submit" id="submit">
+          Submit
+        </button>
+      </div>
+    </form>
+    <br /><span id="text"></span>
+  </body>
+
+  <style>
+    #day {
+      color: black;
+    }
+    .button-1 {
+      background-color: #f6ff00;
+      border-radius: 8px;
+      border-style: none;
+      box-sizing: border-box;
+      color: black;
+      cursor: pointer;
+      display: inline-block;
+      font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+        sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      height: 40px;
+      width: 200px;
+      line-height: 20px;
+      list-style: none;
+      margin: 0;
+      outline: none;
+      padding: 10px 16px;
+      position: relative;
+      text-align: center;
+      text-decoration: none;
+      transition: color 100ms;
+      vertical-align: baseline;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    .button-1:hover,
+    .button-1:focus {
+      background-color: #fbff8e;
+    }
+    .button-2 {
+      background-color: #f6ff00;
+      border-radius: 8px;
+      border-style: none;
+      box-sizing: border-box;
+      color: black;
+      cursor: pointer;
+      display: inline-block;
+      font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+        sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      height: 40px;
+      width: 200px;
+      line-height: 20px;
+      list-style: none;
+      margin: 0;
+      outline: none;
+      padding: 10px 16px;
+      position: relative;
+      text-align: center;
+      text-decoration: none;
+      transition: color 100ms;
+      vertical-align: baseline;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    .button-2:hover,
+    .button-2:focus {
+      background-color: #fbff8e;
+    }
+    body {
+      background: linear-gradient(
+        0deg,
+        rgba(2, 0, 36, 1) 0%,
+        rgba(17, 17, 236, 1) 0%,
+        rgba(0, 212, 255, 1) 35%
+      );
+    }
+    .inp-border {
+      padding: 5px;
+      margin: 2vh 1vh;
+      border-radius: 67px;
+      max-width: 400px;
+    }
+    input {
+      font-size: 17px;
+    }
+    .input {
+      text-align: center;
+      padding: 15px;
+      outline: none;
+      border: double 0;
+      background: white;
+      border-radius: 67px;
+      position: relative;
+      box-sizing: border-box;
+      display: block;
+      width: 100%;
+    }
+    .a1 {
+      background: linear-gradient(
+        330.28deg,
+        #0324ff 100%,
+        #455dff 100%,
+        #0c8ffa 100%
+      );
+    }
+    .a1 > input {
+      color: black;
+    }
+    .a1 > input::placeholder {
+      color: black;
+      opacity: 0.6;
+    }
+    .a2 {
+      background: linear-gradient(
+        330.28deg,
+        #0324ff 100%,
+        #455dff 100%,
+        #0c8ffa 100%
+      );
+    }
+    .a2 > input {
+      color: black;
+    }
+    .a2 > input::placeholder {
+      color: black;
+      opacity: 0.6;
+    }
+    .a3 {
+      background: linear-gradient(
+        330.28deg,
+        #0324ff 100%,
+        #455dff 100%,
+        #0c8ffa 100%
+      );
+    }
+    .a3 > input {
+      color: black;
+    }
+    .a3 > input::placeholder {
+      color: black;
+      opacity: 0.6;
+    }
+    .a4 {
+      background: linear-gradient(
+        330.28deg,
+        #0324ff 100%,
+        #455dff 100%,
+        #0c8ffa 100%
+      );
+    }
+    .a4 > input {
+      color: black;
+    }
+    .a4 > input::placeholder {
+      color: black;
+      opacity: 0.6;
+    }
+    .a5 {
+      background: linear-gradient(
+        330.28deg,
+        #0324ff 100%,
+        #455dff 100%,
+        #0c8ffa 100%
+      );
+    }
+    .a5 > input {
+      color: black;
+    }
+    .a5 > input::placeholder {
+      color: black;
+      opacity: 0.6;
+    }
+    .inp-border:focus-within {
+      background: linear-gradient(
+        330.28deg,
+        #0339fc 0%,
+        #335df5 30.73%,
+        #00bbff 55.73%,
+        #54d1ff 79.17%,
+        #00eeff 100%
+      );
+    }
+    .inp-border:hover {
+      background: linear-gradient(
+        330.28deg,
+        #0339fc 0%,
+        #335df5 30.73%,
+        #00bbff 55.73%,
+        #54d1ff 79.17%,
+        #00eeff 100%
+      );
+    }
+    .a1:hover > input::placeholder {
+      color: white;
+    }
+    .a2:hover > input::placeholder {
+      color: white;
+    }
+    .a3:hover > input::placeholder {
+      color: white;
+    }
+    .a4:hover > input::placeholder {
+      color: white;
+    }
+    .a5:hover > input::placeholder {
+      color: white;
+    }
+  </style>
+  <head>
+    <script type="text/javascript">
+      function submitIt() {
+        let ret = true;
+        let day = document.getElementById("day").value;
+        let water = document.getElementById("water").value;
+        let hard = document.getElementById("hard").value;
+        let sleep = document.getElementById("sleep").value;
+        let worry = document.getElementById("worry").value;
+        let food = document.getElementById("food").value;
+
+        if (day == "") {
+          ret = false;
+          document.getElementById("day").value = "";
+          document.getElementById("error").innerHTML = "Invalid Date";
+        }
+
+        if (isNaN(water) || water == "") {
+          ret = false;
+          water = "";
+          document.getElementById("water").value = "";
+          document.getElementById("water").placeholder =
+            "please enter a valid number";
+        }
+        if (isNaN(hard) || hard == "") {
+          ret = false;
+          hard = "";
+          document.getElementById("hard").value = "";
+          document.getElementById("hard").placeholder =
+            "please enter a valid number";
+        }
+        if (isNaN(sleep) || sleep == "") {
+          ret = false;
+          sleep = "";
+          document.getElementById("sleep").value = "";
+          document.getElementById("sleep").placeholder =
+            "please enter a valid number";
+        }
+        if (isNaN(worry) || worry == "") {
+          ret = false;
+          worry = "";
+          document.getElementById("worry").value = "";
+          document.getElementById("worry").placeholder =
+            "please enter a valid number";
+        }
+        if (isNaN(food) || food == "") {
+          ret = false;
+          food = "";
+          document.getElementById("food").value = "";
+          document.getElementById("food").placeholder =
+            "please enter a valid number";
+        }
+
+        if (!ret) {
+          return ret;
+        }
+        if (parseInt(water) < 0 || parseInt(water) > 20) {
+          ret = false;
+          document.getElementById("water").value = "";
+          document.getElementById("water").placeholder =
+            "please enter between 0 and 20";
+        }
+        if (parseInt(hard) < 0 || parseInt(hard) > 15) {
+          ret = false;
+          document.getElementById("hard").value = "";
+          document.getElementById("hard").placeholder =
+            "please enter between 0 and 15";
+        }
+        if (parseInt(sleep) < 0 || parseInt(sleep) > 24) {
+          ret = false;
+          document.getElementById("sleep").value = "";
+          document.getElementById("sleep").placeholder =
+            "please enter between 0 and 24";
+        }
+        if (parseInt(worry) < 0 || parseInt(worry) > 1400) {
+          ret = false;
+          document.getElementById("worry").value = "";
+          document.getElementById("worry").placeholder =
+            "please enter between 0 and 1400";
+        }
+        if (parseInt(food) < 0 || parseInt(food) > 10) {
+          ret = false;
+          document.getElementById("food").value = "";
+          document.getElementById("food").placeholder =
+            "please enter between 0 and 10";
+        }
+        return ret;
+      }
+    </script>
+  </head>
+</html>
