@@ -12,7 +12,7 @@
       method="POST"
       onsubmit="return false;"
     ></form>
-        <header style="color:green">How many hours did you spend on your hardest task today?</header>
+        <header style="color:green">How many minutes did you spend on your hardest task today?</header>
         <form id="form" action="/frogPosted" method="POST" onsubmit="return false;">
             <div style="text-align:center;">
                 <label for="day">Enter the date</label>
@@ -108,16 +108,16 @@
             document.addEventListener("keydown", function(event) {
 				if (event.keyCode == 13) {
 					var image = document.getElementById("frog");
-					if(document.getElementById("frogTime").value > 2) {
+					if(document.getElementById("frogTime").value > 80) {
 						image.src = "/frogs/Frog-full.svg";
 					}
-					else if(document.getElementById("frogTime").value > 1.5) {
+					else if(document.getElementById("frogTime").value > 60) {
 						image.src = "/frogs/48mins.svg";
 					}
-					else if(document.getElementById("frogTime").value > 1) {
+					else if(document.getElementById("frogTime").value > 40) {
 						image.src = "/frogs/36mins.svg";
 					}
-					else if(document.getElementById("frogTime").value > 0.5) {
+					else if(document.getElementById("frogTime").value > 20) {
 						image.src = "/frogs/24mins.svg"; 
 					}
 					else if(document.getElementById("frogTime").value > 0) {

@@ -108,6 +108,9 @@
             document.addEventListener("keydown", function(event) {
 				if (event.keyCode == 13) {
 					var image = document.getElementById("waterbottle");
+                    var sound = new Audio("/bottles/water.mp3");
+                    sound.currentTime = 0;
+                    sound.play();
 					if(document.getElementById("water").value > 10) {
 						image.src = "/bottles/full.svg";
 					}

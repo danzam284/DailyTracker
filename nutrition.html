@@ -212,7 +212,8 @@
 
 		<style>
             img {
-                width: 50%
+                width: 25rem;
+                height: 25rem;
 
             }
             .link{
@@ -274,6 +275,9 @@
 		</style>
 		<script>
             function change() {
+                var sound = new Audio("/sandwiches/sandwich.mp3");
+                sound.currentTime = 0;
+                sound.play();
                 var num = parseInt(document.getElementById("num").value);
                 let image = document.getElementById("sandwich")
                 if(num == 10) {
