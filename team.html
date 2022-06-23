@@ -937,21 +937,20 @@
                         amtFood[i]++;
                       }
                     }
-
                     let finalCheck = true;
                     if (!filledWater || !filledFood || !filledWorry || !filledSleep || !filledHard && name != null) {
                       let ind = j - 1;
                       while (ind > 0 && finalCheck) {
                         if (allData[ind][0] != "*") {
                           ind--;
+                        } else {
+                          finalCheck = false;
                         }
-                        finalCheck = false;
                       }
                       if (allData[ind].slice(1, name.length + 1) == name) {
                         if (!filledFood && !filledHard && !filledSleep && !filledWater && !filledWorry) {
                           day.push(weekday[daysofWeek[i]]);
                         }
-                        console.log(d);
                         if (d[0][1] != " ") {
                           water.push(parseInt(d[0][1]));
                           filledWater = true;
