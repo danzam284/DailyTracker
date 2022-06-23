@@ -26,7 +26,7 @@
             </div>
         </form>
 
-        <img id="waterbottle" src="/bottles/empty.svg" alt="waterbottle">
+        <img id="worryFace" src="/worries/Asset 6.svg" alt="worryFace">
 		<style>
             .input {
                 text-align: center;
@@ -49,8 +49,8 @@
             body {
                 background: rgb(225, 225, 225);
             }
-			#waterbottle{
-                width:50%;
+			#worryFace{
+                width:35%;
 				display: block;
 				margin-left: auto;
 				margin-right: auto;
@@ -110,27 +110,24 @@
 		<script>
             document.addEventListener("keydown", function(event) {
 				if (event.keyCode == 13 && !isNaN(document.getElementById("worry").value)) {
-					var image = document.getElementById("waterbottle");
-					if(document.getElementById("worry").value > 10) {
-						image.src = "/bottles/full.svg";
+					var image = document.getElementById("worryFace");
+					if(document.getElementById("worry").value >= 60) {
+						image.src = "/worries/Asset 1.svg";
 					}
-					else if(document.getElementById("worry").value > 8) {
-						image.src = "/bottles/128oz.svg";
+					else if(document.getElementById("worry").value >=45) {
+						image.src = "/worries/Asset 2.svg";
 					}
-					else if(document.getElementById("worry").value > 6) {
-						image.src = "/bottles/64oz.svg";
+					else if(document.getElementById("worry").value >= 30) {
+						image.src = "/worries/Asset 3.svg";
 					}
-					else if(document.getElementById("worry").value > 4) {
-						image.src = "/bottles/32oz.svg";
+					else if(document.getElementById("worry").value >= 15) {
+						image.src = "/worries/Asset 4.svg";
 					}
-					else if(document.getElementById("worry").value > 3) {
-						image.src = "/bottles/16oz.svg"; 
-					}
-					else if(document.getElementById("worry").value > 0) {
-						image.src = "/bottles/8oz.svg";
+					else if(document.getElementById("worry").value >= 5) {
+						image.src = "/worries/Asset 5.svg"; 
 					}
 					else{
-						image.src = "/bottles/empty.svg";
+						image.src = "/worries/Asset 6.svg";
 					}
 				}
                 let w = document.getElementById("worry").value;
