@@ -5,7 +5,11 @@
       src="/images/back.png"
       style="width: 2rem; height: 2rem;"
       onclick="document.getElementById('fBack').submit();"
-    /><br /><br />
+    />
+    <div style="display:flex; justify-content:center">
+        <span id="message" style="text-align:center"></span>
+    </div>
+    <br>
         <form
       id="fBack"
       action="/home"
@@ -105,8 +109,9 @@
             }
 		</style>
 		<script>
+            active=false;
             document.addEventListener("keydown", function(event) {
-				if (event.keyCode == 13) {
+				if (event.keyCode == 13 && !isNaN(document.getElementById("water").value)) {
 					var image = document.getElementById("waterbottle");
                     var sound = new Audio("/bottles/water.mp3");
                     sound.currentTime = 0;
@@ -135,9 +140,12 @@
 				}
                 let w = document.getElementById("water").value;
                 if (w == "" || isNaN(w) || document.getElementById("day").value == "") {
-                    //doNothing
+                    document.getElementById("message").style.color="red";
+                    document.getElementById("message").innerHTML="There was an Error Submitting the Form";
                 } else {
                     document.getElementById("form").submit();
+                    document.getElementById("message").style.color="green";
+                    document.getElementById("message").innerHTML="Form Successfully Submitted";
                 }
 			});
 		</script>
