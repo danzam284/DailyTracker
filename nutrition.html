@@ -36,7 +36,7 @@
             <a href="#" id="10" style="background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%);" class="link pop-on-hover">10</a>
         </div>
         <br><br>
-        <div style="display:flex; justify-content:center;">
+        <div id="images" style="display:flex; justify-content:center;">
             <img src="/sandwiches/Full sandwich.svg" id="sandwich">
         </div>
 
@@ -264,10 +264,21 @@
         </script>
 
 		<style>
+            #new {
+                width:10%;
+                position: absolute;
+                top: -40%;
+                left: 35%;
+            }
+            #images {
+                position: relative;
+                top: 0;
+                left: 0;
+            }
             img {
                 width: 25rem;
                 height: 25rem;
-
+                position:relative;
             }
             .link{
                 padding: 15px 30px;
@@ -332,6 +343,21 @@
                 sound.currentTime = 0;
                 sound.play();
                 var num = parseInt(document.getElementById("num").value);
+                if (num > 8) {
+                    let idx = Math.floor(Math.random() * 3);
+                    var src;
+                    if (idx == 0) {
+                        src = '/comments/Awesome.svg';
+                    } else if (idx == 1) {
+                        src = '/comments/Great job.svg';
+                    } else {
+                        src = '/comments/Nice work.svg';
+                    }
+                    document.getElementById("images").innerHTML = "<img id='sandwich' src='/sandwiches/Full sandwich.svg' alt='sandwich'> <img src=\"" + src +  "\"id='new'>"
+                } else {
+                    document.getElementById("images").innerHTML = "<img id='sandwich' src='/sandwiches/Full sandwich.svg' alt='sandwich'>";
+                }
+
                 let image = document.getElementById("sandwich")
                 if(num == 10) {
                     image.src = "/sandwiches/Crumbs.svg";

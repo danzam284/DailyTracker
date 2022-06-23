@@ -25,9 +25,21 @@
                 <input class="input" step=".01" id="sleep" type="number" name="sleep">
             </div>
         </form>
-
-        <img id="sheep" src="/sheep/Sheep-empty.svg" alt="sheep">
+        <div id="images">
+            <img id="sheep" src="/sheep/Sheep-empty.svg" alt="sheep">
+        </div>
 		<style>
+            #new {
+                width:10%;
+                position: absolute;
+                top: 0%;
+                left: 30%;
+            }
+            #images {
+                position: relative;
+                top: 0;
+                left: 0;
+            }
             .input {
                 text-align: center;
                 padding: 15px;
@@ -50,10 +62,11 @@
                 background: rgb(225, 225, 225);
             }
 			#sheep{
-                width:50%;
+                width:35%;
 				display: block;
 				margin-left: auto;
 				margin-right: auto;
+                position:relative;
 			}
 			header{
 				text-align: center;
@@ -110,6 +123,24 @@
 		<script>
             document.addEventListener("keydown", function(event) {
 				if (event.keyCode == 13 && !isNaN(document.getElementById("sleep").value)) {
+                    var sound = new Audio("/images/sheep.mp3");
+                    sound.currentTime = 0;
+                    sound.play();
+                    if (document.getElementById("sleep").value >= 7) {
+                        let idx = Math.floor(Math.random() * 3);
+                        var src;
+                        if (idx == 0) {
+                            src = '/comments/Awesome.svg';
+                        } else if (idx == 1) {
+                            src = '/comments/Great job.svg';
+                        } else {
+                            src = '/comments/Nice work.svg';
+                        }
+                        document.getElementById("images").innerHTML = "<img id='sheep' src='/sheep/Sheep-empty.svg' alt='sheep'> <img src=\"" + src +  "\"id='new'>"
+                    } else {
+                        document.getElementById("images").innerHTML = "<img id='sheep' src='/sheep/Sheep-empty.svg' alt='sheep'>";
+                    }
+
 					var image = document.getElementById("sheep");
 					if(document.getElementById("sleep").value >= 8) {
 						image.src = "/sheep/sheep-full.svg";
@@ -129,16 +160,16 @@
 					else{
 						image.src = "/sheep/Sheep-empty.svg";
 					}
+                    let w = document.getElementById("sleep").value;
+                    if (w == "" || isNaN(w) || document.getElementById("day").value == "") {
+                        document.getElementById("message").style.color="red";
+                        document.getElementById("message").innerHTML="There was an Error Submitting the Form";
+                    } else {
+                        document.getElementById("form").submit();
+                        document.getElementById("message").style.color="green";
+                        document.getElementById("message").innerHTML="Form Successfully Submitted";
+                    }
 				}
-                let w = document.getElementById("sleep").value;
-                if (w == "" || isNaN(w) || document.getElementById("day").value == "") {
-                    document.getElementById("message").style.color="red";
-                    document.getElementById("message").innerHTML="There was an Error Submitting the Form";
-                } else {
-                    document.getElementById("form").submit();
-                    document.getElementById("message").style.color="green";
-                    document.getElementById("message").innerHTML="Form Successfully Submitted";
-                }
 			});
 		</script>
     </body>

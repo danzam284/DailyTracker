@@ -27,8 +27,21 @@
             </div>
         </form>
 
-        <img id="waterbottle" src="/bottles/empty.svg" alt="waterbottle">
+        <div id="images">
+            <img id="waterbottle" src="/bottles/empty.svg" alt="waterbottle">
+        </div>
 		<style>
+            #new {
+                width:10%;
+                position: absolute;
+                top: 0%;
+                left: 30%;
+            }
+            #images {
+                position: relative;
+                top: 0;
+                left: 0;
+            }
             .input {
                 text-align: center;
                 padding: 15px;
@@ -51,10 +64,11 @@
                 background: rgb(225, 225, 225);
             }
 			#waterbottle{
-                width:50%;
+                width:35%;
 				display: block;
 				margin-left: auto;
 				margin-right: auto;
+                position:relative;
 			}
 			header{
 				text-align: center;
@@ -112,10 +126,25 @@
             active=false;
             document.addEventListener("keydown", function(event) {
 				if (event.keyCode == 13 && !isNaN(document.getElementById("water").value)) {
-					var image = document.getElementById("waterbottle");
                     var sound = new Audio("/bottles/water.mp3");
                     sound.currentTime = 0;
                     sound.play();
+                    if (document.getElementById("water").value > 8) {
+                        let idx = Math.floor(Math.random() * 3);
+                        var src;
+                        if (idx == 0) {
+                            src = '/comments/Awesome.svg';
+                        } else if (idx == 1) {
+                            src = '/comments/Great job.svg';
+                        } else {
+                            src = '/comments/Nice work.svg';
+                        }
+                        document.getElementById("images").innerHTML = "<img id='waterbottle' src='/bottles/empty.svg' alt='waterbottle'> <img src=\"" + src +  "\"id='new'>"
+                    } else {
+                        document.getElementById("images").innerHTML = "<img id='waterbottle' src='/bottles/empty.svg' alt='waterbottle'>";
+                    }
+                    var image = document.getElementById("waterbottle");
+
 					if(document.getElementById("water").value > 10) {
 						image.src = "/bottles/full.svg";
 					}
@@ -137,16 +166,16 @@
 					else{
 						image.src = "/bottles/empty.svg";
 					}
+                    let w = document.getElementById("water").value;
+                    if (w == "" || isNaN(w) || document.getElementById("day").value == "") {
+                        document.getElementById("message").style.color="red";
+                        document.getElementById("message").innerHTML="There was an Error Submitting the Form";
+                    } else {
+                        document.getElementById("form").submit();
+                        document.getElementById("message").style.color="green";
+                        document.getElementById("message").innerHTML="Form Successfully Submitted";
+                    }
 				}
-                let w = document.getElementById("water").value;
-                if (w == "" || isNaN(w) || document.getElementById("day").value == "") {
-                    document.getElementById("message").style.color="red";
-                    document.getElementById("message").innerHTML="There was an Error Submitting the Form";
-                } else {
-                    document.getElementById("form").submit();
-                    document.getElementById("message").style.color="green";
-                    document.getElementById("message").innerHTML="Form Successfully Submitted";
-                }
 			});
 		</script>
     </body>

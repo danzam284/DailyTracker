@@ -25,9 +25,22 @@
                 <input class="input" step=".01" id="worry" type="number" name="worry">
             </div>
         </form>
+        <div id="images">
+            <img id="worryFace" src="/worries/Asset 6.svg" alt="worryFace">
+        </div>
 
-        <img id="worryFace" src="/worries/Asset 6.svg" alt="worryFace">
 		<style>
+            #new {
+                width:10%;
+                position: absolute;
+                top: 0%;
+                left: 30%;
+            }
+            #images {
+                position: relative;
+                top: 0;
+                left: 0;
+            }
             .input {
                 text-align: center;
                 padding: 15px;
@@ -54,6 +67,7 @@
 				display: block;
 				margin-left: auto;
 				margin-right: auto;
+                position: relative;
 			}
 			header{
 				text-align: center;
@@ -110,6 +124,24 @@
 		<script>
             document.addEventListener("keydown", function(event) {
 				if (event.keyCode == 13 && !isNaN(document.getElementById("worry").value)) {
+                    var sound = new Audio("/images/stress.mp3");
+                    sound.currentTime = 0;
+                    sound.play();
+                    if (document.getElementById("worry").value <= 15) {
+                        let idx = Math.floor(Math.random() * 3);
+                        var src;
+                        if (idx == 0) {
+                            src = '/comments/Awesome.svg';
+                        } else if (idx == 1) {
+                            src = '/comments/Great job.svg';
+                        } else {
+                            src = '/comments/Nice work.svg';
+                        }
+                        document.getElementById("images").innerHTML = "<img id='worryFace' src='/worries/Asset 6.svg' alt='worryFace'> <img src=\"" + src +  "\"id='new'>"
+                    } else {
+                        document.getElementById("images").innerHTML = "<img id='worryFace' src='/worries/Asset 6.svg' alt='worryFace'>";
+                    }
+
 					var image = document.getElementById("worryFace");
 					if(document.getElementById("worry").value >= 60) {
 						image.src = "/worries/Asset 1.svg";
@@ -129,15 +161,15 @@
 					else{
 						image.src = "/worries/Asset 6.svg";
 					}
+                    let w = document.getElementById("worry").value;
+                    if (w == "" || isNaN(w) || document.getElementById("day").value == "") {
+                        document.getElementById("message").style.color="red";
+                        document.getElementById("message").innerHTML="There was an Error Submitting the Form";
+                    } else {
+                        document.getElementById("message").style.color="green";
+                        document.getElementById("message").innerHTML="Form Successfully Submitted";
+                    }
 				}
-                let w = document.getElementById("worry").value;
-                if (w == "" || isNaN(w) || document.getElementById("day").value == "") {
-                    document.getElementById("message").style.color="red";
-                    document.getElementById("message").innerHTML="There was an Error Submitting the Form";
-                } else {
-                    document.getElementById("message").style.color="green";
-                    document.getElementById("message").innerHTML="Form Successfully Submitted";
-                }
 			});
 		</script>
     </body>
