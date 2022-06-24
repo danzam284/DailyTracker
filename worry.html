@@ -131,6 +131,26 @@
             }
 		</style>
 		<script>
+            document.getElementById("day").onchange = function() {
+                let newDate = new Date(document.getElementById("day").value)
+                currDate.setDate(newDate.getDate() + 1);
+                setDate();
+            }
+            var currDate = new Date();
+            function setDate() {
+                let s = currDate.toLocaleDateString();
+                let day = currDate.getDate();
+                let year = currDate.getFullYear();
+                let month = currDate.getMonth() + 1;
+                if (day.toString().length == 1) {
+                    day = "0" + day.toString();
+                }
+                if (month.toString().length == 1) {
+                    month = "0" + month.toString();
+                }
+                document.getElementById('day').value = year + '-' + month + '-' + day;
+                document.getElementById('currDay').innerHTML = weekday[currDate.getDay()];
+            }
             const weekday = [
                 "Sunday",
                 "Monday",
@@ -142,17 +162,13 @@
             ];
             document.getElementById("next").onclick = function() {
                 currDate.setDate(currDate.getDate() + 1);
-                document.getElementById('day').valueAsDate = currDate;
-                document.getElementById('currDay').innerHTML = weekday[currDate.getDay()];
+                setDate();
             }
             document.getElementById("prev").onclick = function() {
                 currDate.setDate(currDate.getDate() - 1);
-                document.getElementById('day').valueAsDate = currDate;
-                document.getElementById('currDay').innerHTML = weekday[currDate.getDay()];
+                setDate();
             }
-            var currDate = new Date();
-            document.getElementById('day').valueAsDate = currDate;
-            document.getElementById('currDay').innerHTML = weekday[currDate.getDay()];
+            setDate();
             document.addEventListener("keydown", function(event) {
 				if (event.keyCode == 13 && !isNaN(document.getElementById("worry").value)) {
                     var sound = new Audio("/images/stress.mp3");
@@ -189,7 +205,7 @@
 					else if(document.getElementById("worry").value >= 5) {
 						image.src = "/worries/Asset 5.svg"; 
 					}
-					else{
+					else if(document.getElementById("worry").value != ""){
 						image.src = "/worries/Asset 6.svg";
 					}
                     let w = document.getElementById("worry").value;
@@ -197,6 +213,7 @@
                         document.getElementById("message").style.color="red";
                         document.getElementById("message").innerHTML="There was an Error Submitting the Form";
                     } else {
+                        document.getElementById("form").submit();
                         document.getElementById("message").style.color="green";
                         document.getElementById("message").innerHTML="Form Successfully Submitted";
                     }

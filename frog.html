@@ -130,6 +130,26 @@
             }
 		</style>
 		<script>
+            document.getElementById("day").onchange = function() {
+                let newDate = new Date(document.getElementById("day").value)
+                currDate.setDate(newDate.getDate() + 1);
+                setDate();
+            }
+            var currDate = new Date();
+            function setDate() {
+                let s = currDate.toLocaleDateString();
+                let day = currDate.getDate();
+                let year = currDate.getFullYear();
+                let month = currDate.getMonth() + 1;
+                if (day.toString().length == 1) {
+                    day = "0" + day.toString();
+                }
+                if (month.toString().length == 1) {
+                    month = "0" + month.toString();
+                }
+                document.getElementById('day').value = year + '-' + month + '-' + day;
+                document.getElementById('currDay').innerHTML = weekday[currDate.getDay()];
+            }
             const weekday = [
                 "Sunday",
                 "Monday",
@@ -141,17 +161,13 @@
             ];
             document.getElementById("next").onclick = function() {
                 currDate.setDate(currDate.getDate() + 1);
-                document.getElementById('day').valueAsDate = currDate;
-                document.getElementById('currDay').innerHTML = weekday[currDate.getDay()];
+                setDate();
             }
             document.getElementById("prev").onclick = function() {
                 currDate.setDate(currDate.getDate() - 1);
-                document.getElementById('day').valueAsDate = currDate;
-                document.getElementById('currDay').innerHTML = weekday[currDate.getDay()];
+                setDate();
             }
-            var currDate = new Date();
-            document.getElementById('day').valueAsDate = currDate;
-            document.getElementById('currDay').innerHTML = weekday[currDate.getDay()];
+            setDate();
             document.addEventListener("keydown", function(event) {
 				if (event.keyCode == 13 && !isNaN(document.getElementById("frogTime").value)) {
                     var sound = new Audio("/images/frog.mp3");
