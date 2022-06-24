@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <body>
-        <img
+        <img class="image"
       src="/images/back.png"
       style="width: 2rem; height: 2rem;"
       onclick="document.getElementById('fBack').submit();"
@@ -18,9 +18,13 @@
         <header>Rate your nutrition today on a scale of 1 to 10!</header>
         <form id="form" action="/nutritionPosted" method="POST" onsubmit="return false;">
             <input type="hidden" id="num" name="num">
-            <div style="text-align:center;">
-                <label for="day">Enter the date</label>
-                <input type="date" id="day" name="day">
+            <div style="display:flex; justify-content: center; text-align:center">
+                <img id="prev" class="arrow" src="/images/previous.png">
+                <div id="date" style="text-align: center;">
+                    <label id="currDay" for="day"></label>
+                    <input type="date" id="day" name="day">
+                </div>
+                <img id="next" class="arrow" src="/images/next.png">
             </div><br><br><br><br>
         </form>
         <div class="container py-5 text-center" style="display:flex; justify-content: center;">
@@ -37,7 +41,7 @@
         </div>
         <br><br>
         <div id="images" style="display:flex; justify-content:center;">
-            <img src="/sandwiches/Full sandwich.svg" id="sandwich">
+            <img class="image" src="/sandwiches/Full sandwich.svg" id="sandwich">
         </div>
 
         <script>
@@ -264,6 +268,11 @@
         </script>
 
 		<style>
+            .arrow {
+                width:30px;
+                margin-left:5px;
+                margin-right:5px;
+            }
             #new {
                 width:10%;
                 position: absolute;
@@ -275,7 +284,7 @@
                 top: 0;
                 left: 0;
             }
-            img {
+            .image {
                 width: 25rem;
                 height: 25rem;
                 position:relative;
@@ -338,6 +347,28 @@
 			}
 		</style>
 		<script>
+            const weekday = [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+            ];
+            document.getElementById("next").onclick = function() {
+                currDate.setDate(currDate.getDate() + 1);
+                document.getElementById('day').valueAsDate = currDate;
+                document.getElementById('currDay').innerHTML = weekday[currDate.getDay()];
+            }
+            document.getElementById("prev").onclick = function() {
+                currDate.setDate(currDate.getDate() - 1);
+                document.getElementById('day').valueAsDate = currDate;
+                document.getElementById('currDay').innerHTML = weekday[currDate.getDay()];
+            }
+            var currDate = new Date();
+            document.getElementById('day').valueAsDate = currDate;
+            document.getElementById('currDay').innerHTML = weekday[currDate.getDay()];
             function change() {
                 var sound = new Audio("/sandwiches/sandwich.mp3");
                 sound.currentTime = 0;
@@ -353,9 +384,9 @@
                     } else {
                         src = '/comments/Nice work.svg';
                     }
-                    document.getElementById("images").innerHTML = "<img id='sandwich' src='/sandwiches/Full sandwich.svg' alt='sandwich'> <img src=\"" + src +  "\"id='new'>"
+                    document.getElementById("images").innerHTML = "<img class='image' id='sandwich' src='/sandwiches/Full sandwich.svg' alt='sandwich'> <img class='image' src=\"" + src +  "\"id='new'>"
                 } else {
-                    document.getElementById("images").innerHTML = "<img id='sandwich' src='/sandwiches/Full sandwich.svg' alt='sandwich'>";
+                    document.getElementById("images").innerHTML = "<img class='image' id='sandwich' src='/sandwiches/Full sandwich.svg' alt='sandwich'>";
                 }
 
                 let image = document.getElementById("sandwich")

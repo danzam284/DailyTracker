@@ -18,9 +18,13 @@
     ></form>
         <header style="color:#00bbff">How many cups of water did you drink today?</header>
         <form id="form" action="/waterPosted" method="POST" onsubmit="return false;">
-            <div style="text-align:center;">
-                <label for="day">Enter the date</label>
-                <input type="date" id="day" name="day">
+            <div style="display:flex; justify-content: center; text-align:center">
+                <img id="prev" class="arrow" src="/images/previous.png">
+                <div id="date" style="text-align: center;">
+                    <label id="currDay" for="day"></label>
+                    <input type="date" id="day" name="day">
+                </div>
+                <img id="next" class="arrow" src="/images/next.png">
             </div>
             <div class="inp-border a1" style="margin-left: calc(50% - 200px);">
                 <input class="input" step=".01" id="water" type="number" name="water">
@@ -31,6 +35,11 @@
             <img id="waterbottle" src="/bottles/empty.svg" alt="waterbottle">
         </div>
 		<style>
+            .arrow {
+                width:30px;
+                margin-left:5px;
+                margin-right:5px;
+            }
             #new {
                 width:10%;
                 position: absolute;
@@ -123,6 +132,28 @@
             }
 		</style>
 		<script>
+            const weekday = [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+            ];
+            document.getElementById("next").onclick = function() {
+                currDate.setDate(currDate.getDate() + 1);
+                document.getElementById('day').valueAsDate = currDate;
+                document.getElementById('currDay').innerHTML = weekday[currDate.getDay()];
+            }
+            document.getElementById("prev").onclick = function() {
+                currDate.setDate(currDate.getDate() - 1);
+                document.getElementById('day').valueAsDate = currDate;
+                document.getElementById('currDay').innerHTML = weekday[currDate.getDay()];
+            }
+            var currDate = new Date();
+            document.getElementById('day').valueAsDate = currDate;
+            document.getElementById('currDay').innerHTML = weekday[currDate.getDay()];
             active=false;
             document.addEventListener("keydown", function(event) {
 				if (event.keyCode == 13 && !isNaN(document.getElementById("water").value)) {
