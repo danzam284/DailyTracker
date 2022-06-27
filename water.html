@@ -132,6 +132,18 @@
             }
 		</style>
 		<script>
+            function greaterThan(date1, date2) {
+                if (date1.getFullYear() > date2.getFullYear()) {
+                    return true;
+                }
+                if (date1.getMonth() > date2.getMonth()) {
+                    return true;
+                }
+                if (date1.getDate() > date2.getDate()) {
+                    return true;
+                }
+                return false;
+            }
             document.getElementById("day").onchange = function() {
                 let newDate = new Date(document.getElementById("day").value)
                 currDate.setDate(newDate.getDate() + 1);
@@ -214,7 +226,9 @@
 						image.src = "/bottles/empty.svg";
 					}
                     let w = document.getElementById("water").value;
-                    if (w == "" || isNaN(w) || document.getElementById("day").value == "") {
+                    let sevenDaysAgo = new Date();
+                    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+                    if (w == "" || isNaN(w) || document.getElementById("day").value == "" || greaterThan(currDate, new Date()) || greaterThan(sevenDaysAgo, currDate)) {
                         document.getElementById("message").style.color="red";
                         document.getElementById("message").innerHTML="There was an Error Submitting the Form";
                     } else {

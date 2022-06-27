@@ -45,6 +45,8 @@
         </div>
 
         <script>
+            var sevenDaysAgo = new Date();
+            sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
             document.getElementById("1").onclick = function() {
                 document.getElementById("num").value = 1;
                 document.getElementById("1").style.background = "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)";
@@ -57,7 +59,7 @@
                 document.getElementById("8").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("9").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("10").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
-                if (document.getElementById("day").value != "") {
+                if (document.getElementById("day").value != "" || greaterThan(currDate, new Date()) || greaterThan(sevenDaysAgo, currDate)) {
                     document.getElementById("form").submit();
                     document.getElementById("message").style.color="green";
                     document.getElementById("message").innerHTML="Form Successfully Submitted";
@@ -79,7 +81,7 @@
                 document.getElementById("8").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("9").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("10").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
-                if (document.getElementById("day").value != "") {
+                if (document.getElementById("day").value != "" || greaterThan(currDate, new Date()) || greaterThan(sevenDaysAgo, currDate)) {
                     document.getElementById("form").submit();
                     document.getElementById("message").style.color="green";
                     document.getElementById("message").innerHTML="Form Successfully Submitted";
@@ -101,7 +103,7 @@
                 document.getElementById("8").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("9").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("10").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
-                if (document.getElementById("day").value != "") {
+                if (document.getElementById("day").value != "" || greaterThan(currDate, new Date()) || greaterThan(sevenDaysAgo, currDate)) {
                     document.getElementById("form").submit();
                     document.getElementById("message").style.color="green";
                     document.getElementById("message").innerHTML="Form Successfully Submitted";
@@ -123,7 +125,7 @@
                 document.getElementById("8").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("9").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("10").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
-                if (document.getElementById("day").value != "") {
+                if (document.getElementById("day").value != "" || greaterThan(currDate, new Date()) || greaterThan(sevenDaysAgo, currDate)) {
                     document.getElementById("form").submit();
                     document.getElementById("message").style.color="green";
                     document.getElementById("message").innerHTML="Form Successfully Submitted";
@@ -145,7 +147,7 @@
                 document.getElementById("8").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("9").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("10").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
-                if (document.getElementById("day").value != "") {
+                if (document.getElementById("day").value != "" || greaterThan(currDate, new Date()) || greaterThan(sevenDaysAgo, currDate)) {
                     document.getElementById("form").submit();
                     document.getElementById("message").style.color="green";
                     document.getElementById("message").innerHTML="Form Successfully Submitted";
@@ -167,7 +169,7 @@
                 document.getElementById("8").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("9").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("10").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
-                if (document.getElementById("day").value != "") {
+                if (document.getElementById("day").value != "" || greaterThan(currDate, new Date()) || greaterThan(sevenDaysAgo, currDate)) {
                     document.getElementById("form").submit();
                     document.getElementById("message").style.color="green";
                     document.getElementById("message").innerHTML="Form Successfully Submitted";
@@ -189,7 +191,7 @@
                 document.getElementById("8").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("9").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("10").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
-                if (document.getElementById("day").value != "") {
+                if (document.getElementById("day").value != "" || greaterThan(currDate, new Date()) || greaterThan(sevenDaysAgo, currDate)) {
                     document.getElementById("form").submit();
                     document.getElementById("message").style.color="green";
                     document.getElementById("message").innerHTML="Form Successfully Submitted";
@@ -211,7 +213,7 @@
                 document.getElementById("5").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("9").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("10").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
-                if (document.getElementById("day").value != "") {
+                if (document.getElementById("day").value != "" || greaterThan(currDate, new Date()) || greaterThan(sevenDaysAgo, currDate)) {
                     document.getElementById("form").submit();
                     document.getElementById("message").style.color="green";
                     document.getElementById("message").innerHTML="Form Successfully Submitted";
@@ -233,7 +235,7 @@
                 document.getElementById("8").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("5").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("10").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
-                if (document.getElementById("day").value != "") {
+                if (document.getElementById("day").value != "" || greaterThan(currDate, new Date()) || greaterThan(sevenDaysAgo, currDate)) {
                     document.getElementById("form").submit();
                     document.getElementById("message").style.color="green";
                     document.getElementById("message").innerHTML="Form Successfully Submitted";
@@ -255,7 +257,7 @@
                 document.getElementById("8").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("9").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
                 document.getElementById("5").style.background = "linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%)";
-                if (document.getElementById("day").value != "") {
+                if (document.getElementById("day").value != "" || greaterThan(currDate, new Date()) || greaterThan(sevenDaysAgo, currDate)) {
                     document.getElementById("form").submit();
                     document.getElementById("message").style.color="green";
                     document.getElementById("message").innerHTML="Form Successfully Submitted";
@@ -347,6 +349,18 @@
 			}
 		</style>
 		<script>
+            function greaterThan(date1, date2) {
+                if (date1.getFullYear() > date2.getFullYear()) {
+                    return true;
+                }
+                if (date1.getMonth() > date2.getMonth()) {
+                    return true;
+                }
+                if (date1.getDate() > date2.getDate()) {
+                    return true;
+                }
+                return false;
+            }
             document.getElementById("day").onchange = function() {
                 let newDate = new Date(document.getElementById("day").value)
                 currDate.setDate(newDate.getDate() + 1);
