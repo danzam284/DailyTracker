@@ -12,6 +12,7 @@ var transporter = nodemailer.createTransport({
     }
 });
 
+
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var mostRecentName = null;
 var mostRecentEmail = null;
@@ -99,16 +100,14 @@ app.post("/signup.html", urlencodedParser, (req, res) => {
   return res.end();
 });
 
+
 app.post("/home", urlencodedParser, (req, res) => {
   res.redirect(__dirname + "/homescreen.html");
 });
 
 app.post("/login.html", urlencodedParser, async (req, res) => {
     res.redirect(__dirname + "/homescreen.html");
-  var data = await fs.readFile(
-    __dirname + "/users.txt",
-    "utf8",
-    (err, data) => {
+  var data = await fs.readFile(__dirname + "/users.txt","utf8",(err, data) => {
       if (err) {
         console.error(err);
         return;
@@ -157,6 +156,7 @@ app.get(__dirname + "/nutrition.html", (req, res) => {
 app.get(__dirname + "/easter.html", (req, res) => {
   res.sendFile(__dirname + "/easter.html");
 });
+
 
 //Runs when form is submitted
 app.post("/index.html", urlencodedParser, (req, res) => {
@@ -298,30 +298,24 @@ app.post("/team", (urlencodedParser = async function (req, res) {
 
 //converts txt data into a csv file based on last user
 async function parseData() {
-    var dates;
-    var maxStreak;
-    new Promise((resolve, reject) => {
-        dates = findCommon().then(dates => {
-            maxStreak = getMaxStreak(dates);
-        })
-        resolve();
-    }) .then(() => {
-
-    })
-
-    var mailOptions = {
-            from:'streaktracker.lifehikes@gmail.com',
-            to:mostRecentEmail,
-            subject: maxStreak + ' days in a row! You are KILLING it ' + mostRecentName + '!',
-            text:'Hello here from the Life Hikes Product Technology Summer Fellows!\nWe just wanted to congratulate you on logging in ' + maxStreak + " days in a row! Keep up the great work " + mostRecentName + "!\n\nBest,\nYour friends at LifeHikes"
-          }
-  /* transporter.sendMail(mailOptions, function(e, info) {
+  let dates = await findCommon();
+  let maxStreak = await getMaxStreak(dates);
+  console.log(maxStreak);
+  /*
+  var mailOptions = {
+          from:'streaktracker.lifehikes@gmail.com',
+          to:mostRecentEmail,
+          subject: maxStreak + ' days in a row! You are KILLING it ' + mostRecentName + '!',
+          text:'Hello here from the Life Hikes Product Technology Summer Fellows!\nWe just wanted to congratulate you on logging in ' + maxStreak + " days in a row! Keep up the great work " + mostRecentName + "!\n\nBest,\nYour friends at LifeHikes"
+        }
+  transporter.sendMail(mailOptions, function(e, info) {
     if (e) {
         console.log(e);
     } else {
         console.log("email sent: " + info.response);
     }
-  }) */
+  })
+  */ 
 }
 
 async function getMaxStreak(dates) {
@@ -346,9 +340,9 @@ async function getMaxStreak(dates) {
   for (let i = dates.length - 1; i > 0; i--) {
     let options;
     if (i == dates.length - 1) {
-        options = await convert(testDate);
+        options = convert(testDate);
     } else {
-        options = await convert(dates[i]);
+        options = convert(dates[i]);
     }
     if (dates[i - 1] == options[0] || dates[i - 1] == options[1] || dates[i - 1] == options[2]) {
       streak++;
@@ -412,31 +406,17 @@ async function findCommon() {
     }
     return data;
   });
-  
+
+  data = data.split('\n');
   for (let i = 0; i < data.length; i++) {
-    if (data[i] === "*" && i + mostRecentName.length < data.length) {
-      if (data.slice(i + 1, i + mostRecentName.length + 1) == mostRecentName) {
-        while (data[i] != "\n") {
+    if (data[i][0] === "*" && mostRecentName.length < data[i].length) {
+      if (data[i].slice(1, mostRecentName.length + 1) == mostRecentName) {
+        if (i != data.length - 1) {
           i++;
         }
-        if (i < data.length - 1) {
+        while (data[i][0] != "*" && i < data.length - 1) {
+          dates.add(data[i].slice(0, 10));
           i++;
-        }
-        while (data[i] != "*" && i < data.length) {
-          let curr = "";
-          let count = 10;
-          while (count > 0) {
-            count--;
-            curr += data[i];
-            i++;
-          }
-          while (data[i] != "\n") {
-            i += 1;
-          }
-          if (i < data.length - 1) {
-            i++;
-          }
-          dates.add(curr);
         }
       }
     }
@@ -445,3 +425,5 @@ async function findCommon() {
   dates = await bubbleSort(dates);
   return dates;
 }
+
+app.listen(2000);
