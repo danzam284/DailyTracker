@@ -19,7 +19,7 @@
         class="checked-group"
         style="display: flex; justify-content: center;"
       >
-        <label style="margin-right: 5%; margin-left: 5%;"
+        <label style="margin-right: 3%; margin-left: 3%;"
           ><input
             type="checkbox"
             checked="true"
@@ -27,7 +27,7 @@
             name="showWater"
           />Water</label
         >
-        <label style="margin-right: 5%; margin-left: 5%;"
+        <label style="margin-right: 3%; margin-left: 3%;"
           ><input
             type="checkbox"
             checked="true"
@@ -35,7 +35,7 @@
             name="showFrog"
           />Frog</label
         >
-        <label style="margin-right: 5%; margin-left: 5%;"
+        <label style="margin-right: 3%; margin-left: 3%;"
           ><input
             type="checkbox"
             checked="true"
@@ -43,7 +43,7 @@
             name="showSleep"
           />Sleep</label
         >
-        <label style="margin-right: 5%; margin-left: 5%;"
+        <label style="margin-right: 3%; margin-left: 3%;"
           ><input
             type="checkbox"
             checked="true"
@@ -51,13 +51,21 @@
             name="showWorry"
           />Worry</label
         >
-        <label style="margin-right: 5%; margin-left: 5%;"
+        <label style="margin-right: 3%; margin-left: 3%;"
           ><input
             type="checkbox"
             checked="true"
             id="showFood"
             name="showFood"
           />Nutrition</label
+        >
+        <label style="margin-right: 3%; margin-left: 3%;"
+          ><input
+            type="checkbox"
+            checked="true"
+            id="showMovement"
+            name="showMovement"
+          />Movement</label
         >
       </div>
       <br />
@@ -176,6 +184,7 @@
     </div>
     <div style="display: flex; justify-content: center;" id="row3">
       <canvas id="canvas5" style="width: 40%;"></canvas>
+      <canvas id="canvas6" style="width: 40%;"></canvas>
     </div>
   </body>
   <head>
@@ -236,6 +245,8 @@
           nc--;
           remove(sleepA);
           sleepA = null;
+          remove(movementA);
+          movementA = null;
           run();
         }
         if (mode == "week") {
@@ -263,6 +274,8 @@
           nc--;
           remove(sleepA);
           sleepA = null;
+          remove(movementA);
+          movementA = null;
           run();
         }
         if (mode == "month") {
@@ -290,6 +303,8 @@
           nc--;
           remove(sleepA);
           sleepA = null;
+          remove(movementA);
+          movementA = null;
           run();
         }
       }
@@ -390,26 +405,31 @@
       var c3 = false;
       var c4 = false;
       var c5 = false;
+      var c6 = false;
       var waterA;
       var hardA;
       var sleepA;
       var worryA;
       var foodA;
+      var movementA;
       var ctx = document.getElementById("canvas").getContext("2d");
       var ctx2 = document.getElementById("canvas2").getContext("2d");
       var ctx3 = document.getElementById("canvas3").getContext("2d");
       var ctx4 = document.getElementById("canvas4").getContext("2d");
       var ctx5 = document.getElementById("canvas5").getContext("2d");
+      var ctx6 = document.getElementById("canvas6").getContext("2d");
       var dataWater;
       var dataFood;
       var dataWorry;
       var dataHard;
       var dataSleep;
+      var dataMovement;
       var avgWater;
       var avgFood;
       var avgWorry;
       var avgHard;
       var avgSleep;
+      var avgMovement;
       var increased = false;
       var mem;
       var allData;
@@ -633,6 +653,48 @@
           }
         });
       }
+      function buildMovement() {
+        let dsets = [];
+        if (slider.checked) {
+          dsets = [avgMovement, dataMovement];
+        } else {
+          dsets = [dataMovement];
+        }
+        let c = find(6);
+        chartMovement = new Chart(c, {
+          type: "bar",
+          data: {
+            labels: day,
+            datasets: dsets
+          },
+          options: {
+            spanGaps: true,
+            plugins: {
+              title: {
+                display: true,
+                text: name + "'s Movement"
+              }
+            },
+            scales: {
+              xAxes: {
+                title: {
+                  display: true,
+                  text: "Day"
+                }
+              },
+              yAxes: {
+                title: {
+                  display: true,
+                  text: "Minutes of Movement"
+                }
+              }
+            },
+            responsive: false,
+            maintainAspectRatio: true,
+            showScale: false
+          }
+        });
+      }
 
       function ret() {
         if (
@@ -640,7 +702,8 @@
           sleepA == 1 ||
           hardA == 1 ||
           waterA == 1 ||
-          worryA == 1
+          worryA == 1 ||
+          movementA == 1
         ) {
           document.getElementById("canvas").style.backgroundColor = "white";
         } else {
@@ -652,7 +715,8 @@
           sleepA == 2 ||
           hardA == 2 ||
           waterA == 2 ||
-          worryA == 2
+          worryA == 2 ||
+          movementA == 2
         ) {
           document.getElementById("canvas2").style.backgroundColor = "white";
         } else {
@@ -664,7 +728,8 @@
           sleepA == 3 ||
           hardA == 3 ||
           waterA == 3 ||
-          worryA == 3
+          worryA == 3 ||
+          movementA == 3
         ) {
           document.getElementById("canvas3").style.backgroundColor = "white";
         } else {
@@ -676,7 +741,8 @@
           sleepA == 4 ||
           hardA == 4 ||
           waterA == 4 ||
-          worryA == 4
+          worryA == 4 ||
+          movementA == 4
         ) {
           document.getElementById("canvas4").style.backgroundColor = "white";
         } else {
@@ -688,11 +754,25 @@
           sleepA == 5 ||
           hardA == 5 ||
           waterA == 5 ||
-          worryA == 5
+          worryA == 5 ||
+          movementA == 5
         ) {
           document.getElementById("canvas5").style.backgroundColor = "white";
         } else {
           document.getElementById("canvas5").style.backgroundColor =
+            "rgba(0, 0, 0, 0)";
+        }
+        if (
+          foodA == 6 ||
+          sleepA == 6 ||
+          hardA == 6 ||
+          waterA == 6 ||
+          worryA == 6 ||
+          movementA == 6
+        ) {
+          document.getElementById("canvas6").style.backgroundColor = "white";
+        } else {
+          document.getElementById("canvas6").style.backgroundColor =
             "rgba(0, 0, 0, 0)";
         }
       }
@@ -723,6 +803,11 @@
           repl(idx, 5);
           return ctx5;
         }
+        if (!c6) {
+          c6 = true;
+          repl(idx, 6);
+          return ctx6;
+        }
       }
 
       function repl(idx, val) {
@@ -734,8 +819,10 @@
           sleepA = val;
         } else if (idx == 4) {
           worryA = val;
-        } else {
+        } else if (idx == 5){
           foodA = val;
+        } else {
+          movementA = val;
         }
       }
 
@@ -750,6 +837,8 @@
           c4 = false;
         } else if (idx == 5) {
           c5 = false;
+        } else if (idx == 6) {
+          c6 = false;
         }
       }
 
@@ -779,10 +868,18 @@
           remove(n);
           buildFood();
           chartFood.resize(width, height);
+        } else if (movementA == n) {
+          chartMovement.destroy();
+          remove(n);
+          buildMovement();
+          chartMovement.resize(width, height);
         }
       }
 
       function fix() {
+        if ((!c1 || !c2) && c6) {
+          findAndFix(6);
+        }
         if ((!c1 || !c2) && c5) {
           findAndFix(5);
         }
@@ -791,6 +888,9 @@
         }
         if ((!c1 || !c2) && c3) {
           findAndFix(3);
+        }
+        if ((!c3 || !c4) && c6) {
+          findAndFix(6);
         }
         if ((!c3 || !c4) && c5) {
           findAndFix(5);
@@ -815,12 +915,13 @@
       }
 
       async function run() {
-        nc = 5;
+        nc = 6;
         document.getElementById("showWater").checked = true;
         document.getElementById("showFrog").checked = true;
         document.getElementById("showSleep").checked = true;
         document.getElementById("showWorry").checked = true;
         document.getElementById("showFood").checked = true;
+        document.getElementById("showMovement").checked = true;
         $.ajax({
           type: "POST",
           url: "/getdata",
@@ -857,27 +958,32 @@
             let sleep = [];
             let worry = [];
             let food = [];
+            let movement = [];
             let avgwater = [];
             let avghard = [];
             let avgsleep = [];
             let avgworry = [];
             let avgfood = [];
+            let avgmovement = [];
             let amtWater = [];
             let amtHard = [];
             let amtSleep = [];
             let amtWorry = [];
             let amtFood = [];
+            let amtMovement = [];
             for (let i = 0; i < dates.length; i++) {
               let filledWater = false;
               let filledHard = false;
               let filledSleep = false;
               let filledWorry = false;
               let filledFood = false;
+              let filledMovement = false;
               amtWater.push(0);
               amtHard.push(0);
               amtSleep.push(0);
               amtWorry.push(0);
               amtFood.push(0);
+              amtMovement.push(0);
               for (let j = 0; j < allData.length; j++) {
                 if (allData[j][0] != "*") {
                   let d = CSVToArray(allData[j]);
@@ -937,8 +1043,19 @@
                         amtFood[i]++;
                       }
                     }
+                    if (amtMovement[i] != 0) {
+                      if (d[0][6] != " ") {
+                        avgmovement[i] += parseInt(d[0][5]);
+                        amtMovement[i]++;
+                      }
+                    } else {
+                      if (d[0][6] != " ") {
+                        avgmovement.push(parseInt(d[0][6]));
+                        amtMovement[i]++;
+                      }
+                    }
                     let finalCheck = true;
-                    if (!filledWater || !filledFood || !filledWorry || !filledSleep || !filledHard && name != null) {
+                    if (!filledWater || !filledFood || !filledWorry || !filledSleep || !filledHard || !filledMovement && name != null) {
                       let ind = j - 1;
                       while (ind > 0 && finalCheck) {
                         if (allData[ind][0] != "*") {
@@ -948,7 +1065,7 @@
                         }
                       }
                       if (allData[ind].slice(1, name.length + 1) == name) {
-                        if (!filledFood && !filledHard && !filledSleep && !filledWater && !filledWorry) {
+                        if (!filledFood && !filledHard && !filledSleep && !filledWater && !filledWorry && !filledMovement) {
                           day.push(weekday[daysofWeek[i]]);
                         }
                         if (d[0][1] != " ") {
@@ -970,6 +1087,10 @@
                         if (d[0][5] != " ") {
                           food.push(parseInt(d[0][5]));
                           filledFood = true;
+                        }
+                        if (d[0][6] != " ") {
+                          movement.push(parseInt(d[0][6]));
+                          filledMovement = true;
                         }
                       }
                     }
@@ -1001,8 +1122,13 @@
               } else {
                 avgfood[i] /= amtFood[i];
               }
+              if (amtMovement[i] == 0) {
+                avgmovement[i] = null;
+              } else {
+                avgmovement[i] /= amtMovement[i];
+              }
 
-              if (!filledWater && !filledFood && !filledHard && !filledWorry && !filledSleep) {
+              if (!filledWater && !filledFood && !filledHard && !filledWorry && !filledSleep && !filledMovement) {
                 day.push(weekday[daysofWeek[i]]);
               }
               if (!filledWater) {
@@ -1019,6 +1145,9 @@
               }
               if (!filledFood) {
                 food.push(null);
+              }
+              if (!filledMovement) {
+                movement.push(null);
               }
             }
 
@@ -1097,6 +1226,20 @@
               backgroundColor: "#509091",
               borderColor: "#509091",
               data: avghard
+            };
+
+            dataMovement = {
+              label: "Your Movement",
+              backgroundColor: "#918f11",
+              borderColor: "#918f11",
+              data: movement
+            };
+
+            avgMovement = {
+              label: "Average Movement",
+              backgroundColor: "#509091",
+              borderColor: "#509091",
+              data: avgmovement
             };
 
             document.getElementById("showWater").onchange = async function () {
@@ -1249,6 +1392,36 @@
               }
               ret();
             };
+            document.getElementById("showMovement").onchange = function () {
+              if (document.getElementById("showMovement").checked) {
+                buildMovement();
+                chartMovement.resize(width, height);
+                nc++;
+                if (nc == 1) {
+                  increased = true;
+                  height *= 2;
+                  width *= 2;
+                  findAndFix(1);
+                  findAndFix(2);
+                  height /= 2;
+                  width /= 2;
+                  mem = document.getElementById("canvas2");
+                  document.getElementById("canvas2").remove();
+                } else if (increased) {
+                  increased = false;
+                  document.getElementById("row1").appendChild(mem);
+                  findAndFix(1);
+                  findAndFix(2);
+                }
+              } else {
+                chartMovement.destroy();
+                nc--;
+                remove(movementA);
+                movementA = null;
+                fix();
+              }
+              ret();
+            };
 
             buildWater();
             findAndFix(1);
@@ -1260,6 +1433,8 @@
             findAndFix(4);
             buildFood();
             findAndFix(5);
+            buildMovement();
+            findAndFix(6);
 
             document.getElementById("showFood").checked = false;
             document.getElementById("showFood").onchange();

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <img
+      src="/images/back.png"
+      style="width: 2rem; height: 2rem;"
+      onclick="document.getElementById('fBack').submit();"
+    />
+    <div style="display:flex; justify-content:center">
+        <span id="message" style="text-align:center"></span>
+    </div>
+    <br>
+        <form
+      id="fBack"
+      action="/home"
+      method="POST"
+      onsubmit="return false;"
+    ></form>
+        <header style="color:#f49019">How many minutes of movement did you do today?</header>
+        <form id="form" action="/movementPosted" method="POST" onsubmit="return false;">
+            <div style="display:flex; justify-content: center; text-align:center">
+                <img id="prev" class="arrow" src="/images/previous.png">
+                <div id="date" style="text-align: center;">
+                    <label id="currDay" for="day"></label>
+                    <input type="date" id="day" name="day">
+                </div>
+                <img id="next" class="arrow" src="/images/next.png">
+            </div>
+            <div class="inp-border a1" style="margin-left: calc(50% - 200px);">
+                <input class="input" step=".01" id="movement" type="number" name="movement">
+            </div>
+        </form>
+        <div id="images">
+            <img id="waterbottle" src="/bottles/empty.svg" alt="waterbottle">
+        </div>
+		<form action="/team" method="POST">
+			<button class="button-1" role="button" type="submit">Go to Your Data</button>
+		</form>
+		<style>
+            .arrow {
+                width:30px;
+                margin-left:5px;
+                margin-right:5px;
+            }
+            #new {
+                width:10%;
+                position: absolute;
+                top: 0%;
+                left: 30%;
+            }
+            #images {
+                position: relative;
+                top: 0;
+                left: 0;
+            }
+            .input {
+                text-align: center;
+                padding: 15px;
+                outline: none;
+                border: double 0;
+                background: white;
+                border-radius: 67px;
+                position: relative;
+                box-sizing: border-box;
+                display: block;
+                width: 100%;
+            }
+            .inp-border {
+                padding: 5px;
+                margin: 2vh 1vh;
+                border-radius: 67px;
+                max-width: 400px;
+            }
+            body {
+                background: rgb(225, 225, 225);
+            }
+			#waterbottle{
+                width:35%;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+                position:relative;
+			}
+			header{
+				text-align: center;
+				font-size: 250%;
+				margin-bottom: 20px;
+			}
+			input{
+                font-size: 17px;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				margin-top: auto;
+				width: auto;
+			}
+            .a1 {
+                background: linear-gradient(
+                    330.28deg,
+                    #0324ff 100%,
+                    #455dff 100%,
+                    #0c8ffa 100%
+                );
+            }
+            .a1 > input {
+                color: black;
+            }
+            .a1 > input::placeholder {
+                color: black;
+                opacity: 0.6;
+            }
+            .inp-border:focus-within {
+                background: linear-gradient(
+                330.28deg,
+                #0339fc 0%,
+                #335df5 30.73%,
+                #00bbff 55.73%,
+                #54d1ff 79.17%,
+                #00eeff 100%
+                );
+            }
+            .inp-border:hover {
+                background: linear-gradient(
+                330.28deg,
+                #0339fc 0%,
+                #335df5 30.73%,
+                #00bbff 55.73%,
+                #54d1ff 79.17%,
+                #00eeff 100%
+                );
+            }
+            .a1:hover > input::placeholder {
+                color: white;
+            }
+			.next{
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			.button-1 {
+				background-color: #f6ff00;
+				border-radius: 8px;
+				border-style: none;
+				box-sizing: border-box;
+				color: black;
+				cursor: pointer;
+				display: block;
+				font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+					sans-serif;
+				font-size: 14px;
+				font-weight: 500;
+				height: 40px;
+				width: 200px;
+				line-height: 20px;
+				list-style: none;
+				margin-left: auto;
+				margin-right: auto;
+				outline: none;
+				padding: 10px 16px;
+				position: relative;
+				text-align: center;
+				text-decoration: none;
+				transition: color 100ms;
+				user-select: none;
+				-webkit-user-select: none;
+				touch-action: manipulation;
+				}
+			.button-1:hover,
+			.button-1:focus {
+				background-color: #fbff8e;
+			}
+		</style>
+		<script>
+            function greaterThan(date1, date2) {
+                if (date1.getFullYear() > date2.getFullYear()) {
+                    return true;
+                }
+                if (date1.getMonth() > date2.getMonth()) {
+                    return true;
+                }
+                if (date1.getDate() > date2.getDate()) {
+                    return true;
+                }
+                return false;
+            }
+            document.getElementById("day").onchange = function() {
+                let newDate = new Date(document.getElementById("day").value)
+                currDate.setDate(newDate.getDate() + 1);
+                setDate();
+            }
+            var currDate = new Date();
+            function setDate() {
+                let s = currDate.toLocaleDateString();
+                let day = currDate.getDate();
+                let year = currDate.getFullYear();
+                let month = currDate.getMonth() + 1;
+                if (day.toString().length == 1) {
+                    day = "0" + day.toString();
+                }
+                if (month.toString().length == 1) {
+                    month = "0" + month.toString();
+                }
+                document.getElementById('day').value = year + '-' + month + '-' + day;
+                document.getElementById('currDay').innerHTML = weekday[currDate.getDay()];
+            }
+            const weekday = [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+            ];
+            document.getElementById("next").onclick = function() {
+                currDate.setDate(currDate.getDate() + 1);
+                setDate();
+            }
+            document.getElementById("prev").onclick = function() {
+                currDate.setDate(currDate.getDate() - 1);
+                setDate();
+            }
+            setDate();
+            active=false;
+            document.addEventListener("keydown", function(event) {
+				if (event.keyCode == 13 && !isNaN(document.getElementById("movement").value)) {
+                    var sound = new Audio("/bottles/water.mp3");
+                    sound.currentTime = 0;
+                    sound.play();
+                    if (document.getElementById("movement").value > 8) {
+                        let idx = Math.floor(Math.random() * 3);
+                        var src;
+                        if (idx == 0) {
+                            src = '/comments/Awesome.svg';
+                        } else if (idx == 1) {
+                            src = '/comments/Great job.svg';
+                        } else {
+                            src = '/comments/Nice work.svg';
+                        }
+                        document.getElementById("images").innerHTML = "<img id='waterbottle' src='/bottles/empty.svg' alt='waterbottle'> <img src=\"" + src +  "\"id='new'>"
+                    } else {
+                        document.getElementById("images").innerHTML = "<img id='waterbottle' src='/bottles/empty.svg' alt='waterbottle'>";
+                    }
+                    var image = document.getElementById("waterbottle");
+
+					if(document.getElementById("movement").value > 10) {
+						image.src = "/bottles/full.svg";
+					}
+					else if(document.getElementById("movement").value > 8) {
+						image.src = "/bottles/128oz.svg";
+					}
+					else if(document.getElementById("movement").value > 6) {
+						image.src = "/bottles/64oz.svg";
+					}
+					else if(document.getElementById("movement").value > 4) {
+						image.src = "/bottles/32oz.svg";
+					}
+					else if(document.getElementById("movement").value > 3) {
+						image.src = "/bottles/16oz.svg"; 
+					}
+					else if(document.getElementById("movement").value > 0) {
+						image.src = "/bottles/8oz.svg";
+					}
+					else{
+						image.src = "/bottles/empty.svg";
+					}
+                    let w = document.getElementById("movement").value;
+                    let sevenDaysAgo = new Date();
+                    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+                    if (w == "" || isNaN(w) || document.getElementById("day").value == "" || greaterThan(currDate, new Date()) || greaterThan(sevenDaysAgo, currDate)) {
+                        document.getElementById("message").style.color="red";
+                        document.getElementById("message").innerHTML="There was an Error Submitting the Form";
+                    } else {
+                        document.getElementById("form").submit();
+                        document.getElementById("message").style.color="green";
+                        document.getElementById("message").innerHTML="Form Successfully Submitted";
+                    }
+				}
+			});
+		</script>
+    </body>
+</html>

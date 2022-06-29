@@ -52,6 +52,10 @@ app.post("/nutrition", (req, res) => {
   return res.redirect(__dirname + "/nutrition.html");
 });
 
+app.post("/movement", (req, res) => {
+  return res.redirect(__dirname + "/movement.html");
+});
+
 //Keeps signup form address
 app.get(__dirname + "/water.html", (req, res) => {
   res.sendFile(__dirname + "/water.html");
@@ -159,6 +163,11 @@ app.get(__dirname + "/nutrition.html", (req, res) => {
   res.sendFile(__dirname + "/nutrition.html");
 });
 
+//keeps form address
+app.get(__dirname + "/movement.html", (req, res) => {
+  res.sendFile(__dirname + "/movement.html");
+});
+
 app.get(__dirname + "/easter.html", (req, res) => {
   res.sendFile(__dirname + "/easter.html");
 });
@@ -193,7 +202,20 @@ app.post("/index.html", urlencodedParser, (req, res) => {
 app.post("/waterPosted", urlencodedParser, (req, res) => {
   fs.appendFile(
     __dirname + "/mem.txt",
-    req.body.day + ", " + req.body.water + ", " + ", " + ", " + ", " + "\n",
+    req.body.day + ", " + req.body.water + ", " + ", " + ", " + ", " + ", " + "\n",
+    function (e) {
+      if (e) {
+        return console.log(e);
+      }
+    }
+  );
+  res.status(204).send();
+});
+
+app.post("/movementPosted", urlencodedParser, (req, res) => {
+  fs.appendFile(
+    __dirname + "/mem.txt",
+     req.body.day + ", " + ", " + ", " + ", " + ", " + ", " + req.body.movement + "\n",
     function (e) {
       if (e) {
         return console.log(e);
@@ -206,7 +228,7 @@ app.post("/waterPosted", urlencodedParser, (req, res) => {
 app.post("/sleepPosted", urlencodedParser, (req, res) => {
   fs.appendFile(
     __dirname + "/mem.txt",
-    req.body.day + ", " + ", " + ", " + req.body.sleep + ", " + ", " + "\n",
+    req.body.day + ", " + ", " + ", " + req.body.sleep + ", " + ", " + ", " + "\n",
     function (e) {
       if (e) {
         return console.log(e);
@@ -223,7 +245,7 @@ app.post("/easter", urlencodedParser, (req, res) => {
 app.post("/worryPosted", urlencodedParser, (req, res) => {
   fs.appendFile(
     __dirname + "/mem.txt",
-    req.body.day + ", " + ", " + ", " + ", " + req.body.worry + ", " + "\n",
+    req.body.day + ", " + ", " + ", " + ", " + req.body.worry + ", " + ", " + "\n",
     function (e) {
       if (e) {
         return console.log(e);
@@ -236,7 +258,7 @@ app.post("/worryPosted", urlencodedParser, (req, res) => {
 app.post("/nutritionPosted", urlencodedParser, (req, res) => {
   fs.appendFile(
     __dirname + "/mem.txt",
-    req.body.day + ", " + ", " + ", " + ", " + ", " + req.body.num + "\n",
+    req.body.day + ", " + ", " + ", " + ", " + ", " + req.body.num + ", " + "\n",
     function (e) {
       if (e) {
         return console.log(e);
@@ -249,7 +271,7 @@ app.post("/nutritionPosted", urlencodedParser, (req, res) => {
 app.post("/frogPosted", urlencodedParser, (req, res) => {
   fs.appendFile(
     __dirname + "/mem.txt",
-    req.body.day + ", " + ", " + req.body.frogTime + ", " + ", " + ", " + "\n",
+    req.body.day + ", " + ", " + req.body.frogTime + ", " + ", " + ", " + ", " + "\n",
     function (e) {
       if (e) {
         return console.log(e);
