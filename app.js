@@ -17,6 +17,8 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var mostRecentName = null;
 var mostRecentEmail = null;
 var emailSent = false;
+var currentStreak = 1;
+var maxStreak = 1;
 
 app.use(express.static(__dirname + "/public"));
 
@@ -81,6 +83,10 @@ app.post("/form", (req, res) => {
 //sends txt to client html
 app.post("/getUsers", (req, res) => {
   res.status(200).sendFile(__dirname + "/users.txt");
+});
+
+app.post("/getMaxAndMin", (req, res) => {
+  res.status(200).send(currentStreak + " " + maxStreak);
 });
 
 app.post("/signup.html", urlencodedParser, (req, res) => {
@@ -299,14 +305,13 @@ app.post("/team", (urlencodedParser = async function (req, res) {
 //converts txt data into a csv file based on last user
 async function parseData() {
   let dates = await findCommon();
-  let maxStreak = await getMaxStreak(dates);
-  console.log(maxStreak);
-  /*
+  let currStreak = await getMaxStreak(dates);
+/*
   var mailOptions = {
           from:'streaktracker.lifehikes@gmail.com',
           to:mostRecentEmail,
-          subject: maxStreak + ' days in a row! You are KILLING it ' + mostRecentName + '!',
-          text:'Hello here from the Life Hikes Product Technology Summer Fellows!\nWe just wanted to congratulate you on logging in ' + maxStreak + " days in a row! Keep up the great work " + mostRecentName + "!\n\nBest,\nYour friends at LifeHikes"
+          subject: currStreak + ' days in a row! You are KILLING it ' + mostRecentName + '!',
+          text:'Hello here from the Life Hikes Product Technology Summer Fellows!\nWe just wanted to congratulate you on logging in ' + currStreak + " days in a row! Keep up the great work " + mostRecentName + "!\n\nBest,\nYour friends at LifeHikes"
         }
   transporter.sendMail(mailOptions, function(e, info) {
     if (e) {
@@ -315,10 +320,12 @@ async function parseData() {
         console.log("email sent: " + info.response);
     }
   })
-  */ 
+  */
+
 }
 
 async function getMaxStreak(dates) {
+  let found = false;
   let today = new Date();
   let year = today.getFullYear().toString();
   let month = (today.getMonth() + 1).toString();
@@ -347,10 +354,20 @@ async function getMaxStreak(dates) {
     if (dates[i - 1] == options[0] || dates[i - 1] == options[1] || dates[i - 1] == options[2]) {
       streak++;
     } else {
-      return streak;
+      if (!found){
+        found = true;
+        currentStreak = streak;
+      }
+      maxStreak = Math.max(maxStreak, streak);
+      streak = 1;
     }
   }
-  return streak;
+  if (!found){
+    found = true;
+    currentStreak = streak;
+  }
+  maxStreak = Math.max(maxStreak, streak);
+  return currentStreak;
 }
 
  function convert(date) {

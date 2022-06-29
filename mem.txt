@@ -11,6 +11,15 @@
 2022-06-22, , , , , 5
 2022-06-24, , , , , 5
 2022-06-26, , , , , 5
+2022-05-22, , , , , 5
+2022-05-23, , , , , 5
+2022-05-21, , , , , 5
+2022-05-20, , , , , 5
+2022-05-19, , , , , 5
+2022-05-18, , , , , 5
+2022-05-17, , , , , 5
+2022-05-15, , , , , 5
+2022-05-16, , , , , 5
 *Daniel Zamloot, dzamloot@gmail.com
 *Daniel Zamloot, dzamloot@gmail.com
 2022-06-27, 20, , , , 
@@ -27,10 +36,7 @@
 *Daniel Zamloot, dzamloot@gmail.com
 *Daniel Zamloot, dzamloot@gmail.com
 *Daniel Zamloot, dzamloot@gmail.com
-*Daniel Zamloot, dzamloot@gmail.com
-*Daniel Zamloot, dzamloot@gmail.com
-*Daniel Zamloot, dzamloot@gmail.com
-*Daniel Zamloot, dzamloot@gmail.com
+2022-06-28, 20, , , ,
 *Daniel Zamloot, dzamloot@gmail.com
 *Daniel Zamloot, dzamloot@gmail.com
 *Daniel Zamloot, dzamloot@gmail.com
