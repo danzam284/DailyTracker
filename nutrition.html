@@ -43,7 +43,9 @@
         <div id="images" style="display:flex; justify-content:center;">
             <img class="image" src="/sandwiches/Full sandwich.svg" id="sandwich">
         </div>
-
+		<form action="" method="POST">
+			<button class="button-1" role="button" type="submit">Go to Your Data</button>
+		</form>
         <script>
             var sevenDaysAgo = new Date();
             sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
@@ -346,6 +348,38 @@
 				margin-right: auto;
 				margin-top: auto;
 				width: auto;
+			}
+			.button-1 {
+				background-color: #f6ff00;
+				border-radius: 8px;
+				border-style: none;
+				box-sizing: border-box;
+				color: black;
+				cursor: pointer;
+				display: block;
+				font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+					sans-serif;
+				font-size: 14px;
+				font-weight: 500;
+				height: 40px;
+				width: 200px;
+				line-height: 20px;
+				list-style: none;
+				margin-left: auto;
+				margin-right: auto;
+				outline: none;
+				padding: 10px 16px;
+				position: relative;
+				text-align: center;
+				text-decoration: none;
+				transition: color 100ms;
+				user-select: none;
+				-webkit-user-select: none;
+				touch-action: manipulation;
+				}
+			.button-1:hover,
+			.button-1:focus {
+				background-color: #fbff8e;
 			}
 		</style>
 		<script>
