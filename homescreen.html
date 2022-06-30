@@ -8,6 +8,11 @@
         <form id="form6" action="/movement" method="POST" onsubmit="return false"></form>
         <form id="results" action="/team" method="POST" onsubmit="return false;"></form>
         <form id="lol" action="/home" method="POST" onsubmit="return false;"></form>
+		<div class="mute">
+			<button type="button" id="mute__toggle" onclick="changeIcon()">
+				<img src="/images/speaker.png">
+			</button>
+		</div>
         <div class="hamburger-menu">
             <input id="menu__toggle" type="checkbox" />
             <label class="menu__btn" for="menu__toggle">
@@ -294,7 +299,6 @@
     <script type="text/javascript">
         var max = "";
         var cur = "";
-
         function run() {
             $.ajax({
                 type: "POST",
@@ -311,6 +315,37 @@
         }
         run();
     </script>
+	<script>
+		function setIcon(){
+			$.ajax({
+			type: "POST",
+			url: "/getMuteStatus",
+			dataType: "text",
+			success: function(content){
+				let muted = Number(content)
+			}
+			})
+			
+		}
+		function changeIcon(){
+			$.ajax({
+			type: "POST",
+			url: "/getMuteStatus",
+			dataType: "text",
+			success: function(content){
+				let muted = Number(content)
+			}
+			})
+			let image = document.getElementById("mute__toggle");
+			if(muted){
+				image.src = "/images/mute.png"
+				
+			}
+			else{
+				image.src = "/images/speaker.png"
+			}
+		}
+	</script>
     <script type="text/javascript">
         function exit() {
             document.getElementById("form").submit();

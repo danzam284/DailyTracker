@@ -19,6 +19,7 @@ var mostRecentEmail = null;
 var emailSent = false;
 var currentStreak = 1;
 var maxStreak = 1;
+var muted = 0;
 
 app.use(express.static(__dirname + "/public"));
 
@@ -76,7 +77,7 @@ app.get(__dirname + "/frog.html", (req, res) => {
 });
 
 //switch from sign in to log in form
-app.post("/signup", (req, res) => {
+app.post("/login", (req, res) => {
   return res.redirect(__dirname + "/login.html");
 });
 
@@ -147,6 +148,8 @@ app.post("/login.html", urlencodedParser, async (req, res) => {
   //await sleep(1000);
   res.end();
 });
+
+app.post("/")
 
 //Keeps login form address
 app.get(__dirname + "/login.html", (req, res) => {
@@ -236,6 +239,10 @@ app.post("/sleepPosted", urlencodedParser, (req, res) => {
     }
   );
   res.status(204).send();
+});
+
+app.post("/getMuteStatus", (req, res) => {
+	res.status(200).send(muted);
 });
 
 app.post("/easter", urlencodedParser, (req, res) => {
