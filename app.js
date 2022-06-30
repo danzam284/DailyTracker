@@ -346,12 +346,10 @@ async function parseData() {
 
 }
 
-async function getMaxStreak(dates) {
-  let found = false;
-  let today = new Date();
-  let year = today.getFullYear().toString();
-  let month = (today.getMonth() + 1).toString();
-  let day = today.getDate().toString();
+function fixDate(date) {
+  let year = date.getFullYear().toString();
+  let month = (date.getMonth() + 1).toString();
+  let day = date.getDate().toString()
 
   if (month.length == 1) {
     month = "0" + month;
@@ -359,22 +357,27 @@ async function getMaxStreak(dates) {
   if (day.length == 1) {
     day = "0" + day;
   }
+  return year + "-" + month + "-"+ day;
+}
 
-  let testDate = year + "-" + month + "-"+ day;
+
+async function getMaxStreak(dates) {
+  let found = false;
+  let today = new Date();
+
+  let testDate = await fixDate(today);
 
   if (!(testDate in dates)) {
     dates.push(testDate);
   }
+
   dates = Array.from(new Set(dates));
   let streak = 1;
-  for (let i = dates.length - 1; i > 0; i--) {
-    let options;
-    if (i == dates.length - 1) {
-        options = convert(testDate);
-    } else {
-        options = convert(dates[i]);
-    }
-    if (dates[i - 1] == options[0] || dates[i - 1] == options[1] || dates[i - 1] == options[2]) {
+  for (let i = dates.length - 2; i >= 0; i--) {
+    console.log(streak);
+    today.setDate(today.getDate() - 1);
+    testDate = await fixDate(today);
+    if (dates[i] == testDate) {
       streak++;
     } else {
       if (!found){
@@ -382,7 +385,9 @@ async function getMaxStreak(dates) {
         currentStreak = streak;
       }
       maxStreak = Math.max(maxStreak, streak);
-      streak = 1;
+      streak = 0;
+      today = new Date(dates[i]);
+      today.setDate(today.getDate() + 1);
     }
   }
   if (!found){
@@ -391,23 +396,6 @@ async function getMaxStreak(dates) {
   }
   maxStreak = Math.max(maxStreak, streak);
   return currentStreak;
-}
-
- function convert(date) {
-  let option1Day = (parseInt(date.slice(8, 10)) - 1).toString();
-  if (option1Day.length == 1) {
-    option1Day = "0" + option1Day;
-  }
-  let option2Month = (parseInt(date.slice(5, 7)) - 1).toString();
-  if (option2Month.length == 1) {
-    option2Month = "0" + option2Month;
-  }
-  let option2Day = "30";
-  let option3Day = "31";
-  let option1 = date.slice(0, 8) + option1Day;
-  let option2 = date.slice(0, 5) + option2Month + "-" + option2Day;
-  let option3 = date.slice(0, 5) + option2Month + "-" + option3Day;
-  return [option1, option2, option3];
 }
 
 async function after(d1, d2) {
@@ -458,6 +446,7 @@ async function findCommon() {
           dates.add(data[i].slice(0, 10));
           i++;
         }
+        i--;
       }
     }
   }
