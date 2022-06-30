@@ -1,0 +1,268 @@
+<html>
+    <body>
+        <form id="lol" action="/home" method="POST" onsubmit="return false;"></form>
+        <div class="hamburger-menu">
+            <input id="menu__toggle" type="checkbox" />
+            <label class="menu__btn" for="menu__toggle">
+              <span></span>
+            </label>
+        
+            <ul class="menu__box">
+              <li><a class="menu__item" href="#" onclick="document.getElementById('lol').submit();">Home</a></li>
+              <li><a class="menu__item" href="#" onclick="exit3();">Data</a></li>
+              <li><a class="menu__item" href="#">Streaks</a></li>
+            </ul>
+          </div>
+        <form id="form" action="/water" method="POST" onsubmit="return false;"></form>
+        <form id="form2" action="/frog" method="POST" onsubmit="return false;"></form>
+        <form id="form3" action="/nutrition" method="POST" onsubmit="return false;"></form>
+        <form id="form4" action="/sleep" method="POST" onsubmit="return false;"></form>
+        <form id="form5" action="/worry" method="POST" onsubmit="return false;"></form>
+        <form id="form6" action="/movement" method="POST" onsubmit="return false"></form>
+        <form id="results" action="/team" method="POST" onsubmit="return false;"></form>
+        <div id="streak-container">
+            <div id="streak">
+                <div id="welcome">Welcome Back!</div>
+                <div id="streaks">
+                    <div id="cur" name="cur"><span>Current Streak</span></div>
+                    <label id="lcur"></label>
+                    <div id="max"><span>Max Streak</span></div>
+                    <label id="lmax"></label>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <figure onclick="exit();">
+                <img src="/images/water.png">
+                <figcaption>Water</figcaption>
+            </figure>
+            <figure onclick="exit2();">
+                <img src="/images/frog.png">
+                <figcaption>Frog</figcaption>
+            </figure>
+            <figure onclick="exit5();">
+                <img src="/images/sleep icon.svg">
+                <figcaption>Sleep</figcaption>
+            </figure>
+        </div>
+        <div>
+            <figure onclick="exit6();">
+                <img src="/images/worry icon-red.svg">
+                <figcaption>Worry</figcaption>
+            </figure>
+            <figure onclick="exit4();">
+                <img src="/images/nutrition icon2.svg">
+                <figcaption>Nutrition</figcaption>
+            </figure>
+            <figure onclick="exit7();">
+                <img src="/images/movement Icon.svg">
+                <figcaption>Movement</figcaption>
+            </figure>
+        </div>
+    </body>
+
+    <style>
+        .hamburger-menu {
+            float: right;
+        }
+        #menu__toggle {
+            opacity: 0;
+        }
+        #menu__toggle:checked + .menu__btn > span {
+            transform: rotate(45deg);
+        }
+        #menu__toggle:checked + .menu__btn > span::before {
+            top: 0;
+            transform: rotate(0deg);
+        }
+        #menu__toggle:checked + .menu__btn > span::after {
+            top: 0;
+            transform: rotate(90deg);
+        }
+        #menu__toggle:checked ~ .menu__box {
+            left: 0 !important;
+        }
+        .menu__btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 26px;
+            height: 26px;
+            cursor: pointer;
+            z-index: 1;
+        }
+        .menu__btn > span,
+        .menu__btn > span::before,
+        .menu__btn > span::after {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: #616161;
+            transition-duration: .25s;
+        }
+        .menu__btn > span::before {
+            content: '';
+            top: -8px;
+        }
+        .menu__btn > span::after {
+            content: '';
+            top: 8px;
+        }
+        .menu__box {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 100%;
+            width: 300px;
+            height: 100%;
+            margin: 0;
+            margin-left:85%;
+            padding: 80px 0;
+            list-style: none;
+            background-color: #ECEFF1;
+            box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+            transition-duration: .25s;
+        }
+        .menu__item {
+            display: block;
+            padding: 12px 24px;
+            color: #333;
+            font-family: 'Roboto', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            text-decoration: none;
+            transition-duration: .25s;
+        }
+        .menu__item:hover {
+            background-color: #CFD8DC;
+        }
+        label {
+            font-size: 20px;
+        }
+        #lcur {
+            position:absolute;
+            margin-right: 13em;
+            margin-top:3%;
+        }
+        #lmax {
+            position:absolute;
+            margin-left: 13em;
+            margin-top:3%;
+        }
+        span {
+            margin-top:5%;
+            font-size: 20px;
+        }
+        #cur {
+            background-color: rgb(239, 239, 239);
+            width:25%;
+            height: width;
+            margin-right:4%;
+            margin-left:4%;
+            border-radius: 20px;
+        }
+        #max {
+            background-color: rgb(239, 239, 239);
+            width:25%;
+            height: width;
+            margin-right:4%;
+            margin-left:4%;
+            border-radius: 20px;
+        }
+        #welcome {
+            text-align: center;
+            font-size: 30px;
+            margin-left:15%;
+            margin-top: 1%;
+            margin-bottom: 2%;
+            height:13%;
+            width:70%;
+        }
+        #streak-container {
+            height:25%;
+            width:100%;
+            display: flex;
+            justify-content: center;
+        }
+        #streak {
+            display: block;
+            border-radius: 25px;
+            background-color:rgb(218, 218, 218);
+            height:100%;
+            width:80%;
+        }
+        #streaks {
+            display: flex;
+            justify-content: center;
+            width:70%;
+            height:50%;
+            margin-left:15%;
+            margin-top:2%
+        }
+        div {
+            display:flex;
+            justify-content:center;
+        }
+        figure {
+            text-align:center;
+            margin: 4%;
+        }
+        img {
+            border-radius: 20px;
+            width: 150px;
+            height: width;
+        }
+        h1 {
+            text-align:center;
+        }
+        body {
+          background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%);
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        var max = "";
+        var cur = "";
+
+        function run() {
+            $.ajax({
+                type: "POST",
+                url: "/getMaxAndMin",
+                dataType: "text",
+                success: function (content) {
+                    let gap = content.indexOf(" ");
+                    cur = content.slice(0, gap);
+                    max = content.slice(gap + 1);
+                    document.getElementById("lcur").innerHTML = cur + " days";
+                    document.getElementById("lmax").innerHTML = max + " days";
+                }
+            });
+        }
+        run();
+    </script>
+    <script type="text/javascript">
+        function exit() {
+            document.getElementById("form").submit();
+        }
+        function exit2() {
+            document.getElementById("form2").submit();
+        }
+        function exit3() {
+            document.getElementById("results").submit();
+        }
+        function exit4() {
+            document.getElementById("form3").submit();
+        }
+        function exit5() {
+            document.getElementById("form4").submit();
+        }
+        function exit6() {
+            document.getElementById("form5").submit();
+        }
+        function exit7() {
+            document.getElementById("form6").submit();
+        }
+    </script>
+</html>

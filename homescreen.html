@@ -1,5 +1,12 @@
 <html>
     <body>
+        <form id="form" action="/water" method="POST" onsubmit="return false;"></form>
+        <form id="form2" action="/frog" method="POST" onsubmit="return false;"></form>
+        <form id="form3" action="/nutrition" method="POST" onsubmit="return false;"></form>
+        <form id="form4" action="/sleep" method="POST" onsubmit="return false;"></form>
+        <form id="form5" action="/worry" method="POST" onsubmit="return false;"></form>
+        <form id="form6" action="/movement" method="POST" onsubmit="return false"></form>
+        <form id="results" action="/team" method="POST" onsubmit="return false;"></form>
         <form id="lol" action="/home" method="POST" onsubmit="return false;"></form>
         <div class="hamburger-menu">
             <input id="menu__toggle" type="checkbox" />
@@ -12,57 +19,188 @@
               <li><a class="menu__item" href="#" onclick="exit3();">Data</a></li>
               <li><a class="menu__item" href="#">Streaks</a></li>
             </ul>
-          </div>
-        <form id="form" action="/water" method="POST" onsubmit="return false;"></form>
-        <form id="form2" action="/frog" method="POST" onsubmit="return false;"></form>
-        <form id="form3" action="/nutrition" method="POST" onsubmit="return false;"></form>
-        <form id="form4" action="/sleep" method="POST" onsubmit="return false;"></form>
-        <form id="form5" action="/worry" method="POST" onsubmit="return false;"></form>
-        <form id="form6" action="/movement" method="POST" onsubmit="return false"></form>
-        <form id="results" action="/team" method="POST" onsubmit="return false;"></form>
-        <div id="streak-container">
-            <div id="streak">
-                <div id="welcome">Welcome Back!</div>
-                <div id="streaks">
-                    <div id="cur" name="cur"><span>Current Streak</span></div>
-                    <label id="lcur"></label>
-                    <div id="max"><span>Max Streak</span></div>
-                    <label id="lmax"></label>
+        </div><br><br>
+
+        <div id="box">
+            <div id="welcome">
+                <div id="w">
+                    <div id="welc">Welcome Back!</div>
+                </div>
+                <div id="streak-container">
+                    <div id="cur" name="cur">Current Streak<br><br>
+                        <label id="lcur"></label>
+                    </div>
+                    <img id="imgh" src="/images/hiker.svg">
+                    <div id="max">Max Streak<br><br>
+                        <label id="lmax"></label>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div>
-            <figure onclick="exit();">
-                <img src="/images/water.png">
-                <figcaption>Water</figcaption>
-            </figure>
-            <figure onclick="exit2();">
-                <img src="/images/frog.png">
-                <figcaption>Frog</figcaption>
-            </figure>
-            <figure onclick="exit5();">
-                <img src="/images/sleep icon.svg">
-                <figcaption>Sleep</figcaption>
-            </figure>
-        </div>
-        <div>
-            <figure onclick="exit6();">
-                <img src="/images/worry icon-red.svg">
-                <figcaption>Worry</figcaption>
-            </figure>
-            <figure onclick="exit4();">
-                <img src="/images/nutrition icon2.svg">
-                <figcaption>Nutrition</figcaption>
-            </figure>
-            <figure onclick="exit7();">
-                <img src="/images/movement Icon.svg">
-                <figcaption>Movement</figcaption>
-            </figure>
+            <div id="apps">
+                <div class='row'>
+                    <figure onclick='exit();'>
+                        <img class="img" src='/images/water.png'>
+                    </figure>
+                    <figure onclick='exit2();'>
+                        <img class="img" src='/images/frog.png'>
+                    </figure>
+                    <figure onclick='exit5();'>
+                        <img class="img" src='/images/sleep icon.svg'>
+                    </figure>
+                </div>
+                <div class='row'>
+                    <figure onclick='exit6();'>
+                        <img class="img" src='/images/worry icon-red.svg'>
+                    </figure>
+                    <figure onclick='exit4();'>
+                        <img class="img" src='/images/nutrition icon2.svg'>
+                    </figure>
+                    <figure onclick='exit7();'>
+                        <img class="img" src='/images/movement Icon.svg'>
+                    </figure>
+                </div>
+            </div>
+
+            <div id="map">
+                <img id="hike" src="/images/Hike View 1.svg">
+            </div>
+
+            <div id="month">
+                <header style="text-align: center">Streaks</header>
+                <div class="inner"></div>
+                <div class="inner"></div>
+                <div class="inner"></div>
+                <div class="inner"></div>
+                <div class="inner"></div>
+                <div class="inner"></div>
+            </div>
         </div>
     </body>
 
     <style>
+        #imgh {
+            position: absolute;
+            width:4rem;
+            height:4rem;
+            margin-top:1%;
+        }
+        #hike {
+            height: 100%;
+            width: 100%;
+        }
+        #w {
+            display: flex;
+            justify-content: center;
+        }
+        label {
+            font-size: 20px;
+        }
+        #cur {
+            background-color: rgb(208, 208, 208);
+            width:20%;
+            height: 70%;
+            border-radius: 20px;
+            margin-right: 20%;
+            font-size: 20px;
+            text-align: center;
+        }
+        #max {
+            background-color: rgb(208, 208, 208);
+            width:20%;
+            height: 70%;
+            border-radius: 20px;
+            margin-left: 20%;
+            font-size: 20px;
+            text-align: center;
+        }
+        #welc {
+            text-align: center;
+            font-size: 15px;
+            margin-top: 1%;
+            height:13%;
+            width:70%;
+        }
+        #streak-container {
+            height:100%;
+            width:100%;
+            display: flex;
+            justify-content: center;
+            border-radius: 25px;
+        }
+        .row {
+            resize:none;
+            display:flex;
+            justify-content:center;
+        }
+        #apps {
+            grid-column: 50 / 101;
+            grid-row: 1 / 20;
+            background-color: rgb(235, 235, 235);
+            border-radius:20px;
+            margin: 0.5%;
+        }
+        #welcome {
+            resize:none;
+            grid-column: 1 / 50;
+            grid-row: 1 / 15;
+            background-color: rgb(235, 235, 235);
+            border-radius:20px;
+            margin: 0.5%;
+        }
+        .inner {
+            resize:none;
+            background-color: rgb(200, 200, 200);
+            width: 85%;
+            height: 15%;
+            margin:5%;
+            border-radius: 20px;
+            direction: ltr;
+        }
+        #map {
+            resize:none;
+            grid-column: 1 / 50;
+            grid-row: 15 / 70;
+            border-radius: 25px;;
+            margin: 0.5%;
+            overflow: auto;
+        }
+        #month {
+            resize:none;
+            grid-column: 50 / 101;
+            grid-row: 20 / 70;
+            border-radius: 20px;
+            overflow: auto;
+            background-color: rgb(235, 235, 235);
+            margin: 0.5%;
+        }
+        #box {
+            resize:none;
+            width: 100%;
+            height: 95%;
+            display: grid;
+            gap: 10px;
+        }
+        body {
+            background: linear-gradient(0deg,rgba(2, 0, 36, 1) 0%,rgba(17, 17, 236, 1) 0%,rgba(0, 212, 255, 1) 35%);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+     
+        ::-webkit-scrollbar-track {
+            background: gainsboro;
+            border-radius: 5px;
+        }
+     
+        ::-webkit-scrollbar-thumb {
+            background: rgb(0, 120, 239);
+            border-radius: 5px;
+        }
+     
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgb(0, 78, 94);
+        }
         .hamburger-menu {
             float: right;
         }
@@ -138,87 +276,16 @@
         .menu__item:hover {
             background-color: #CFD8DC;
         }
-        label {
-            font-size: 20px;
-        }
-        #lcur {
-            position:absolute;
-            margin-right: 13em;
-            margin-top:3%;
-        }
-        #lmax {
-            position:absolute;
-            margin-left: 13em;
-            margin-top:3%;
-        }
-        span {
-            margin-top:5%;
-            font-size: 20px;
-        }
-        #cur {
-            background-color: rgb(239, 239, 239);
-            width:25%;
-            height: width;
-            margin-right:4%;
-            margin-left:4%;
-            border-radius: 20px;
-        }
-        #max {
-            background-color: rgb(239, 239, 239);
-            width:25%;
-            height: width;
-            margin-right:4%;
-            margin-left:4%;
-            border-radius: 20px;
-        }
-        #welcome {
-            text-align: center;
-            font-size: 30px;
-            margin-left:15%;
-            margin-top: 1%;
-            margin-bottom: 2%;
-            height:13%;
-            width:70%;
-        }
-        #streak-container {
-            height:25%;
-            width:100%;
-            display: flex;
-            justify-content: center;
-        }
-        #streak {
-            display: block;
-            border-radius: 25px;
-            background-color:rgb(218, 218, 218);
-            height:100%;
-            width:80%;
-        }
-        #streaks {
-            display: flex;
-            justify-content: center;
-            width:70%;
-            height:50%;
-            margin-left:15%;
-            margin-top:2%
-        }
-        div {
-            display:flex;
-            justify-content:center;
-        }
         figure {
             text-align:center;
             margin: 4%;
+            margin-left: 10%;
+            margin-right: 10%;
         }
-        img {
-            border-radius: 20px;
-            width: 150px;
+        .img {
+            border-radius: 5px;
+            width: 80px;
             height: width;
-        }
-        h1 {
-            text-align:center;
-        }
-        body {
-          background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(17,17,236,1) 0%, rgba(0,212,255,1) 35%);
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

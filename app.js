@@ -365,6 +365,7 @@ async function getMaxStreak(dates) {
   if (!(testDate in dates)) {
     dates.push(testDate);
   }
+  dates = Array.from(new Set(dates));
   let streak = 1;
   for (let i = dates.length - 1; i > 0; i--) {
     let options;
