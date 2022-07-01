@@ -71,12 +71,60 @@
 
             <div id="month">
                 <header id="m" style="font-size:25px;text-align: center"></header>
-                <div class="inner"></div>
-                <div class="inner"></div>
-                <div class="inner"></div>
-                <div class="inner"></div>
-                <div class="inner"></div>
-                <div class="inner"></div>
+                <div class="combo">
+                    <span style="margin-left:10px;">Water</span>
+                    <div class="inner">
+                        <div class="days">
+                        </div>
+                        <div class="nums">
+                        </div>
+                    </div>
+                </div>
+                <div class="combo">
+                    <span style="margin-left:10px;">Frog</span>
+                    <div class="inner">
+                        <div class="days">
+                        </div>
+                        <div class="nums">
+                        </div>
+                    </div>
+                </div>
+                <div class="combo">
+                    <span style="margin-left:10px;">Sleep</span>
+                    <div class="inner">
+                        <div class="days">
+                        </div>
+                        <div class="nums">
+                        </div>
+                    </div>
+                </div>
+                <div class="combo">
+                    <span style="margin-left:10px;">Worry</span>
+                    <div class="inner">
+                        <div class="days">
+                        </div>
+                        <div class="nums">
+                        </div>
+                    </div>
+                </div>
+                <div class="combo">
+                    <span style="margin-left:10px;">Nutrition</span>
+                    <div class="inner">
+                        <div class="days">
+                        </div>
+                        <div class="nums">
+                        </div>
+                    </div>
+                </div>
+                <div class="combo">
+                    <span style="margin-left:10px;">Movement</span>
+                    <div class="inner">
+                        <div class="days">
+                        </div>
+                        <div class="nums">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
@@ -155,14 +203,38 @@
             border-radius:20px;
             margin: 0.5%;
         }
+        .n {
+            margin-left: 6.5%;
+            margin-right: 6.5%;
+            margin-bottom: 5%;
+        }
         .inner {
             resize:none;
+            width: 100%;
+            height: 100%;
             background-color: rgb(200, 200, 200);
+            border-radius: 20px;
+            align-items: center;
+        }
+        .days {
+            resize:none;
+            width: 100%;
+            height: 50%;
+            display: flex;
+            justify-content: center;
+        }
+        .nums {
+            resize:none;
+            width: 100%;
+            height: 50%;
+            display: flex;
+            justify-content: center;
+        }
+        .combo {
             width: 85%;
             height: 15%;
             margin:5%;
             border-radius: 20px;
-            direction: ltr;
         }
         #map {
             resize:none;
@@ -299,6 +371,31 @@
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
+        const days = ["S", "M", "T", "W", "T", "F", "S"];
+        let today = new Date();
+        let dates = [];
+        let nums = [];
+        for (let i = 0; i < 7; i++) {
+            dates.push(days[today.getDay()]);
+            nums.push(today.getDate());
+            today.setDate(today.getDate() - 1);
+        }
+        dates.reverse();
+        nums.reverse();
+
+        let inners = document.getElementsByClassName("days");
+        let inners2 = document.getElementsByClassName("nums");
+        for (let i = 0; i < inners.length; i++) {
+            for (let j = 0; j < 7; j++) {
+                inners[i].innerHTML += "<div class='n'>" + dates[j] + "</div>";
+            }
+        }
+        for (let i = 0; i < inners2.length; i++) {
+            for (let j = 0; j < 7; j++) {
+                inners2[i].innerHTML += "<div class='n'>" + nums[j] + "</div>";
+            }
+        }
+
         function setIcon(){
             $.ajax({
             type: "POST",
