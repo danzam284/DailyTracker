@@ -54,7 +54,7 @@
         </div>
         <br><br>
         <div id="images" style="display:flex; justify-content:center;">
-            <img class="image" src="/sandwiches/Full sandwich.svg" id="sandwich">
+            <img class="image" src="/sandwiches/empty.svg" id="sandwich">
         </div>
 		<form action="/movement" method="POST">
 			<button class="button-1" role="button" type="submit">Go to Movement</button>
@@ -536,29 +536,29 @@
                     } else {
                         src = '/comments/Nice work.svg';
                     }
-                    document.getElementById("images").innerHTML = "<img class='image' id='sandwich' src='/sandwiches/Full sandwich.svg' alt='sandwich'> <img class='image' src=\"" + src +  "\"id='new'>"
+                    document.getElementById("images").innerHTML = "<img class='image' id='sandwich' src='/sandwiches/salad 5.svg' alt='sandwich'> <img class='image' src=\"" + src +  "\"id='new'>"
                 } else {
-                    document.getElementById("images").innerHTML = "<img class='image' id='sandwich' src='/sandwiches/Full sandwich.svg' alt='sandwich'>";
+                    document.getElementById("images").innerHTML = "<img class='image' id='sandwich' src='/sandwiches/salad 5.svg' alt='sandwich'>";
                 }
 
                 let image = document.getElementById("sandwich")
                 if(num == 10) {
-                    image.src = "/sandwiches/Crumbs.svg";
+                    image.src = "/sandwiches/salad 5.svg";
                 }
                 else if(num > 7) {
-                    image.src = "/sandwiches/last bite.svg";
+                    image.src = "/sandwiches/salad 4.svg";
                 }
                 else if (num > 5) {
-                    image.src = "/sandwiches/3rd bite.svg";
+                    image.src = "/sandwiches/salad 3.svg";
                 }
                 else if (num > 3) {
-                    image.src = "/sandwiches/2nd bite.svg";
+                    image.src = "/sandwiches/salad 2.svg";
                 }
                 else if (num > 1) {
-                    image.src = "/sandwiches/1st bite.svg";
+                    image.src = "/sandwiches/salad 1.svg";
                 }
                 else{
-                    image.src = "/sandwiches/Full sandwich.svg";
+                    image.src = "/sandwiches/empty.svg";
                 }
             }
 		</script>

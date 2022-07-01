@@ -44,13 +44,13 @@
             </div>
         </form>
         <div id="images">
-            <img id="waterbottle" src="/bottles/empty.svg" alt="waterbottle">
+            <img id="runner" src="/movement/run 1.svg" alt="runner">
         </div>
 		<form action="/team" method="POST">
 			<button class="button-1" role="button" type="submit">Go to Your Data</button>
 		</form>
 		<style>
-            .hamburger-menu {
+        .hamburger-menu {
             float: right;
         }
         #menu__toggle {
@@ -162,8 +162,8 @@
             body {
                 background: rgb(225, 225, 225);
             }
-			#waterbottle{
-                width:35%;
+			#runner{
+                width:8%;
 				display: block;
 				margin-left: auto;
 				margin-right: auto;
@@ -315,7 +315,7 @@
                     var sound = new Audio("/bottles/water.mp3");
                     sound.currentTime = 0;
                     sound.play();
-                    if (document.getElementById("movement").value > 8) {
+                    if (document.getElementById("movement").value > 40) {
                         let idx = Math.floor(Math.random() * 3);
                         var src;
                         if (idx == 0) {
@@ -325,32 +325,29 @@
                         } else {
                             src = '/comments/Nice work.svg';
                         }
-                        document.getElementById("images").innerHTML = "<img id='waterbottle' src='/bottles/empty.svg' alt='waterbottle'> <img src=\"" + src +  "\"id='new'>"
+                        document.getElementById("images").innerHTML = "<img id='runner' src='/movement/run 6.svg' alt='runner'> <img src=\"" + src +  "\"id='new'>"
                     } else {
-                        document.getElementById("images").innerHTML = "<img id='waterbottle' src='/bottles/empty.svg' alt='waterbottle'>";
+                        document.getElementById("images").innerHTML = "<img id='runner' src='/movement/run 6.svg' alt='runner'>";
                     }
-                    var image = document.getElementById("waterbottle");
+                    var image = document.getElementById("runner");
 
-					if(document.getElementById("movement").value > 10) {
-						image.src = "/bottles/full.svg";
+					if(document.getElementById("movement").value >= 60) {
+						image.src = "/movement/run 6.svg";
 					}
-					else if(document.getElementById("movement").value > 8) {
-						image.src = "/bottles/128oz.svg";
+					else if(document.getElementById("movement").value >= 45) {
+						image.src = "/movement/run 5.svg";
 					}
-					else if(document.getElementById("movement").value > 6) {
-						image.src = "/bottles/64oz.svg";
+					else if(document.getElementById("movement").value >= 30) {
+						image.src = "/movement/run 4.svg";
 					}
-					else if(document.getElementById("movement").value > 4) {
-						image.src = "/bottles/32oz.svg";
-					}
-					else if(document.getElementById("movement").value > 3) {
-						image.src = "/bottles/16oz.svg"; 
+					else if(document.getElementById("movement").value >= 15) {
+						image.src = "/movement/run 3.svg";
 					}
 					else if(document.getElementById("movement").value > 0) {
-						image.src = "/bottles/8oz.svg";
+						image.src = "/movement/run 2.svg"; 
 					}
 					else{
-						image.src = "/bottles/empty.svg";
+						image.src = "/movement/run 1.svg";
 					}
                     let w = document.getElementById("movement").value;
                     let sevenDaysAgo = new Date();
