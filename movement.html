@@ -163,7 +163,7 @@
                 background: rgb(225, 225, 225);
             }
 			#runner{
-                width:8%;
+                width:35%;
 				display: block;
 				margin-left: auto;
 				margin-right: auto;
@@ -263,10 +263,10 @@
                 if (date1.getFullYear() > date2.getFullYear()) {
                     return true;
                 }
-                if (date1.getMonth() > date2.getMonth()) {
+                else if (date1.getFullYear() == date2.getFullYear() && date1.getMonth() > date2.getMonth()) {
                     return true;
                 }
-                if (date1.getDate() > date2.getDate()) {
+                else if (date1.getFullYear() == date2.getFullYear() && date1.getMonth() == date2.getMonth() && date1.getDate() > date2.getDate()) {
                     return true;
                 }
                 return false;
