@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
     <body>
         <form id="form" action="/water" method="POST" onsubmit="return false;"></form>
@@ -9,11 +8,9 @@
         <form id="form6" action="/movement" method="POST" onsubmit="return false"></form>
         <form id="results" action="/team" method="POST" onsubmit="return false;"></form>
         <form id="lol" action="/home" method="POST" onsubmit="return false;"></form>
-		<div class="mute">
-			<button type="button" id="mute__toggle" onclick="changeIcon()">
-				<img src="/images/speaker.png">
-			</button>
-		</div>
+        <div class="mute">
+            <img id="mute__toggle" src="/images/speaker.png" onclick="changeIcon()">
+        </div>
         <div class="hamburger-menu">
             <input id="menu__toggle" type="checkbox" />
             <label class="menu__btn" for="menu__toggle">
@@ -73,7 +70,7 @@
             </div>
 
             <div id="month">
-                <header id="m" style="font-size: 25px; text-align: center"></header>
+                <header id="m" style="font-size:25px;text-align: center"></header>
                 <div class="inner"></div>
                 <div class="inner"></div>
                 <div class="inner"></div>
@@ -85,6 +82,10 @@
     </body>
 
     <style>
+        #mute__toggle {
+            position: absolute;
+            width:2%;
+        }
         #imgh {
             position: absolute;
             width:4rem;
@@ -297,12 +298,44 @@
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+        function setIcon(){
+            $.ajax({
+            type: "POST",
+            url: "/getMuteStatus",
+            dataType: "text",
+            success: function(content){
+                let muted = Number(content)
+            }
+            })
+            
+        }
+        function changeIcon(){
+            $.ajax({
+            type: "POST",
+            url: "/getMuteStatus",
+            dataType: "text",
+            success: function(content){
+                let muted = Number(content)
+            }
+            })
+            let image = document.getElementById("mute__toggle");
+            if(muted){
+                image.src = "/images/mute.png"
+
+            }
+            else{
+                image.src = "/images/speaker.png"
+            }
+        }
+    </script>
     <script type="text/javascript">
         const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
         var t = new Date();
         document.getElementById("m").innerHTML = month[t.getMonth()];
         var max = "";
         var cur = "";
+
         function run() {
             $.ajax({
                 type: "POST",
@@ -319,37 +352,6 @@
         }
         run();
     </script>
-	<script>
-		function setIcon(){
-			$.ajax({
-			type: "POST",
-			url: "/getMuteStatus",
-			dataType: "text",
-			success: function(content){
-				let muted = Number(content)
-			}
-			})
-			
-		}
-		function changeIcon(){
-			$.ajax({
-			type: "POST",
-			url: "/getMuteStatus",
-			dataType: "text",
-			success: function(content){
-				let muted = Number(content)
-			}
-			})
-			let image = document.getElementById("mute__toggle");
-			if(muted){
-				image.src = "/images/mute.png"
-
-			}
-			else{
-				image.src = "/images/speaker.png"
-			}
-		}
-	</script>
     <script type="text/javascript">
         function exit() {
             document.getElementById("form").submit();
