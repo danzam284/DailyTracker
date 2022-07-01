@@ -374,7 +374,6 @@ async function getMaxStreak(dates) {
   dates = Array.from(new Set(dates));
   let streak = 1;
   for (let i = dates.length - 2; i >= 0; i--) {
-    console.log(streak);
     today.setDate(today.getDate() - 1);
     testDate = await fixDate(today);
     if (dates[i] == testDate) {
