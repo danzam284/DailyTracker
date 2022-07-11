@@ -312,7 +312,7 @@
             active=false;
             document.addEventListener("keydown", function(event) {
 				if (event.keyCode == 13 && !isNaN(document.getElementById("movement").value)) {
-                    var sound = new Audio("/bottles/water.mp3");
+                    var sound = new Audio("/movement/movement.mp3");
                     if (!muted) {
                         sound.currentTime = 0;
                         sound.play();

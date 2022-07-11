@@ -19,7 +19,7 @@ var mostRecentEmail = null;
 var emailSent = false;
 var currentStreak = 1;
 var maxStreak = 1;
-var muted = false;
+var muted = true;
 
 app.use(express.static(__dirname + "/public"));
 
