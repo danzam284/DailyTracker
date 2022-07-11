@@ -67,7 +67,7 @@
             </div>
 
             <div id="map">
-                <img id="hike" src="/images/Trail V2.svg">
+                <img id="hike" src="/trails/Trail 1.svg">
             </div>
 
             <div id="month">
@@ -445,6 +445,8 @@
                     max = content.slice(gap + 1);
                     document.getElementById("lcur").innerHTML = cur + " days";
                     document.getElementById("lmax").innerHTML = max + " days";
+                    let numDays = parseInt(cur);
+                    flip(numDays);
                 }
             });
             $.ajax({
@@ -547,6 +549,18 @@
         }
         function exit7() {
             document.getElementById("form6").submit();
+        }
+
+        function sleep (time) {
+            return new Promise((resolve) => setTimeout(resolve, time));
+        }
+
+        async function flip(reps) {
+            let img = document.getElementById("hike");
+            for (let i = 1; i < 11; i++) {
+                img.src = "/trails/Trail " + i + ".svg";
+                await sleep(1000);
+            }
         }
     </script>
 </html>
