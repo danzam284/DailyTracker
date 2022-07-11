@@ -67,7 +67,7 @@
             </div>
 
             <div id="map">
-                <img id="hike" src="/images/Hike View 1.svg">
+                <img id="hike" src="/images/Trail V2.svg">
             </div>
 
             <div id="month">
@@ -375,8 +375,9 @@
                 url: "/getMuteStatus",
                 dataType: "text",
                 success: function(muted){
+                    console.log(muted);
                     let image = document.getElementById("mute__toggle");
-                    if (muted == "true"){
+                    if (muted == "true" || muted == 1){
                         image.src = "/images/mute.png";
                     }
                     else{
@@ -403,7 +404,7 @@
                 day = "0" + day;
             }
             return year + "-" + month + "-"+ day;
-        }       
+        }  
     </script>
     <script type="text/javascript">
         const CSVToArray = (data) =>

@@ -19,7 +19,7 @@ var mostRecentEmail = null;
 var emailSent = false;
 var currentStreak = 1;
 var maxStreak = 1;
-var muted = 0;
+var muted = false;
 
 app.use(express.static(__dirname + "/public"));
 
@@ -242,7 +242,7 @@ app.post("/sleepPosted", urlencodedParser, (req, res) => {
 });
 
 app.post("/getMuteStatus", (req, res) => {
-	res.status(200).send(muted.toString());
+	res.status(200).send(muted);
 });
 
 app.post("/easter", urlencodedParser, (req, res) => {
