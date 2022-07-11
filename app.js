@@ -242,7 +242,7 @@ app.post("/sleepPosted", urlencodedParser, (req, res) => {
 });
 
 app.post("/getMuteStatus", (req, res) => {
-	res.status(200).send(muted);
+	res.status(200).send(muted.toString());
 });
 
 app.post("/easter", urlencodedParser, (req, res) => {
@@ -319,6 +319,11 @@ app.post("/getdata", (req, res) => {
 //sends most recent name to client side
 app.post("/getName", (req, res) => {
   res.status(200).send(mostRecentName);
+});
+
+app.post("/changeIcon", (req, res) => {
+  muted = !muted;
+  res.status(204).send();
 });
 
 app.post("/team", (urlencodedParser = async function (req, res) {

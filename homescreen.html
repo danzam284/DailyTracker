@@ -8,6 +8,7 @@
         <form id="form6" action="/movement" method="POST" onsubmit="return false"></form>
         <form id="results" action="/team" method="POST" onsubmit="return false;"></form>
         <form id="lol" action="/home" method="POST" onsubmit="return false;"></form>
+        <form id="icon" action="/changeIcon" method="POST" onsubmit="return false"></form>
         <div class="mute">
             <img id="mute__toggle" src="/images/speaker.png" onclick="changeIcon()">
         </div>
@@ -370,32 +371,24 @@
 
         function setIcon(){
             $.ajax({
-            type: "POST",
-            url: "/getMuteStatus",
-            dataType: "text",
-            success: function(content){
-                let muted = Number(content)
-            }
+                type: "POST",
+                url: "/getMuteStatus",
+                dataType: "text",
+                success: function(muted){
+                    let image = document.getElementById("mute__toggle");
+                    if (muted == "true"){
+                        image.src = "/images/mute.png";
+                    }
+                    else{
+                        image.src = "/images/speaker.png";
+                    }
+                }
             })
-            
         }
-        function changeIcon(){
-            $.ajax({
-            type: "POST",
-            url: "/getMuteStatus",
-            dataType: "text",
-            success: function(content){
-                let muted = Number(content)
-            }
-            })
-            let image = document.getElementById("mute__toggle");
-            if(muted){
-                image.src = "/images/mute.png"
 
-            }
-            else{
-                image.src = "/images/speaker.png"
-            }
+        function changeIcon(){
+            document.getElementById("icon").submit();
+            setIcon();
         }
 
         function fixDate(date) {
@@ -431,7 +424,6 @@
                 dataType: "text",
                 success: function (content) {
                     name = content;
-                    console.log(name);
                 }
             });
             $.ajax({
