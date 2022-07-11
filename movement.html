@@ -313,8 +313,10 @@
             document.addEventListener("keydown", function(event) {
 				if (event.keyCode == 13 && !isNaN(document.getElementById("movement").value)) {
                     var sound = new Audio("/bottles/water.mp3");
-                    sound.currentTime = 0;
-                    sound.play();
+                    if (!muted) {
+                        sound.currentTime = 0;
+                        sound.play();
+                    }
                     if (document.getElementById("movement").value > 40) {
                         let idx = Math.floor(Math.random() * 3);
                         var src;
@@ -363,5 +365,21 @@
 				}
 			});
 		</script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script>
+            var muted;
+            $.ajax({
+                type: "POST",
+                url: "/getMuteStatus",
+                dataType: "text",
+                success: function(result){
+                    if (result == "true") {
+                        muted = false;
+                    } else {
+                        muted = true;
+                    }
+                }
+            });
+        </script>
     </body>
 </html>
