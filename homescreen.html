@@ -369,27 +369,35 @@
             }
         }
 
-        function setIcon(){
+        function setIcon(swap){
             $.ajax({
                 type: "POST",
                 url: "/getMuteStatus",
                 dataType: "text",
-                success: function(muted){
-                    console.log(muted);
+                success: function(result){
                     let image = document.getElementById("mute__toggle");
-                    if (muted == "true" || muted == 1){
-                        image.src = "/images/mute.png";
+                    let muted;
+                    if (result == "true") {
+                        muted = true;
+                    } else {
+                        muted = false;
                     }
-                    else{
+                    if (swap) {
+                        muted = !muted;
+                    }
+                    console.log(muted)
+                    if (muted){
+                        image.src = "/images/mute.png";
+                    } else {
                         image.src = "/images/speaker.png";
                     }
                 }
-            })
+            });
         }
 
         function changeIcon(){
             document.getElementById("icon").submit();
-            setIcon();
+            setIcon(false);
         }
 
         function fixDate(date) {
@@ -419,6 +427,7 @@
         var cur = "";
         var name;
         function run() {
+            setIcon(true);
             $.ajax({
                 type: "POST",
                 url: "/getName",

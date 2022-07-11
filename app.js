@@ -242,6 +242,7 @@ app.post("/sleepPosted", urlencodedParser, (req, res) => {
 });
 
 app.post("/getMuteStatus", (req, res) => {
+  console.log(muted);
 	res.status(200).send(muted);
 });
 
