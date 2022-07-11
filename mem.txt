@@ -76,3 +76,12 @@
 *Daniel Zamloot, dzamloot@gmail.com
 *Daniel Zamloot, dzamloot@gmail.com
 *Daniel Zamloot, dzamloot@gmail.com
+*Daniel Zamloot, dzamloot@gmail.com
+*Daniel Zamloot, dzamloot@gmail.com
+2022-07-11, 5, 5, 5, 5, 5, 5
+2022-07-10, 5, 5, 5, 5, 5, 5
+*Roger Clemens, dzamloot@gmail.com
+2022-07-09, 5, 5, 5, 5, 5, 5
+2022-07-07, 5, 5, 5, 5, 5, 5
+2022-07-06, 5, 5, 5, 5, 5, 5
+2022-07-05, 5, 5, 5, 5, 5, 5
