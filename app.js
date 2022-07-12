@@ -20,6 +20,7 @@ var emailSent = false;
 var currentStreak = 1;
 var maxStreak = 1;
 var muted = true;
+__dirname = "/Users/RemyK/Documents/GitHub/DailyTracker";
 
 app.use(express.static(__dirname + "/public"));
 
