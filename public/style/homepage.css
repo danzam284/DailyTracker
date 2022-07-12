@@ -29,6 +29,14 @@ label {
     font-size:18px;
     text-align: center;
 }
+#currentstreak {
+    position:relative;
+    top:10%;
+}
+#maxstreak {
+    position:relative;
+    top:10%;
+}
 #max {
     background-color: rgb(208, 208, 208);
     width:20%;
@@ -37,6 +45,14 @@ label {
     margin-left: 20%;
     font-size: 18px;
     text-align: center;
+}
+#lcur {
+    position:relative;
+    top:40%;
+}
+#lmax {
+    position:relative;
+    top:40%;
 }
 #welc {
     text-align: center;

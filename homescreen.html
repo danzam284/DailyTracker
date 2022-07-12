@@ -34,11 +34,11 @@
                     <div id="welc">Welcome Back!</div>
                 </div>
                 <div id="streak-container">
-                    <div id="cur" name="cur">Current Streak<br><br>
+                    <div id="cur" name="cur"><div id="currentstreak">Current Streak</div>
                         <label id="lcur"></label>
                     </div>
                     <img id="imgh" src="/images/hiker.svg">
-                    <div id="max">Max Streak<br><br>
+                    <div id="max" name="max"><div id="maxstreak">Max Streak</div>
                         <label id="lmax"></label>
                     </div>
                 </div>
@@ -132,11 +132,12 @@
             var top = 1;
             var cur = images.length - 1;
 
-            for (let i = 0; i < n; i++) {
+            for (let i = 0; i < 10; i++) {
                 document.getElementById("mid").innerHTML = "Day " + (i + 1);
-                changeImg();
                 await sleep(1000);
+                changeImg();
             }
+            document.getElementById("mid").innerHTML = "Day " + 11;
 
             async function changeImg() {
                 var next = (cur + 1) % images.length;
