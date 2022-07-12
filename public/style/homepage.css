@@ -8,7 +8,8 @@
     height:4rem;
     margin-top:1%;
 }
-#hike {
+.hike {
+    position: absolute;
     height: 100%;
     width: 100%;
 }
@@ -57,7 +58,7 @@ label {
     justify-content:center;
 }
 #apps {
-    grid-column: 50 / 101;
+    grid-column: 60 / 101;
     grid-row: 1 / 20;
     background-color: rgb(235, 235, 235);
     border-radius:20px;
@@ -65,7 +66,7 @@ label {
 }
 #welcome {
     resize:none;
-    grid-column: 1 / 50;
+    grid-column: 1 / 60;
     grid-row: 1 / 15;
     background-color: rgb(235, 235, 235);
     border-radius:20px;
@@ -116,8 +117,9 @@ label {
     border-radius: 20px;
 }
 #map {
+    position: relative;
     resize:none;
-    grid-column: 1 / 50;
+    grid-column: 1 / 60;
     grid-row: 15 / 70;
     border-radius: 25px;;
     margin: 0.5%;
@@ -127,7 +129,7 @@ label {
 }
 #month {
     resize:none;
-    grid-column: 50 / 101;
+    grid-column: 60 / 101;
     grid-row: 20 / 70;
     border-radius: 20px;
     overflow: auto;
@@ -143,6 +145,7 @@ label {
 }
 body {
     background: linear-gradient(0deg,rgba(2, 0, 36, 1) 0%,rgba(17, 17, 236, 1) 0%,rgba(0, 212, 255, 1) 35%);
+    font-family: 'Courier New', Courier, monospace;
 }
 ::-webkit-scrollbar {
     width: 6px;
