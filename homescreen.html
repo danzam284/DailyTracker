@@ -70,7 +70,6 @@
             </div>
 
             <div id="map">
-                <img class="hike" src="/trails/Trail 1.svg">
                 <img class="hike" src="/trails/Trail 2.svg">
                 <img class="hike" src="/trails/Trail 3.svg">
                 <img class="hike" src="/trails/Trail 4.svg">
@@ -81,6 +80,7 @@
                 <img class="hike" src="/trails/Trail 9.svg">
                 <img class="hike" src="/trails/Trail 10.svg">
                 <img class="hike" src="/trails/Trail 11.svg">
+                <img class="hike" src="/trails/Trail 1.svg">
             </div>
 
             <div id="month">
@@ -119,6 +119,56 @@
         </div>
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
+        function sleep (time) {
+            return new Promise((resolve) => setTimeout(resolve, time));
+        }
+
+        async function begin(n) {
+            var images = document.getElementsByClassName("hike");
+            for (let i = 0; i < images.length; i++) {
+                images[i].style.opacity = 1;
+            }
+            var top = 1;
+            var cur = images.length - 1;
+
+            for (let i = 0; i < 10; i++) {
+                changeImg();
+                await sleep(1000);
+            }
+
+            async function changeImg() {
+                var next = (cur + 1) % images.length;
+                images[cur].style.zIndex = top + 1;
+                images[next].style.zIndex = top;
+
+                await transition();
+
+                images[cur].style.zIndex = top;
+                images[next].style.zIndex = top + 1;
+                top++;
+                images[cur].style.opacity = 1;
+                cur = next;
+                if (cur == images.length - 2) {
+                    clearInterval(go);
+                }
+            }
+
+            function transition() {
+                return new Promise(function(resolve, reject) {
+                    var del = 0.03;
+                    var id = setInterval(changeOpacity, 10);
+                    function changeOpacity() {
+                        images[cur].style.opacity -= del;
+                        if (images[cur].style.opacity <= 0) {
+                            clearInterval(id);
+                            resolve();
+                        }
+                    }
+                });
+            }
+        }
+    </script>
     <script>
         var datesForChecking = []
         const days = ["S", "M", "T", "W", "T", "F", "S"];
@@ -224,7 +274,7 @@
                     document.getElementById("lcur").innerHTML = cur + " days";
                     document.getElementById("lmax").innerHTML = max + " days";
                     let numDays = parseInt(cur);
-                    //flip(numDays);
+                    begin(numDays);
                 }
             });
             $.ajax({
@@ -327,18 +377,6 @@
         }
         function exit7() {
             document.getElementById("form6").submit();
-        }
-
-        function sleep (time) {
-            return new Promise((resolve) => setTimeout(resolve, time));
-        }
-
-        async function flip(reps) {
-            let img = document.getElementById("hike");
-            for (let i = 1; i < 11; i++) {
-                img.src = "/trails/Trail " + i + ".svg";
-                await sleep(1000);
-            }
         }
     </script>
 </html>
