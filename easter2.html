@@ -1,0 +1,70 @@
+<html>
+    <head></head>
+    <body>
+        <img src="/images/monkey1.gif">
+        <img src="/images/monkey2.gif">
+        <img src="/images/monkey3.gif">
+        <p>PARTY<br>TIME</p>
+    </body>
+
+    <style>
+        body{
+            text-align:center;
+            color:black;
+            
+            font-family: 'Oswald', sans-serif;
+            font-size:9em;
+            line-height:1;
+            
+            -webkit-transform: rotateX(25deg) rotateY(20deg) rotateZ(-3deg); 
+            transform: rotateX(25deg) rotateY(20deg) rotateZ(-3deg);  
+            
+            
+            -webkit-animation: anim 3s;
+            -webkit-animation-timing-function: linear;
+            -webkit-animation-iteration-count:infinite;
+            
+            animation: anim 3s;
+            animation-timing-function: linear;
+            animation-iteration-count:infinite;
+        }
+
+        @-webkit-keyframes anim {
+            0%{text-shadow:-6px 4px 0px red; background-color: teal;}
+            10% {text-shadow:4px -6px 0px green; background-color: red;}
+            20% {text-shadow:-9px 4px 0px blue; background-color: green;}
+            30% {text-shadow:4px -6px 0px yellow; background-color: blue;}
+            40% {text-shadow:-8px 4px 0px orange; background-color: yellow;}
+            50% {text-shadow:4px 5px 0px purple; background-color: orange;}
+            60% {text-shadow:-6px 4px 0px brown; background-color: purple;}
+            70% {text-shadow:4px 7px 0px pink; background-color: brown;
+            80% {text-shadow:-9px -4px 0px lime; background-color: pink;}
+            90% {text-shadow:4px -6px 0px cyan; background-color: lime;}
+            100% {text-shadow:-9px 4px 0px teal; background-color: cyan;}
+        } 
+
+        @keyframes anim {
+            0%{text-shadow:-6px 4px 0px red; background-color: teal;}
+            10% {text-shadow:4px -6px 0px green; background-color: red;}
+            20% {text-shadow:-9px 4px 0px blue; background-color: green;}
+            30% {text-shadow:4px -6px 0px yellow; background-color: blue;}
+            40% {text-shadow:-8px 4px 0px orange; background-color: yellow;}
+            50% {text-shadow:4px 5px 0px purple; background-color: orange;}
+            60% {text-shadow:-6px 4px 0px brown; background-color: purple;}
+            70% {text-shadow:4px 7px 0px pink; background-color: brown;
+            80% {text-shadow:-9px -4px 0px lime; background-color: pink;}
+            90% {text-shadow:4px -6px 0px cyan; background-color: lime;}
+            100% {text-shadow:-9px 4px 0px teal; background-color: cyan;}
+        } 
+
+    </style>
+
+    <script>
+        var myAudio = new Audio('/images/disco.mp3'); 
+        myAudio.addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+        }, false);
+        myAudio.play();
+    </script>
+</html>

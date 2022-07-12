@@ -2,7 +2,7 @@
     <head>
         <link rel="stylesheet" href="/style/homepage.css">
     </head>
-    <body>
+    <body id="bod">
         <form id="form" action="/water" method="POST" onsubmit="return false;"></form>
         <form id="form2" action="/frog" method="POST" onsubmit="return false;"></form>
         <form id="form3" action="/nutrition" method="POST" onsubmit="return false;"></form>
@@ -11,7 +11,8 @@
         <form id="form6" action="/movement" method="POST" onsubmit="return false"></form>
         <form id="results" action="/team" method="POST" onsubmit="return false;"></form>
         <form id="lol" action="/home" method="POST" onsubmit="return false;"></form>
-        <form id="icon" action="/changeIcon" method="POST" onsubmit="return false"></form>
+        <form id="icon" action="/changeIcon" method="POST" onsubmit="return false;"></form>
+        <form id="easter2" action="/easter2" method="POST" onsubmit="return false;"></form>
         <div class="mute">
             <img id="mute__toggle" src="/images/speaker.png" onclick="changeIcon()">
         </div>
@@ -21,7 +22,7 @@
               <span></span>
             </label>
         
-            <ul class="menu__box">
+            <ul class="menu__box" id="moo">
               <li><a class="menu__item" href="#" onclick="document.getElementById('lol').submit();">Home</a></li>
               <li><a class="menu__item" href="#" onclick="exit3();">Data</a></li>
               <li><a class="menu__item" href="#">Streaks</a></li>
@@ -120,6 +121,22 @@
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
+        let ham = document.getElementById('menu__toggle');
+        ham.onclick = function() {
+            if (ham.checked) {
+                var z = document.createElement('li');
+                z.id='ester';
+                var inn = "<img width='30px' src='/images/egg.png' style='position:fixed; zIndex:100; right:0px; bottom:0px'; onclick='submitEaster();'>";
+                z.innerHTML = inn;
+                document.getElementById('moo').appendChild(z);
+            } else {
+                document.getElementById('moo').removeChild(document.getElementById('ester'));
+            }
+        }
+
+        function submitEaster() {
+            document.getElementById("easter2").submit();
+        }
         function sleep (time) {
             return new Promise((resolve) => setTimeout(resolve, time));
         }
@@ -151,9 +168,6 @@
                 top++;
                 images[cur].style.opacity = 1;
                 cur = next;
-                if (cur == images.length - 2) {
-                    clearInterval(go);
-                }
             }
 
             function transition() {

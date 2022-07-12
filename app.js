@@ -33,6 +33,10 @@ app.post("/water", (req, res) => {
   return res.redirect(__dirname + "/water.html");
 });
 
+app.post("/easter2", (req, res) => {
+  return res.redirect(__dirname + "/easter2.html");
+});
+
 //switch from sign in to log in form
 app.post("/worry", (req, res) => {
   return res.redirect(__dirname + "/worry.html");
@@ -60,6 +64,10 @@ app.post("/movement", (req, res) => {
 //Keeps signup form address
 app.get(__dirname + "/water.html", (req, res) => {
   res.sendFile(__dirname + "/water.html");
+});
+
+app.get(__dirname + "/easter2.html", (req, res) => {
+  res.sendFile(__dirname + "/easter2.html");
 });
 
 //Keeps signup form address
