@@ -127,6 +127,13 @@ label {
     width: 99%;
     height: 99%;
 }
+#mid {
+    font-size: 2rem;
+    z-index: 1000;
+    grid-column: 1 / 60;
+    grid-row: 10 / 25;
+    text-align:center;
+}
 #month {
     resize:none;
     grid-column: 60 / 101;
@@ -239,12 +246,13 @@ body {
 .menu__item:hover {
     background-color: #CFD8DC;
 }
-figure {
+figure:not(.hike) {
     text-align:center;
     margin: 4%;
     margin-left: 10%;
     margin-right: 10%;
 }
+
 .img {
     border-radius: 5px;
     width: 80px;

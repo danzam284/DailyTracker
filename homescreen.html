@@ -68,7 +68,7 @@
                     </figure>
                 </div>
             </div>
-
+            <div id="mid">Day 1</div>
             <div id="map">
                 <img class="hike" src="/trails/Trail 2.svg">
                 <img class="hike" src="/trails/Trail 3.svg">
@@ -132,7 +132,8 @@
             var top = 1;
             var cur = images.length - 1;
 
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < n; i++) {
+                document.getElementById("mid").innerHTML = "Day " + (i + 1);
                 changeImg();
                 await sleep(1000);
             }
