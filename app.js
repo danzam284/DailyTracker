@@ -19,8 +19,7 @@ var mostRecentEmail = null;
 var emailSent = false;
 var currentStreak = 1;
 var maxStreak = 1;
-var muted = 0;
-__dirname = "/Users/Admin/Documents/GitHub/DailyTracker"
+var muted = true;
 
 app.use(express.static(__dirname + "/public"));
 
@@ -320,6 +319,11 @@ app.post("/getdata", (req, res) => {
 //sends most recent name to client side
 app.post("/getName", (req, res) => {
   res.status(200).send(mostRecentName);
+});
+
+app.post("/changeIcon", (req, res) => {
+  muted = !muted;
+  res.status(204).send();
 });
 
 app.post("/team", (urlencodedParser = async function (req, res) {

@@ -11,6 +11,7 @@
         <form id="form6" action="/movement" method="POST" onsubmit="return false"></form>
         <form id="results" action="/team" method="POST" onsubmit="return false;"></form>
         <form id="lol" action="/home" method="POST" onsubmit="return false;"></form>
+        <form id="icon" action="/changeIcon" method="POST" onsubmit="return false"></form>
         <div class="mute">
             <img id="mute__toggle" src="/images/speaker.png" onclick="changeIcon()">
         </div>
@@ -69,7 +70,7 @@
             </div>
 
             <div id="map">
-                <img id="hike" src="/images/Hike View 1.svg">
+                <img id="hike" src="/trails/Trail 1.svg">
             </div>
 
             <div id="month">
@@ -109,17 +110,20 @@
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
+        var datesForChecking = []
         const days = ["S", "M", "T", "W", "T", "F", "S"];
         let today = new Date();
         let dates = [];
         let nums = [];
         for (let i = 0; i < 7; i++) {
+            datesForChecking.push(fixDate(today))
             dates.push(days[today.getDay()]);
             nums.push(today.getDate());
             today.setDate(today.getDate() - 1);
         }
         dates.reverse();
         nums.reverse();
+        datesForChecking.reverse();
 
         let inners = document.getElementsByClassName("inner");
         for (let i = 0; i < inners.length; i++) {
@@ -129,48 +133,76 @@
         }
         for (let i = 0; i < inners.length; i++) {
             for (let j = 0; j < 7; j++) {
-                inners[i].innerHTML += "<div class='n" + i + "'>" + nums[j] + "</div>";
+                inners[i].innerHTML += "<div id='n" + i + "" + j +"'>" + nums[j] + "</div>";
             }
         }
 
-        function setIcon(){
+        function setIcon(swap){
             $.ajax({
-            type: "POST",
-            url: "/getMuteStatus",
-            dataType: "text",
-            success: function(content){
-                let muted = Number(content)
-            }
-            })
-            
+                type: "POST",
+                url: "/getMuteStatus",
+                dataType: "text",
+                success: function(result){
+                    let image = document.getElementById("mute__toggle");
+                    let muted;
+                    if (result == "true") {
+                        muted = true;
+                    } else {
+                        muted = false;
+                    }
+                    if (swap) {
+                        muted = !muted;
+                    }
+                    if (muted){
+                        image.src = "/images/mute.png";
+                    } else {
+                        image.src = "/images/speaker.png";
+                    }
+                }
+            });
         }
+
         function changeIcon(){
-            $.ajax({
-            type: "POST",
-            url: "/getMuteStatus",
-            dataType: "text",
-            success: function(content){
-                let muted = Number(content)
-            }
-            })
-            let image = document.getElementById("mute__toggle");
-            if(muted){
-                image.src = "/images/mute.png"
-
-            }
-            else{
-                image.src = "/images/speaker.png"
-            }
+            document.getElementById("icon").submit();
+            setIcon(false);
         }
+
+        function fixDate(date) {
+            let year = date.getFullYear().toString();
+            let month = (date.getMonth() + 1).toString();
+            let day = date.getDate().toString()
+
+            if (month.length == 1) {
+                month = "0" + month;
+            }
+            if (day.length == 1) {
+                day = "0" + day;
+            }
+            return year + "-" + month + "-"+ day;
+        }  
     </script>
     <script type="text/javascript">
+        const CSVToArray = (data) =>
+              data
+                .slice(data.indexOf("\n") + 1)
+                .split("\n")
+                .map((v) => v.split(","));
         const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
         var t = new Date();
         document.getElementById("m").innerHTML = month[t.getMonth()];
         var max = "";
         var cur = "";
-
+        var name;
         function run() {
+            setIcon(true);
+            $.ajax({
+                type: "POST",
+                url: "/getName",
+                dataType: "text",
+                success: function (content) {
+                    name = content;
+                }
+            });
             $.ajax({
                 type: "POST",
                 url: "/getMaxAndMin",
@@ -181,9 +213,87 @@
                     max = content.slice(gap + 1);
                     document.getElementById("lcur").innerHTML = cur + " days";
                     document.getElementById("lmax").innerHTML = max + " days";
+                    let numDays = parseInt(cur);
+                    flip(numDays);
                 }
             });
-        }
+            $.ajax({
+                type: "POST",
+                url: "/getdata",
+                dataType: "text",
+                success: function (content) {
+                    var allData = content.split("\n");
+                    var fillWater = [false, false, false, false, false, false, false];
+                    var fillFrog = [false, false, false, false, false, false, false];
+                    var fillSleep = [false, false, false, false, false, false, false];
+                    var fillWorry = [false, false, false, false, false, false, false];
+                    var fillNutrition = [false, false, false, false, false, false, false];
+                    var fillMovement = [false, false, false, false, false, false, false];
+                    for (let i = 0; i < datesForChecking.length; i++) {
+                        var recentName = "";
+                        for (let j = 0; j < allData.length; j++) {
+                            if (allData[j][0] && allData[j][0] == "*") {
+                                recentName = allData[j].slice(1, name.length + 1);
+                            }
+                            if (allData[j][0] && allData[j][0] != "*" && name == recentName) {
+                                let currRow = CSVToArray(allData[j])[0];
+                                if (datesForChecking[i] == currRow[0]) {
+                                    if (currRow[1] != " ") {
+                                        fillWater[i] = true;
+                                    }
+                                    if (currRow[2] != " ") {
+                                        fillFrog[i] = true;
+                                    }
+                                    if (currRow[3] != " ") {
+                                        fillSleep[i] = true;
+                                    }
+                                    if (currRow[4] != " ") {
+                                        fillWorry[i] = true;
+                                    }
+                                    if (currRow[5] != " ") {
+                                        fillNutrition[i] = true;
+                                    }
+                                    if (currRow[6] != " ") {
+                                        fillMovement[i] = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    for (let i = 0; i < fillWater.length; i++) {
+                        if (fillWater[i]) {
+                            document.getElementById("n0" + i).style.background = "#6fd9ff";
+                        }
+                    }
+                    for (let i = 0; i < fillFrog.length; i++) {
+                        if (fillFrog[i]) {
+                            document.getElementById("n1" + i).style.background = "rgb(130, 255, 130)";
+                        }
+                    }
+                    for (let i = 0; i < fillSleep.length; i++) {
+                        if (fillSleep[i]) {
+                            document.getElementById("n2" + i).style.background = "rgb(117, 18, 255)";
+                        }
+                    }
+                    for (let i = 0; i < fillWorry.length; i++) {
+                        if (fillWorry[i]) {
+                            document.getElementById("n3" + i).style.background = "rgb(255, 130, 130)";
+                        }
+                    }
+                    for (let i = 0; i < fillNutrition.length; i++) {
+                        if (fillNutrition[i]) {
+                            document.getElementById("n4" + i).style.background = "rgb(105, 68, 23)";
+                        }
+                    }
+                    for (let i = 0; i < fillMovement.length; i++) {
+                        if (fillMovement[i]) {
+                            document.getElementById("n5" + i).style.background = "rgb(255, 190, 85)";
+                        }
+                    }
+                }
+                });
+            }
         run();
     </script>
     <script type="text/javascript">
@@ -207,6 +317,18 @@
         }
         function exit7() {
             document.getElementById("form6").submit();
+        }
+
+        function sleep (time) {
+            return new Promise((resolve) => setTimeout(resolve, time));
+        }
+
+        async function flip(reps) {
+            let img = document.getElementById("hike");
+            for (let i = 1; i < 11; i++) {
+                img.src = "/trails/Trail " + i + ".svg";
+                await sleep(1000);
+            }
         }
     </script>
 </html>

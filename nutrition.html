@@ -523,8 +523,10 @@
             setDate();
             function change() {
                 var sound = new Audio("/sandwiches/sandwich.mp3");
-                sound.currentTime = 0;
-                sound.play();
+                if (!muted) {
+                        sound.currentTime = 0;
+                        sound.play();
+                    }
                 var num = parseInt(document.getElementById("num").value);
                 if (num > 8) {
                     let idx = Math.floor(Math.random() * 3);
@@ -562,5 +564,21 @@
                 }
             }
 		</script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script>
+            var muted;
+            $.ajax({
+                type: "POST",
+                url: "/getMuteStatus",
+                dataType: "text",
+                success: function(result){
+                    if (result == "true") {
+                        muted = false;
+                    } else {
+                        muted = true;
+                    }
+                }
+            });
+        </script>
     </body>
 </html>
