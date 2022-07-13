@@ -1,13 +1,21 @@
 <html>
     <head></head>
     <body>
-        <img src="/images/monkey1.gif">
-        <img src="/images/monkey2.gif">
-        <img src="/images/monkey3.gif">
-        <p>PARTY<br>TIME</p>
+        <p>Easter Egg</p>
+        <img id="1" src="/images/monkey1.gif">
+        <img id="2" src="/images/monkey2.gif">
+        <img id="3" src="/images/monkey3.gif">
+        <img id="4" src="/images/monkey4.gif">
+        <img id="5" src="/images/monkey5.gif">
+        <img id="6" src="/images/monkey6.gif">
+        <p>Party Time</p>
     </body>
 
     <style>
+        img {
+            width:200px;
+            position: absolute;
+        }
         body{
             text-align:center;
             color:black;
@@ -58,7 +66,7 @@
         } 
 
     </style>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
         var myAudio = new Audio('/sounds/disco2.mp3'); 
         myAudio.addEventListener('ended', function() {
@@ -66,5 +74,15 @@
             this.play();
         }, false);
         myAudio.play();
+
+        function fun() {
+            for (let i = 1; i < 8; i++) {
+                let img = document.getElementById(i.toString());
+                img.style.top = Math.random() * screen.availHeight - 200;
+                img.style.left = Math.random() * screen.availWidth - 200;
+                img.style.width = Math.random() * 300 + 200;
+            }
+        }
+        setInterval(fun, 1000);
     </script>
 </html>
