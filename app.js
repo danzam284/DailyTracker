@@ -20,7 +20,7 @@ var emailSent = false;
 var currentStreak = 1;
 var maxStreak = 1;
 var muted = true;
-__dirname = "/Users/RemyK/Documents/GitHub/DailyTracker";
+//__dirname = "/Users/RemyK/Documents/GitHub/DailyTracker";
 
 app.use(express.static(__dirname + "/public"));
 
@@ -422,10 +422,10 @@ async function after(d1, d2) {
   if (d1.slice(0, 4) > d2.slice(0, 4)) {
     return true;
   }
-  if (d1.slice(5, 7) > d2.slice(5, 7)) {
+  if (d1.slice(0, 4) == d2.slice(0, 4) && d1.slice(5, 7) > d2.slice(5, 7)) {
     return true;
   }
-  if (d1.slice(8, 10) > d2.slice(8, 10)) {
+  if (d1.slice(0, 4) == d2.slice(0, 4) && d1.slice(5, 7) == d2.slice(5, 7) && d1.slice(8, 10) > d2.slice(8, 10)) {
     return true;
   }
   return false;

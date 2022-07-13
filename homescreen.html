@@ -149,12 +149,12 @@
             var top = 1;
             var cur = images.length - 1;
 
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < n - 1; i++) {
                 document.getElementById("mid").innerHTML = "Day " + (i + 1);
                 await sleep(1000);
                 changeImg();
             }
-            document.getElementById("mid").innerHTML = "Day " + 11;
+            document.getElementById("mid").innerHTML = "Day " + n;
 
             async function changeImg() {
                 var next = (cur + 1) % images.length;
