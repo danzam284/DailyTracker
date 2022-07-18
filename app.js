@@ -26,72 +26,72 @@ app.use(express.static(__dirname + "/public"));
 
 //Keeps signup form address
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/signup.html");
+  res.sendFile(__dirname + "/html/signup.html");
 });
 
 //switch from sign in to log in form
 app.post("/water", (req, res) => {
-  return res.redirect(__dirname + "/water.html");
+  return res.redirect(__dirname + "/html/water.html");
 });
 
 app.post("/easter2", (req, res) => {
-  return res.redirect(__dirname + "/easter2.html");
+  return res.redirect(__dirname + "/html/easter2.html");
 });
 
 //switch from sign in to log in form
 app.post("/worry", (req, res) => {
-  return res.redirect(__dirname + "/worry.html");
+  return res.redirect(__dirname + "/html/worry.html");
 });
 
 //switch from sign in to log in form
 app.post("/sleep", (req, res) => {
-  return res.redirect(__dirname + "/sleep.html");
+  return res.redirect(__dirname + "/html/sleep.html");
 });
 
 //switch from sign in to log in form
 app.post("/frog", (req, res) => {
-  return res.redirect(__dirname + "/frog.html");
+  return res.redirect(__dirname + "/html/frog.html");
 });
 
 //switch from sign in to log in form
 app.post("/nutrition", (req, res) => {
-  return res.redirect(__dirname + "/nutrition.html");
+  return res.redirect(__dirname + "/html/nutrition.html");
 });
 
 app.post("/movement", (req, res) => {
-  return res.redirect(__dirname + "/movement.html");
+  return res.redirect(__dirname + "/html/movement.html");
 });
 
 //Keeps signup form address
-app.get(__dirname + "/water.html", (req, res) => {
-  res.sendFile(__dirname + "/water.html");
+app.get(__dirname + "/html/water.html", (req, res) => {
+  res.sendFile(__dirname + "/html/water.html");
 });
 
-app.get(__dirname + "/easter2.html", (req, res) => {
-  res.sendFile(__dirname + "/easter2.html");
-});
-
-//Keeps signup form address
-app.get(__dirname + "/worry.html", (req, res) => {
-  res.sendFile(__dirname + "/worry.html");
+app.get(__dirname + "/html/easter2.html", (req, res) => {
+  res.sendFile(__dirname + "/html/easter2.html");
 });
 
 //Keeps signup form address
-app.get(__dirname + "/sleep.html", (req, res) => {
-  res.sendFile(__dirname + "/sleep.html");
+app.get(__dirname + "/html/worry.html", (req, res) => {
+  res.sendFile(__dirname + "/html/worry.html");
 });
 
-app.get(__dirname + "/frog.html", (req, res) => {
-  res.sendFile(__dirname + "/frog.html");
+//Keeps signup form address
+app.get(__dirname + "/html/sleep.html", (req, res) => {
+  res.sendFile(__dirname + "/html/sleep.html");
+});
+
+app.get(__dirname + "/html/frog.html", (req, res) => {
+  res.sendFile(__dirname + "/html/frog.html");
 });
 
 //switch from sign in to log in form
 app.post("/login", (req, res) => {
-  return res.redirect(__dirname + "/login.html");
+  return res.redirect(__dirname + "/html/login.html");
 });
 
 app.post("/form", (req, res) => {
-  return res.redirect(__dirname + "/index.html");
+  return res.redirect(__dirname + "/html/index.html");
 });
 
 //sends txt to client html
@@ -104,7 +104,7 @@ app.post("/getMaxAndMin", (req, res) => {
 });
 
 app.post("/signup.html", urlencodedParser, (req, res) => {
-  res.redirect(__dirname + "/login.html");
+  res.redirect(__dirname + "/html/login.html");
   let email = req.body.email;
   let name = req.body.name;
   let password = req.body.password;
@@ -122,11 +122,11 @@ app.post("/signup.html", urlencodedParser, (req, res) => {
 
 
 app.post("/home", urlencodedParser, (req, res) => {
-  res.redirect(__dirname + "/homescreen.html");
+  res.redirect(__dirname + "/html/homescreen.html");
 });
 
 app.post("/login.html", urlencodedParser, async (req, res) => {
-    res.redirect(__dirname + "/homescreen.html");
+    res.redirect(__dirname + "/html/homescreen.html");
   var data = await fs.readFile(__dirname + "/users.txt","utf8",(err, data) => {
       if (err) {
         console.error(err);
@@ -161,33 +161,33 @@ app.post("/login.html", urlencodedParser, async (req, res) => {
 app.post("/")
 
 //Keeps login form address
-app.get(__dirname + "/login.html", (req, res) => {
-  res.sendFile(__dirname + "/login.html");
+app.get(__dirname + "/html/login.html", (req, res) => {
+  res.sendFile(__dirname + "/html/login.html");
 });
 
 //keeps form address
-app.get(__dirname + "/index.html", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+app.get(__dirname + "/html/index.html", (req, res) => {
+  res.sendFile(__dirname + "/html/index.html");
 });
 
 //keeps form address
-app.get(__dirname + "/nutrition.html", (req, res) => {
-  res.sendFile(__dirname + "/nutrition.html");
+app.get(__dirname + "/html/nutrition.html", (req, res) => {
+  res.sendFile(__dirname + "/html/nutrition.html");
 });
 
 //keeps form address
-app.get(__dirname + "/movement.html", (req, res) => {
-  res.sendFile(__dirname + "/movement.html");
+app.get(__dirname + "/html/movement.html", (req, res) => {
+  res.sendFile(__dirname + "/html/movement.html");
 });
 
-app.get(__dirname + "/easter.html", (req, res) => {
-  res.sendFile(__dirname + "/easter.html");
+app.get(__dirname + "/html/easter.html", (req, res) => {
+  res.sendFile(__dirname + "/html/easter.html");
 });
 
 
 //Runs when form is submitted
 app.post("/index.html", urlencodedParser, (req, res) => {
-  res.redirect(__dirname + "/team.html");
+  res.redirect(__dirname + "/html/team.html");
   fs.appendFile(
     __dirname + "/mem.txt",
     req.body.day +
@@ -255,7 +255,7 @@ app.post("/getMuteStatus", (req, res) => {
 });
 
 app.post("/easter", urlencodedParser, (req, res) => {
-  res.redirect(__dirname + "/easter.html");
+  res.redirect(__dirname + "/html/easter.html");
 });
 
 app.post("/worryPosted", urlencodedParser, (req, res) => {
@@ -301,18 +301,18 @@ app.post("/frogPosted", urlencodedParser, (req, res) => {
 app.post(
   "/skip",
   (urlencodedParser = async function (req, res) {
-    return res.redirect(__dirname + "/team.html");
+    return res.redirect(__dirname + "/html/team.html");
   })
 );
 
 //keeps homepage address
-app.get(__dirname + "/homescreen.html", (req, res) => {
-  res.sendFile(__dirname + "/homescreen.html");
+app.get(__dirname + "/html/homescreen.html", (req, res) => {
+  res.sendFile(__dirname + "/html/homescreen.html");
 });
 
 //keeps team address
-app.get(__dirname + "/team.html", (req, res) => {
-  res.sendFile(__dirname + "/team.html");
+app.get(__dirname + "/html/team.html", (req, res) => {
+  res.sendFile(__dirname + "/html/team.html");
 });
 
 //sends csv to client html
@@ -338,7 +338,7 @@ app.post("/changeIcon", (req, res) => {
 app.post("/team", (urlencodedParser = async function (req, res) {
     new Promise((resolve, reject) => {
         parseData().then(() => {
-            res.redirect(__dirname + "/team.html")
+            res.redirect(__dirname + "/html/team.html")
         });
         resolve();
     })
